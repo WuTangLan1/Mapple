@@ -1,3 +1,5 @@
+<!-- This is the code for the src\App.vue -->
+
 <template>
   <nav>
       

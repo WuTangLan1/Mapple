@@ -1,0 +1,1 @@
+<!-- This is the code for the src\components\homedir\bottomfooter.vue -->
