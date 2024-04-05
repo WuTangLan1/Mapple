@@ -2,7 +2,7 @@
 
 <template>
     <div class="home-view">
-      <!-- Your main content goes here -->
+      <p> hello </p>
     </div>
   </template>
   
@@ -14,7 +14,8 @@
   
   <style scoped>
   .home-view {
-    height: 70vh; /* Set height to 70% of the viewport height */
+    height: 70%; 
+    width: 100%;
     background-color: blue;
   }
   </style>
