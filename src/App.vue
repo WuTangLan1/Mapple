@@ -1,19 +1,30 @@
 <!-- This is the code for the src\App.vue -->
 
+<script>
+import TopHeader from './components/homedir/topheader.vue';
+import BottomFooter from './components/homedir/bottomfooter.vue';
+
+export default {
+  components: {
+    TopHeader,
+    BottomFooter
+  }
+}
+</script>
+
 <template>
-  <nav>
-      
-  </nav>
-  <router-view/>
+  <div id="app">
+    <top-header/>
+    <router-view/>
+    <bottom-footer/>
+  </div>
 </template>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 nav {
