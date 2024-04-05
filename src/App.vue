@@ -24,19 +24,7 @@ export default {
 #app {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+  height: 100%;
+  width:100%;
 }
 </style>
