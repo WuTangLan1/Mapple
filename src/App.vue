@@ -33,7 +33,6 @@ export default {
 .router-view-container {
   flex-grow: 1;
   width: 100%;
-  height: 80vw;
   overflow: auto; 
 }
 

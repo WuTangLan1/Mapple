@@ -47,6 +47,9 @@ export default {
   justify-content: space-around;
   align-items: flex-start;
   flex-wrap: wrap;
+  flex-direction: column;
+  padding-left:0.5rem;
+  padding-right :0.5rem;
 }
 
 .footer-section {
@@ -61,6 +64,23 @@ export default {
 .footer-section ul {
   list-style: none;
   padding: 0;
+}
+
+@media (min-width: 600px) {
+  .footer-content {
+    flex-direction: row; /* switch to row layout for larger screens */
+    justify-content: space-between; /* distribute space between sections */
+  }
+
+  .footer-section.links ul {
+    flex-direction: row; /* align Quick Links in a row */
+    justify-content: flex-start; /* align Quick Links to the start */
+    gap: 1rem; /* add a gap between the links */
+  }
+  
+  .footer-section {
+    margin-bottom: 0; /* remove the margin-bottom for larger screens if desired */
+  }
 }
 
 .footer-section li a {
@@ -79,21 +99,6 @@ export default {
   font-size: 0.85rem;
 }
 
-
-@media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .footer-section {
-    margin-bottom: 1rem;
-  }
-
-  .footer-bottom {
-    font-size: 0.75rem;
-  }
-}
 </style>
 
 
