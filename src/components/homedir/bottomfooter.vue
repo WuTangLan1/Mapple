@@ -75,9 +75,10 @@ export default {
   text-decoration: none;
 }
 
-.social-icon img {
-  height: 20px; 
-  width: auto; 
+img {
+  height: 2.5rem;
+  width: auto;
+  display: block; 
 }
 
 .social-icon span {
@@ -100,7 +101,7 @@ export default {
   list-style: none;
   padding: 0;
 }
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .footer-content,
   .footer-section,
   .footer-bottom {
@@ -146,7 +147,7 @@ export default {
 }
 
 
-@media (min-width: 600px) {
+@media (min-width: 800px) {
   .footer-content {
     flex-direction: row; /* switch to row layout for larger screens */
     justify-content: space-between; /* distribute space between sections */

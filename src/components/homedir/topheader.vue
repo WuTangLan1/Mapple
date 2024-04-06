@@ -80,8 +80,8 @@ export default {
   }
 
   .top-header {
-    justify-content: space-between; 
     padding: 10px clamp(2vw, 5vw, 20px);
+    justify-content: space-between; 
   }
 
   .logo-container {
