@@ -24,7 +24,7 @@ export default {
 #app {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width:100%;
+  height: 100vh; /* Make sure the app fills the whole viewport height */
+  width: 100%;
 }
 </style>

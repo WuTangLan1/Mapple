@@ -14,9 +14,9 @@
   
   <style scoped>
   .home-view {
-    height: 70%; 
+    height: 80%; 
     width: 100%;
-    background-color: blue;
+    background-color: rgb(223, 223, 230);
   }
   </style>
   

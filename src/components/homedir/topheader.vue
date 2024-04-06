@@ -14,10 +14,10 @@
   
   <style scoped>
     header {
-    background-color: #b25353; 
+    background-color: #c9d2f3; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     padding: 10px 0; 
-    height: 20%; 
+    height: 15%; 
     width: 100%;
     }
   </style>
