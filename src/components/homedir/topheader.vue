@@ -28,26 +28,23 @@ export default {
   background-color: #c9d2f3;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px 20px;
-  /* Removed the height to allow padding to define the space */
   width: 100%;
 }
 
 .logo-container {
-  flex: 0 0 auto; /* Do not grow or shrink, base width on content */
+  flex: 0 0 auto; 
 }
 
 .logo {
-  /* Adjust the height to fit within the header while maintaining aspect ratio */
-  max-height: 100px; /* Example size, adjust as necessary */
-  max-width: 100%; /* Ensures the image is responsive and doesn't overflow */
+  max-height: 100px; 
+  max-width: 100%; 
 }
 
 .title {
-  /* This will make the title flex in size with the content, adjust '1' to change the growth rate */
-  flex: 1 0 auto; /* Removed flex: 2 to better control size */
-  text-align: left; /* Align to the left to be closer to the logo */
-  margin-left: 20px; /* Adjust spacing between logo and title as necessary */
-  font-size: 1.5em; /* Adjust size as necessary */
+  flex: 1 0 auto; 
+  text-align: left; 
+  margin-left: 20px;
+  font-size: 1.5em; 
 }
 
 .navigation {

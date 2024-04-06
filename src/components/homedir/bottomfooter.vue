@@ -2,7 +2,7 @@
 
 <template>
   <footer>
-    <!-- Your footer content goes here -->
+    <p>the footer content will go here</p>
   </footer>
 </template>
 
@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style scoped>
-.footer {
+footer {
   background-color: #c9d2f3; 
   box-shadow: 0 2px;
   height: 10vh; 
