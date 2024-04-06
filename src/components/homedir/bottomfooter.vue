@@ -7,6 +7,7 @@ export default {
     return {
       footerExpanded: false,
       footerMaxHeight: '120px',
+      toggleIconUrl: require('@/assets/images/socials/toggle_arrow.png'),
     };
   },
   mounted() {
@@ -39,9 +40,7 @@ export default {
     <footer :class="{ 'footer-expanded': footerExpanded }" class="footer" :style="{ 'max-height': footerMaxHeight }">
     <div class="footer-content" ref="footerContent">
       <div class="footer-toggle" @click="toggleFooter">
-        <div class="toggle-icon">
-          
-        </div>
+        <img :src="toggleIconUrl" class="toggle-icon" alt="Toggle arrow" />
       </div>
       <div class="footer-section links">
         <h3>Quick Links</h3>
@@ -95,6 +94,7 @@ export default {
   padding-left:0.5rem;
   padding-right :0.5rem;
   transition: max-height 0.3s ease;
+  position: relative;
 }
 
 .footer:not(.footer-expanded) .footer-content {
@@ -102,32 +102,27 @@ export default {
 }
 
 .footer-toggle {
-  position: absolute; /* Changed to absolute to position the toggle within the footer */
-  top: 10px; /* Position the toggle from the top of the footer */
-  right: 20px; /* Position the toggle from the right of the footer */
+  position: absolute; /* Adjust the position within .footer */
+  top: 0; /* Adjust if you want more space from the top edge */
+  right: 0; /* Adjust if you want more space from the right edge */
   cursor: pointer;
+  /* Remove padding if you want the toggle icon closer to the edge */
 }
 
 .toggle-icon {
-  position: absolute;
-  top: -20px; /* Adjust as necessary to move the triangle above the toggle bar */
-  right: 20px; /* Adjust as necessary for spacing from the right */
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  /* The border-bottom will create the triangle */
-  border-bottom: 10px solid #333; /* Color of the triangle */
+  position: absolute; /* This positions the icon relative to footer-toggle now */
+  top: 10px; /* Position from the top inside the footer-toggle */
+  right: 20px; /* Position from the right inside the footer-toggle */
+  width: 20px; /* Width of the icon image */
+  height: 20px; /* Height of the icon image */
   transition: transform 0.3s ease;
 }
 
-.footer:not(.footer-expanded) .toggle-icon {
-  transform: rotate(0deg); /* Ensures the triangle points down when collapsed */
-}
+  /* Rotate the image when the footer is expanded */
+  .footer-expanded .toggle-icon {
+    transform: rotate(180deg); /* Rotate the arrow to point upwards */
+  }
 
-.footer-expanded .toggle-icon {
-  transform: rotate(180deg); /* Points up when the footer is expanded */
-}
 
 .social-icons {
   display: flex;
