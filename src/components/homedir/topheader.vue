@@ -41,25 +41,28 @@ export default {
 }
 
 .title {
-  flex: 1 0 auto; 
-  text-align: left; 
+  flex: 0 1 auto; 
+  text-align: left;
   margin-left: 20px;
-  font-size: 1.5em; 
+  font-size: 1.5em;
+  padding-right: 1rem;
 }
 
 .navigation {
-  /* This allows the navigation to take up the space it needs based on content */
-  flex: 0 0 auto; /* Do not grow or shrink, base width on content */
+  flex: 1;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between; /* This will space out the nav links */
+  padding-right: 1rem; /* Ensure there's a gap on the right */
 }
 
 .nav-link {
   text-decoration: none;
   color: #000;
   font-weight: bold;
-  padding: 0.5em 1em;
+  padding: 0.5em;
+  margin: 0 0.5rem; /* This gives space between each nav link */
 }
+
 
 .nav-link:hover {
   text-decoration: underline;
