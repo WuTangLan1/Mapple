@@ -43,9 +43,9 @@ export default {
 .footer {
   background-color: #c9d2f3;
   color: #333;
-  padding: clamp(10px, 2vw, 20px);
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  width:100%;
 }
 
 

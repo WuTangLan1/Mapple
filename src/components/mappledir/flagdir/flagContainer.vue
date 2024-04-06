@@ -2,7 +2,7 @@
 
 <template>
     <div class="flag-container">
-      <!-- Flag content goes here -->
+      <p>the flag content will go here</p>
     </div>
   </template>
   
@@ -17,6 +17,5 @@
     height: 50%;
     width: 100%;
     background-color: #fafafa;
-    border: 2px solid #add8e6; 
     }
   </style>

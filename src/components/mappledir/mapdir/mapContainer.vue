@@ -2,7 +2,7 @@
 
 <template>
     <div class="map-container">
-      <!-- Map content goes here -->
+      <p> the interactive globe will go here </p>
     </div>
   </template>
   
@@ -17,6 +17,5 @@
     height: 50%;
     width: 100%;
     background-color: #f2f2f2; 
-    border: 2px solid #add8e6; 
     }
   </style>
