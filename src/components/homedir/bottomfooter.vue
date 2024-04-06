@@ -65,6 +65,45 @@ export default {
   list-style: none;
   padding: 0;
 }
+@media (max-width: 600px) {
+  .footer-content,
+  .footer-section,
+  .footer-bottom {
+    text-align: center; 
+    align-items: center;
+  }
+
+  .footer-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-section ul {
+    justify-content: center; /* Center Quick Links */
+  }
+
+  .footer-section .social-icons {
+    justify-content: center; /* Center social icons */
+  }
+
+  .footer-section h3,
+  .footer-section p,
+  .footer-bottom p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer-section.links ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Wrap the links if necessary */
+    gap: 0.5rem; /* Maintain a gap between the links */
+  }
+
+  .footer-section.links li {
+    margin: 0.5rem; /* Add margin around each link for better spacing */
+  }
+}
+
 
 @media (min-width: 600px) {
   .footer-content {

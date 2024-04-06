@@ -14,8 +14,9 @@
   
   <style scoped>
     .map-container {
-      height: 50%; /* Take up half of the parent's height */
-      width: 100%; /* Take up full width */
-      background-color: #f0f0f0; /* Another light off-white color for contrast */
+    height: 50%;
+    width: 100%;
+    background-color: #f2f2f2; 
+    border: 2px solid #add8e6; 
     }
   </style>

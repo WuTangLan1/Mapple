@@ -14,8 +14,9 @@
   
   <style scoped>
     .flag-container {
-      height: 50%; /* Take up half of the parent's height */
-      width: 100%; /* Take up full width */
-      background-color: #f8f8f8; /* Light off-white color */
+    height: 50%;
+    width: 100%;
+    background-color: #fafafa;
+    border: 2px solid #add8e6; 
     }
   </style>
