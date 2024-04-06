@@ -1,11 +1,46 @@
 <!-- This is the code for the src\components\homedir\bottomfooter.vue -->
 
+<script>
+export default {
+  name: 'BottomFooter',
+  data() {
+    return {
+      footerExpanded: false,
+      footerMaxHeight: '120px',
+      toggleIconUrl: require('@/assets/images/socials/toggle_arrow.png'),
+    };
+  },
+  mounted() {
+    this.updateFooterHeight();
+  },
+  methods: {
+      toggleFooter() {
+        this.footerExpanded = !this.footerExpanded;
+        this.$nextTick(() => {
+          this.updateFooterHeight();
+        });
+      },
+      updateFooterHeight() {
+        const newHeight = this.footerExpanded ? '500px' : '120px'; 
+        this.footerMaxHeight = newHeight;
+      },
+    },
+  watch: {
+    footerExpanded(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.updateFooterHeight();
+      }
+    },
+  },
+}
+</script>
+
+
 <template>
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-section about">
-        <h3>About Mapple</h3>
-        <p>Mapple is a daily geographical challenge that tests your knowledge of the world's countries. Join the adventure and learn with us every day!</p>
+    <footer :class="{ 'footer-expanded': footerExpanded }" class="footer" :style="{ 'max-height': footerMaxHeight }">
+    <div class="footer-content" ref="footerContent">
+      <div class="footer-toggle" @click="toggleFooter">
+        <img :src="toggleIconUrl" class="toggle-icon" alt="Toggle arrow" />
       </div>
       <div class="footer-section links">
         <h3>Quick Links</h3>
@@ -15,17 +50,21 @@
           <li><a href="#">Support</a></li>
         </ul>
       </div>
-      <div class="footer-section social">
-    <h3>Follow Us</h3>
-    <div class="social-icons">
-      <a href="https://www.instagram.com/discover_mapple" target="_blank" rel="noopener noreferrer">
-        <img src="@/assets/images/socials/insta_icon.jpg" alt="Instagram" />
-      </a>
-      <a href="https://www.twitter.com/discover_mapple" target="_blank" rel="noopener noreferrer">
-        <img src="@/assets/images/socials/x_icon.jpg" alt="Twitter" />
-      </a>
-    </div>
-  </div>
+      <div class="footer-section about" v-show="footerExpanded">
+        <h3>About Mapple</h3>
+        <p>Mapple is a daily geographical challenge that tests your knowledge of the world's countries. Join the adventure and learn with us every day!</p>
+      </div>
+      <div class="footer-section social" v-show="footerExpanded">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/discover_mapple" target="_blank" rel="noopener noreferrer">
+            <img src="@/assets/images/socials/insta_icon.jpg" alt="Instagram" />
+          </a>
+          <a href="https://www.twitter.com/discover_mapple" target="_blank" rel="noopener noreferrer">
+            <img src="@/assets/images/socials/x_icon.jpg" alt="Twitter" />
+          </a>
+        </div>
+      </div>
     </div>
     <div class="footer-bottom">
       <p>&copy; 2024 Mapple. All rights reserved.</p>
@@ -33,11 +72,6 @@
   </footer>
 </template>
 
-<script>
-export default {
-  name: 'BottomFooter'
-}
-</script>
 
 <style scoped>
 .footer {
@@ -46,6 +80,8 @@ export default {
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   width:100%;
+  transition: max-height 0.5s ease;
+  max-height: var(--footer-max-height, 100px); 
 }
 
 
@@ -57,7 +93,36 @@ export default {
   flex-direction: column;
   padding-left:0.5rem;
   padding-right :0.5rem;
+  transition: max-height 0.3s ease;
+  position: relative;
 }
+
+.footer:not(.footer-expanded) .footer-content {
+  max-height: 120px; /* Set to the same height as the collapsed footer */
+}
+
+.footer-toggle {
+  position: absolute; /* Adjust the position within .footer */
+  top: 0; /* Adjust if you want more space from the top edge */
+  right: 0; /* Adjust if you want more space from the right edge */
+  cursor: pointer;
+  /* Remove padding if you want the toggle icon closer to the edge */
+}
+
+.toggle-icon {
+  position: absolute; /* This positions the icon relative to footer-toggle now */
+  top: 10px; /* Position from the top inside the footer-toggle */
+  right: 20px; /* Position from the right inside the footer-toggle */
+  width: 20px; /* Width of the icon image */
+  height: 20px; /* Height of the icon image */
+  transition: transform 0.3s ease;
+}
+
+  /* Rotate the image when the footer is expanded */
+  .footer-expanded .toggle-icon {
+    transform: rotate(180deg); /* Rotate the arrow to point upwards */
+  }
+
 
 .social-icons {
   display: flex;

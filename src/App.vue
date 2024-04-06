@@ -34,6 +34,8 @@ export default {
   flex-grow: 1;
   width: 100%;
   overflow: auto; 
+  height: calc(100vh - var(--footer-height + 100px));
+  overflow: auto;
 }
 
 </style>
