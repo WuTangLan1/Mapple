@@ -27,31 +27,31 @@ export default {
   justify-content: space-between;
   background-color: #c9d2f3;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 10px 20px;
-  max-width: 100%;
+  padding: clamp(10px, 2vw, 20px); /* Responsive padding */
+  width: 100%;
 }
 
 .logo-container {
-  flex: 0 0 auto; 
+  flex: 0 0 auto;
 }
 
 .logo {
-  max-height: 100px; 
-  max-width: 100%; 
+  max-height: clamp(50px, 8vw, 120px); /* Responsive logo size */
+  max-width: 100%; /* Ensure logo does not exceed its container width */
 }
 
 .title {
-  flex: 0 1 auto; 
+  flex: 0 1 auto;
   text-align: left;
   margin-left: 20px;
-  font-size: 1.5em;
+  font-size: clamp(1.2em, 2.5vw, 2.5em); /* Responsive font size for title */
   padding-right: 1rem;
 }
 
 .navigation {
   flex: 1;
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   padding-right: 1rem;
 }
 
@@ -61,8 +61,8 @@ export default {
   font-weight: bold;
   padding: 0.5em;
   margin: 0 0.5rem;
+  font-size: clamp(0.9em, 1vw, 1.2em); /* Responsive font size for navigation links */
 }
-
 
 .nav-link:hover {
   text-decoration: underline;

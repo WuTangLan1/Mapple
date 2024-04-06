@@ -78,11 +78,11 @@ export default {
   }
 
   .footer-section ul {
-    justify-content: center; /* Center Quick Links */
+    justify-content: center; 
   }
 
   .footer-section .social-icons {
-    justify-content: center; /* Center social icons */
+    justify-content: center; 
   }
 
   .footer-section h3,
@@ -95,8 +95,8 @@ export default {
   .footer-section.links ul {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap; /* Wrap the links if necessary */
-    gap: 0.5rem; /* Maintain a gap between the links */
+    flex-wrap: wrap; 
+    gap: 0.5rem;
   }
 
   .footer-section.links li {
