@@ -13,11 +13,11 @@ export default {
 </script>
 
 <style scoped>
-footer {
-  background-color: #c9d3f7; 
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); 
-  padding: 10px 0; 
-  height: 5%; 
+.footer {
+  background-color: #c9d2f3; 
+  box-shadow: 0 2px;
+  height: 10vh; 
+  width: 100%;
 }
 </style>
 

@@ -14,7 +14,6 @@
   
   <style scoped>
   .home-view {
-    height: 80%; 
     width: 100%;
     background-color: rgb(223, 223, 230);
   }
@@ -24,4 +23,3 @@
 
 
 
-  

@@ -15,7 +15,9 @@ export default {
 <template>
   <div id="app">
     <top-header/>
-    <router-view/>
+    <div class="router-view-container">
+      <router-view/>
+    </div>
     <bottom-footer/>
   </div>
 </template>
@@ -24,10 +26,17 @@ export default {
 #app {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Make sure the app fills the whole viewport height */
+  min-height: 100vh; 
   width: 100%;
 }
-</style>
 
+.router-view-container {
+  flex-grow: 1;
+  width: 100%;
+  height: 80vw;
+  overflow: auto; 
+}
+
+</style>
 
 
