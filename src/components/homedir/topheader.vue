@@ -9,7 +9,7 @@
     <nav class="navigation">
       <router-link to="/" class="nav-link">Home</router-link>
       <router-link to="/stay" class="nav-link">Stay of the week</router-link>
-      <router-link to="/login" class="nav-link">register/login</router-link>
+      <router-link to="/login" class="nav-link">Register/Login</router-link>
     </nav>
   </header>
 </template>
@@ -67,4 +67,34 @@ export default {
 .nav-link:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 750px) {
+  .title {
+    display: none;
+  }
+
+  .top-header {
+    justify-content: space-between; 
+  }
+
+  .navigation {
+    justify-content: space-around;
+    padding-right: 0; 
+  }
+  
+  .logo-container {
+    flex: 0 0 auto; 
+    margin-right: auto; /* This will push everything else to the right */
+  }
+  
+  .logo {
+    max-height: 80px; 
+  }
+  
+  .nav-link {
+    margin: 0; 
+    padding: 0.5em; 
+  }
+}
+
 </style>
