@@ -16,11 +16,16 @@
         </ul>
       </div>
       <div class="footer-section social">
-        <h3>Follow Us</h3>
-        <div class="social-icons">
-          <!-- Icons or links to social media -->
-        </div>
-      </div>
+    <h3>Follow Us</h3>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/discover_mapple" target="_blank" rel="noopener noreferrer">
+        <img src="@/assets/images/socials/insta_icon.jpg" alt="Instagram" />
+      </a>
+      <a href="https://www.twitter.com/discover_mapple" target="_blank" rel="noopener noreferrer">
+        <img src="@/assets/images/socials/x_icon.jpg" alt="Twitter" />
+      </a>
+    </div>
+  </div>
     </div>
     <div class="footer-bottom">
       <p>&copy; 2024 Mapple. All rights reserved.</p>
@@ -38,9 +43,11 @@ export default {
 .footer {
   background-color: #c9d2f3;
   color: #333;
-  padding: 2rem 0;
+  padding: clamp(10px, 2vw, 20px);
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
+
 
 .footer-content {
   display: flex;
@@ -50,6 +57,17 @@ export default {
   flex-direction: column;
   padding-left:0.5rem;
   padding-right :0.5rem;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center; /* Center social icons */
+  gap: 1rem; /* Adjust the gap to your preference */
+}
+
+.social-icons img {
+  height: 30px; /* Adjust the size to fit your design */
+  width: auto;
 }
 
 .footer-section {
@@ -81,8 +99,14 @@ export default {
     justify-content: center; 
   }
 
-  .footer-section .social-icons {
+  .footer-section {
     justify-content: center; 
+  }
+
+  .social-icons {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 
   .footer-section h3,

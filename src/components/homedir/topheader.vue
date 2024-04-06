@@ -27,9 +27,12 @@ export default {
   justify-content: space-between;
   background-color: #c9d2f3;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: clamp(10px, 2vw, 20px); /* Responsive padding */
+  padding: clamp(10px, 2vw, 20px);
   width: 100%;
+  max-height: 100px; /* Set a fixed maximum height */
+  overflow: hidden; /* Ensure content does not overflow */
 }
+
 
 .logo-container {
   flex: 0 0 auto;
@@ -75,11 +78,21 @@ export default {
 
   .top-header {
     justify-content: space-between; 
+    padding: 10px clamp(2vw, 5vw, 20px);
+  }
+
+  .logo-container {
+    margin-right: auto; 
+  }
+
+  .logo {
+    /* Adjust the logo size for smaller screens */
+    max-height: clamp(40px, 8vw, 60px); /* Smaller min and max sizes for narrow viewports */
   }
 
   .navigation {
-    justify-content: space-around;
-    padding-right: 0; 
+    padding-right: 0;
+    justify-content: space-around;  
   }
   
   .logo-container {
@@ -92,8 +105,9 @@ export default {
   }
   
   .nav-link {
-    margin: 0; 
-    padding: 0.5em; 
+    padding: 0.5em clamp(2vw, 5vw, 20px); /* Responsive horizontal padding for nav links */
+    margin: 0; /* No margins necessary if padding is handling spacing */
+    font-size: clamp(0.8em, 2.5vw, 1em);
   }
 }
 
