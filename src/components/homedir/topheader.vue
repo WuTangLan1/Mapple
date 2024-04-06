@@ -28,7 +28,7 @@ export default {
   background-color: #c9d2f3;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px 20px;
-  width: 100%;
+  max-width: 100%;
 }
 
 .logo-container {
@@ -88,7 +88,7 @@ export default {
   }
   
   .logo {
-    max-height: 80px; 
+    max-height: 6rem; 
   }
   
   .nav-link {
