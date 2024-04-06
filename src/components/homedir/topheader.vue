@@ -22,32 +22,39 @@ export default {
 
 <style scoped>
 .top-header {
-  background-color: #c9d2f3; /* Consistent light blue for both */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #c9d2f3;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1rem 0; /* Use rem for padding to ensure responsiveness */
-  height: 10vh; /* Adjusted for header */
+  padding: 10px 20px;
+  /* Removed the height to allow padding to define the space */
   width: 100%;
 }
 
 .logo-container {
-  flex: 1;
+  flex: 0 0 auto; /* Do not grow or shrink, base width on content */
 }
 
 .logo {
-  height: 100%; /* Adjust as necessary */
+  /* Adjust the height to fit within the header while maintaining aspect ratio */
+  max-height: 100px; /* Example size, adjust as necessary */
+  max-width: 100%; /* Ensures the image is responsive and doesn't overflow */
 }
 
 .title {
-  flex: 2;
-  text-align: center;
-  margin: 0;
-  font-size: 2em; /* Adjust size as necessary */
+  /* This will make the title flex in size with the content, adjust '1' to change the growth rate */
+  flex: 1 0 auto; /* Removed flex: 2 to better control size */
+  text-align: left; /* Align to the left to be closer to the logo */
+  margin-left: 20px; /* Adjust spacing between logo and title as necessary */
+  font-size: 1.5em; /* Adjust size as necessary */
 }
 
 .navigation {
-  flex: 1;
+  /* This allows the navigation to take up the space it needs based on content */
+  flex: 0 0 auto; /* Do not grow or shrink, base width on content */
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
 }
 
 .nav-link {

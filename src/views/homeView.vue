@@ -13,10 +13,11 @@
   </script>
   
   <style scoped>
-  .home-view {
-    width: 100%;
-    background-color: rgb(223, 223, 230);
-  }
+    .home-view {
+      width: 100%;
+      background-color: #ffffff; /* White background for a clean look */
+      color: #333333; /* Dark gray text for better contrast */
+    }
   </style>
   
 
