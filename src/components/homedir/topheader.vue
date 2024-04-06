@@ -51,8 +51,8 @@ export default {
 .navigation {
   flex: 1;
   display: flex;
-  justify-content: space-between; /* This will space out the nav links */
-  padding-right: 1rem; /* Ensure there's a gap on the right */
+  justify-content: space-between; 
+  padding-right: 1rem;
 }
 
 .nav-link {
@@ -60,7 +60,7 @@ export default {
   color: #000;
   font-weight: bold;
   padding: 0.5em;
-  margin: 0 0.5rem; /* This gives space between each nav link */
+  margin: 0 0.5rem;
 }
 
 
