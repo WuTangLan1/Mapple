@@ -43,7 +43,7 @@ export default {
 .navigation {
   display: flex;
   justify-content: flex-end; 
-  gap: 1rem; 
+  gap: 2rem; 
 }
 
 .nav-link {
