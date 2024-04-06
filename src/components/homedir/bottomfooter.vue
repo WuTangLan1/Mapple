@@ -61,14 +61,31 @@ export default {
 
 .social-icons {
   display: flex;
-  justify-content: center; /* Center social icons */
-  gap: 1rem; /* Adjust the gap to your preference */
+  justify-content: center;
+  gap: 2rem;
 }
 
-.social-icons img {
-  height: 30px; /* Adjust the size to fit your design */
-  width: auto;
+.social-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.social-icon a {
+  text-decoration: none;
+}
+
+.social-icon img {
+  height: 20px; 
+  width: auto; 
+}
+
+.social-icon span {
+  font-size: 0.75rem;
+  color: #333;
+  margin-top: 0.5rem;
+}
+
 
 .footer-section {
   margin-bottom: 1.5rem;

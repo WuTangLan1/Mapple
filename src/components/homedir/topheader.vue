@@ -27,10 +27,13 @@ export default {
   justify-content: space-between;
   background-color: #c9d2f3;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: clamp(10px, 2vw, 20px);
+  padding: clamp(10px, 2vw, 20px); /* Responsive padding */
   width: 100%;
-  max-height: 100px; /* Set a fixed maximum height */
-  overflow: hidden; /* Ensure content does not overflow */
+  max-height: 100px;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: calc(100% - 2 * clamp(10px, 2vw, 20px)); /* Calculate max-width considering the padding */
 }
 
 
@@ -86,8 +89,7 @@ export default {
   }
 
   .logo {
-    /* Adjust the logo size for smaller screens */
-    max-height: clamp(40px, 8vw, 60px); /* Smaller min and max sizes for narrow viewports */
+    max-height: clamp(40px, 8vw, 60px); 
   }
 
   .navigation {
@@ -97,7 +99,7 @@ export default {
   
   .logo-container {
     flex: 0 0 auto; 
-    margin-right: auto; /* This will push everything else to the right */
+    margin-right: auto; 
   }
   
   .logo {
@@ -105,8 +107,8 @@ export default {
   }
   
   .nav-link {
-    padding: 0.5em clamp(2vw, 5vw, 20px); /* Responsive horizontal padding for nav links */
-    margin: 0; /* No margins necessary if padding is handling spacing */
+    padding: 0.5em clamp(2vw, 5vw, 20px); 
+    margin: 0; 
     font-size: clamp(0.8em, 2.5vw, 1em);
   }
 }
