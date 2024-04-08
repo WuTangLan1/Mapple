@@ -35,17 +35,19 @@ export default {
 #app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; 
-  max-height: 100vh;
+  min-height: 100vh;
   width: 100%;
 }
+
 
 .router-view-container {
   flex-grow: 1;
   width: 100%;
-  overflow: auto; 
+  overflow: auto;
   height: calc(100vh - var(--header-height) - var(--footer-height));
+  box-sizing: border-box; 
 }
+
 
 </style>
 
