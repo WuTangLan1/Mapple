@@ -6,12 +6,15 @@
 
 <script>
 import Globe from 'globe.gl';
-import { onMounted, ref, nextTick } from 'vue';
+import { onMounted, ref, nextTick, reactive } from 'vue';
+import { geoContains } from 'd3-geo';
+
 
 export default {
   name: 'MapContainer',
   setup() {
     const globeContainer = ref(null);
+    const selectedCountry = reactive({ current: null });
 
     onMounted(async () => {
       await nextTick();
@@ -35,7 +38,7 @@ export default {
       globe.polygonAltitude(0.01);
       console.log('polygonAltitude set');
 
-      globe.polygonCapColor(() => '#ffcc00');
+      globe.polygonCapColor(() => '#90EE90');
       console.log('polygonCapColor set');
 
       globe.polygonStrokeColor(() => '#fff');
@@ -59,8 +62,28 @@ export default {
       fetch('data/mapple.geo.json')
         .then(res => res.json())
         .then(data => {
-          globe.polygonsData(data.features);
-          console.log('GeoJSON data loaded');
+          globe.polygonsData(data.features)
+          .polygonCapColor(() => '#90EE90')
+          globe.onGlobeClick((coords) => {
+            console.log(`Clicked coordinates: ${coords.lat}, ${coords.lng}`);
+            const clickedCountry = data.features.find(feature => {
+              // Use a geo-utility function to determine if the clicked coordinates are within the feature
+              return geoContains(feature.geometry, [coords.lng, coords.lat]);
+            });
+            
+            if (clickedCountry) {
+              selectedCountry.current = clickedCountry;
+              console.log(clickedCountry.properties.NAME); // Log the country's name
+              
+              // Update the colors accordingly
+              globe.polygonsData().polygonCapColor(feature => {
+                return feature === selectedCountry.current ? '#ADD8E6' : '#90EE90';
+              });
+              
+              // Trigger a re-render of the globe to show the new color
+              globe.polygonsData(globe.polygonsData());
+            }
+          });
         })
         .catch(error => {
           console.error('Error fetching or setting globe data:', error);
@@ -73,7 +96,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .map-container {
