@@ -3,17 +3,25 @@
 <script>
 import TopHeader from './components/homedir/topheader.vue';
 import BottomFooter from './components/homedir/bottomfooter.vue';
+import StartModal from './components/homedir/startModal.vue'
 
 export default {
   components: {
     TopHeader,
-    BottomFooter
+    BottomFooter,
+    StartModal
+  },
+  methods: {
+    setDifficulty(level) {
+      console.log("Difficulty selected:", level);
+    }
   }
 }
 </script>
 
 <template>
   <div id="app">
+    <start-modal @difficultySelected="setDifficulty"/>
     <top-header/>
     <div class="router-view-container">
       <router-view/>
