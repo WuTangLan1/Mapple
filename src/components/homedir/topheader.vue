@@ -23,7 +23,7 @@ export default {
 .top-header {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Use space-between to place logo and nav-links on opposite ends */
+  justify-content: space-between;
   background-color: #c9d2f3;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -36,8 +36,8 @@ export default {
 }
 
 .logo {
-  max-height: clamp(50px, 8vw, 120px); /* Responsive logo size */
-  max-width: 100%; /* Ensure logo does not exceed its container width */
+  max-height: clamp(50px, 8vw, 120px); 
+  max-width: 100%;
 }
 
 .navigation {

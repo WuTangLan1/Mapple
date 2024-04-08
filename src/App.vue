@@ -28,6 +28,7 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh; 
+  max-height: 100vh;
   width: 100%;
 }
 

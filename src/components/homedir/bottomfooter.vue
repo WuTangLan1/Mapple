@@ -82,9 +82,7 @@ export default {
   overflow: hidden;
   width:100%;
   transition: max-height 0.5s ease;
-  max-height: var(--footer-max-height, 100px); 
 }
-
 
 .footer-content {
   display: flex;
@@ -99,29 +97,27 @@ export default {
 }
 
 .footer:not(.footer-expanded) .footer-content {
-  max-height: 120px; /* Set to the same height as the collapsed footer */
+  max-height: 100px; 
 }
 
 .footer-toggle {
-  position: absolute; /* Adjust the position within .footer */
-  top: 0; /* Adjust if you want more space from the top edge */
-  right: 0; /* Adjust if you want more space from the right edge */
+  position: absolute; 
+  top: 0; 
+  right: 0; 
   cursor: pointer;
-  /* Remove padding if you want the toggle icon closer to the edge */
 }
 
 .toggle-icon {
-  position: absolute; /* This positions the icon relative to footer-toggle now */
-  top: 10px; /* Position from the top inside the footer-toggle */
-  right: 20px; /* Position from the right inside the footer-toggle */
-  width: 20px; /* Width of the icon image */
-  height: 20px; /* Height of the icon image */
+  position: absolute; 
+  top: 10px; 
+  right: 20px;
+  width: 20px;
+  height: 20px; 
   transition: transform 0.3s ease;
 }
 
-  /* Rotate the image when the footer is expanded */
   .footer-expanded .toggle-icon {
-    transform: rotate(180deg); /* Rotate the arrow to point upwards */
+    transform: rotate(180deg); 
   }
 
 
@@ -165,8 +161,8 @@ img {
 
 .footer-section ul {
   list-style: none;
-  padding: 0;
 }
+
 @media (max-width: 1000px) {
   .footer-content,
   .footer-section,
