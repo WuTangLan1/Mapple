@@ -12,64 +12,68 @@ export default {
   name: 'MapContainer',
   setup() {
     const globeContainer = ref(null);
-    const hoveredCountry = ref(null);
 
     onMounted(async () => {
-      await nextTick(); // Ensure the DOM has updated with the globe container
+      await nextTick();
 
-      // Initialize the globe with additional attributes
-      const globe = Globe()(globeContainer.value)
-        .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg') // Use a night view for a different look
-        .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png') // Add topography
-        .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png') // Add stars in the background
-        .polygonsData([])
-        .polygonAltitude(0.01)
-        .polygonCapColor(country => country === hoveredCountry.value ? 'darkgreen' : '#ffcc00')
-        .polygonStrokeColor(() => '#fff')
-        .polygonsTransitionDuration(300) // Transition effect for polygons
-        .atmosphereColor('lightskyblue') 
-.atmosphereAltitude(0.3) // Make the atmosphere thicker for a more dramatic effect
-.pointOfView({ lat: 1.3521, lng: 103.8198, altitude: 2 }) // Optional: Set a default point of view
-.enablePointerInteraction(true) // Enable pointer interaction for better user experience
-.onCountryHover((country) => {
-          hoveredCountry.value = country ? country.properties.ISO_A2 : null;
+      // Initialize the globe and add console logs to check each method
+      const globe = Globe()(globeContainer.value);
+      console.log('Globe instance:', globe);
+
+      globe.globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg');
+      console.log('globeImageUrl set');
+
+      globe.bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png');
+      console.log('bumpImageUrl set');
+
+      globe.backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png');
+      console.log('backgroundImageUrl set');
+
+      globe.polygonsData([]);
+      console.log('polygonsData set');
+
+      globe.polygonAltitude(0.01);
+      console.log('polygonAltitude set');
+
+      globe.polygonCapColor(() => '#ffcc00');
+      console.log('polygonCapColor set');
+
+      globe.polygonStrokeColor(() => '#fff');
+      console.log('polygonStrokeColor set');
+
+      globe.polygonsTransitionDuration(300);
+      console.log('polygonsTransitionDuration set');
+
+      globe.atmosphereColor('lightskyblue');
+      console.log('atmosphereColor set');
+
+      globe.atmosphereAltitude(0.3);
+      console.log('atmosphereAltitude set');
+
+      globe.pointOfView({ lat: 1.3521, lng: 103.8198, altitude: 2 });
+      console.log('pointOfView set');
+
+      globe.enablePointerInteraction(true);
+      console.log('enablePointerInteraction set');
+
+      fetch('data/mapple.geo.json')
+        .then(res => res.json())
+        .then(data => {
+          globe.polygonsData(data.features);
+          console.log('GeoJSON data loaded');
         })
-        .onCountryClick((country) => {
-          if (country) {
-            console.log(country.properties.NAME);
-            globe.polygonCapColor(d => d === country ? 'darker color here' : '#ffcc00');
-            globe.polygonsData(globe.polygonsData());
-          }
+        .catch(error => {
+          console.error('Error fetching or setting globe data:', error);
         });
-
-
-  const controls = globe.controls(); 
-  controls.autoRotate = true; 
-  controls.autoRotateSpeed = 0.5; 
-  controls.enableZoom = true;
-  controls.zoomSpeed = 0.8; // 
-  controls.enableRotate = true; 
-  controls.rotateSpeed = 0.8; 
-
-  fetch('data/mapple.geo.json')
-    .then(res => res.json())
-    .then(data => {
-      globe.polygonsData(data.features)
-        .polygonCapColor(() => '#ffcc00') 
-        .polygonStrokeColor(() => '#ffffff');
-    })
-    .catch(error => {
-      console.error('Error fetching or setting globe data:', error);
     });
-});
 
-return {
-  globeContainer,
+    return {
+      globeContainer,
+    };
+  },
 };
-},
-};
-
 </script>
+
 
 <style scoped>
 .map-container {
