@@ -23,8 +23,8 @@ export default {
 <style scoped>
   .home-view {
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    height: calc(100vh - var(--header-height) - var(--footer-height)); /* Adjust based on your header/footer height */
+    flex-direction: column;
+    height:100%;
     width: 100%;
     background-color: #ffffff;
     color: #333333;

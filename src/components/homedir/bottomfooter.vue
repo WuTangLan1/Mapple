@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       footerExpanded: false,
-      footerMaxHeight: '120px',
+      footerMaxHeight: '100px',
       toggleIconUrl: require('@/assets/images/socials/toggle_arrow.png'),
     };
   },
@@ -21,9 +21,10 @@ export default {
         });
       },
       updateFooterHeight() {
-        const newHeight = this.footerExpanded ? '500px' : '120px'; 
+        const newHeight = this.footerExpanded ? '500px' : '100px'; 
         this.footerMaxHeight = newHeight;
-      },
+        document.documentElement.style.setProperty('--footer-height', newHeight);
+      }
     },
   watch: {
     footerExpanded(newValue, oldValue) {

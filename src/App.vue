@@ -23,6 +23,7 @@ export default {
 </template>
 
 <style>
+@import './assets/css/styles.css';
 #app {
   display: flex;
   flex-direction: column;
@@ -34,8 +35,7 @@ export default {
   flex-grow: 1;
   width: 100%;
   overflow: auto; 
-  height: calc(100vh - var(--footer-height + 100px));
-  overflow: auto;
+  height: calc(100vh - var(--header-height) - var(--footer-height));
 }
 
 </style>
