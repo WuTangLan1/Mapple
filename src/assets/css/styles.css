@@ -4,3 +4,7 @@
     --footer-height: 100px; /* Adjust based on your footer's default height */
   }
 
+
+button:hover {
+  transform : translateY(-2px)
+}
