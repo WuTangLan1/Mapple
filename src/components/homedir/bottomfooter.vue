@@ -164,10 +164,15 @@ img {
 }
 
 @media (max-width: 1000px) {
+  .footer {
+    /* Ensure the footer itself doesn't grow larger than needed */
+    max-height: 500px; /* or the maximum height you want when expanded */
+  }
+
   .footer-content,
   .footer-section,
   .footer-bottom {
-    text-align: center; 
+    text-align: center;
     align-items: center;
   }
 
@@ -176,11 +181,15 @@ img {
   }
 
   .footer-section ul {
-    justify-content: center; 
+    padding: 0; /* Resets padding to ensure alignment */
+    display: flex; /* Flex layout for inner items */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 0.5rem; /* Space between items */
   }
 
-  .footer-section {
-    justify-content: center; 
+  .footer-section.links li {
+    margin: 0.5rem; /* Add margin around each link for better spacing */
   }
 
   .social-icons {
@@ -196,35 +205,34 @@ img {
     margin-right: auto;
   }
 
+  /* Adjust the layout of Quick Links to stack vertically */
   .footer-section.links ul {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; 
-    gap: 0.5rem;
+    flex-direction: column; /* Stack Quick Links vertically */
   }
 
-  .footer-section.links li {
-    margin: 0.5rem; /* Add margin around each link for better spacing */
+  .footer-expanded .footer-content {
+    max-height: none; /* Allow the footer content to expand as needed when the footer is expanded */
   }
 }
 
-
-@media (min-width: 800px) {
+/* Styles for when the width is between 800px and 1000px */
+@media (min-width: 800px) and (max-width: 1000px) {
   .footer-content {
-    flex-direction: row; /* switch to row layout for larger screens */
-    justify-content: space-between; /* distribute space between sections */
+    flex-direction: row; /* Keep row layout for this width range */
+    justify-content: space-between; /* Distribute space between sections */
   }
 
   .footer-section.links ul {
-    flex-direction: row; /* align Quick Links in a row */
-    justify-content: flex-start; /* align Quick Links to the start */
-    gap: 1rem; /* add a gap between the links */
+    flex-direction: row; /* Keep Quick Links in a row for this width range */
+    justify-content: center; /* Center Quick Links */
+    gap: 1rem; /* Add a gap between the links */
   }
   
   .footer-section {
-    margin-bottom: 0; /* remove the margin-bottom for larger screens if desired */
+    margin-bottom: 0; /* Optional: remove the margin-bottom */
   }
 }
+
 
 .footer-section li a {
   color: #333;
