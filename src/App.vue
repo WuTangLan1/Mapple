@@ -11,9 +11,15 @@ export default {
     BottomFooter,
     StartModal
   },
+  data() {
+    return {
+      difficultySelected: false, // Add this state
+    };
+  },
   methods: {
     setDifficulty(level) {
       console.log("Difficulty selected:", level);
+      this.difficultySelected = true; // Update the state when a difficulty level is selected
     }
   }
 }
@@ -24,7 +30,7 @@ export default {
     <start-modal @difficultySelected="setDifficulty"/>
     <top-header/>
     <div class="router-view-container">
-      <router-view/>
+      <router-view :difficultySelected="difficultySelected"/>
     </div>
     <bottom-footer/>
   </div>

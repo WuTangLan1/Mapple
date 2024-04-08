@@ -43,7 +43,7 @@ export default {
       <div class="footer-toggle" @click="toggleFooter">
         <img :src="toggleIconUrl" class="toggle-icon" alt="Toggle arrow" />
       </div>
-      <div class="footer-section links">
+      <div class="footer-section links" v-show="footerExpanded">
         <h3>Quick Links</h3>
         <ul>
           <li><a href="#">Privacy Policy</a></li>
@@ -55,7 +55,7 @@ export default {
         <h3>About Mapple</h3>
         <p>Mapple is a daily geographical challenge that tests your knowledge of the world's countries. Join the adventure and learn with us every day!</p>
       </div>
-      <div class="footer-section social" v-show="footerExpanded">
+      <div class="footer-section social" >
         <h3>Follow Us</h3>
         <div class="social-icons">
           <a href="https://www.instagram.com/discover_mapple" target="_blank" rel="noopener noreferrer">
