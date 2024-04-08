@@ -61,6 +61,18 @@
   justify-content: center; /* Center buttons in the container */
 }
 
+.button-easy {
+    background-color: rgb(116, 167, 118);   
+}
+
+.button-medium {
+    background-color: rgb(39, 120, 179);   
+}
+
+.button-hard {
+   background-color: rgb(128, 33, 159);     
+ }
+
 .button-easy, .button-medium, .button-hard {
   margin: 10px;
   padding: 10px 20px;
