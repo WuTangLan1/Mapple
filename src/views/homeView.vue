@@ -2,19 +2,19 @@
 
 <template>
   <div class="home-view">
-    <FlagContainer />
+    <PromptContainer />
     <MapContainer />
   </div>
 </template>
 
 <script>
-import FlagContainer from '@/components/mappledir/flagdir/flagContainer.vue';
+import PromptContainer from '@/components/mappledir/promptdir/promptContainer.vue';
 import MapContainer from '@/components/mappledir/mapdir/mapContainer.vue';
 
 export default {
   name: 'HomeView',
   components: {
-    FlagContainer,
+    PromptContainer,
     MapContainer
   }
 }
