@@ -1,4 +1,4 @@
-<!-- This is the code for the src\components\mappledir\flagdir\flagContainer.vue -->
+<!-- This is the code for the src\components\mappledir\promptdir\promptContainer.vue -->
 
 <template>
     <div class="flag-container">
