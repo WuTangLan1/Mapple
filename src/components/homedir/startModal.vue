@@ -15,7 +15,7 @@
   </template>
   
   <script>
-  import { useCountryStore } from '@/stores/usecountryStore';
+  import { useCountryStore } from '@/stores/useCountryStore';
   export default {
     data() {
       return {

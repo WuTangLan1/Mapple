@@ -10,7 +10,7 @@
 <script>
 import PromptContainer from '@/components/mappledir/promptdir/promptContainer.vue';
 import MapContainer from '@/components/mappledir/mapdir/mapContainer.vue';
-import { useCountryStore } from '@/stores/usecountryStore.js';
+import { useCountryStore } from '@/stores/useCountryStore.js';
 
 export default {
   name: 'HomeView',

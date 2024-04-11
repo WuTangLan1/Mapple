@@ -13,7 +13,7 @@
 
 <script>
 import { computed } from 'vue';
-import { useCountryStore } from '@/stores/usecountryStore.js';
+import { useCountryStore } from '@/stores/useCountryStore.js';
 
 export default {
   name: 'PromptContainer',

@@ -1,7 +1,7 @@
 // src/stores/countryStore.js
 import { defineStore } from 'pinia';
 import { db } from '@/components/fbdir/fbInit';
-import { doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, query, getDocs } from 'firebase/firestore';
 
 export const useCountryStore = defineStore('country', {
   state: () => ({
