@@ -127,10 +127,9 @@ export default {
   gap: 2rem;
 }
 
-.social-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.social-icons {
+  justify-content: center;
+  gap: 2rem;
 }
 
 .social-icon a {
@@ -151,19 +150,26 @@ img {
 
 
 .footer-section {
+  width: 100%; /* Set width to 100% for proper centering */
+  display: flex; /* Use flexbox for centering content */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  text-align: center; /* Center text */
   margin-bottom: 1.5rem;
 }
 
+
 .footer-section h3 {
   color: #333;
-  margin-bottom: 1rem;
+  margin-bottom: 0.2rem;
 }
 
 .footer-section.links ul {
-  display: flex; /* Display as flex to make items align in a row */
-  justify-content: center; /* Center items horizontally */
-  padding: 0; /* Remove default padding */
+  display: flex;
+  justify-content: center;
+  padding: 0;
 }
+
 
 .footer-section.links li {
   padding: 0 1rem; /* Add some spacing between the links */
