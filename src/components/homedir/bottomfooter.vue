@@ -44,13 +44,13 @@ export default {
         <img :src="toggleIconUrl" class="toggle-icon" alt="Toggle arrow" />
       </div>
       <div class="footer-section links">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Support</a></li>
-        </ul>
-      </div>
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
       <div class="footer-section about" v-show="footerExpanded">
         <h3>About Mapple</h3>
         <p>Mapple is a daily geographical challenge that tests your knowledge of the world's countries. Join the adventure and learn with us every day!</p>
@@ -86,15 +86,15 @@ export default {
 
 .footer-content {
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
   flex-wrap: wrap;
   flex-direction: column;
-  padding-left:0.5rem;
-  padding-right :0.5rem;
+  padding: 0.5rem;
   transition: max-height 0.3s ease;
   position: relative;
 }
+
 
 .footer:not(.footer-expanded) .footer-content {
   max-height: 100px; 
@@ -159,71 +159,18 @@ img {
   margin-bottom: 1rem;
 }
 
+.footer-section.links ul {
+  display: flex; /* Display as flex to make items align in a row */
+  justify-content: center; /* Center items horizontally */
+  padding: 0; /* Remove default padding */
+}
+
+.footer-section.links li {
+  padding: 0 1rem; /* Add some spacing between the links */
+}
+
 .footer-section ul {
   list-style: none;
-}
-
-@media (max-width: 1000px) {
-  .footer-content,
-  .footer-section,
-  .footer-bottom {
-    text-align: center; 
-    align-items: center;
-  }
-
-  .footer-section {
-    margin-bottom: 1.5rem;
-  }
-
-  .footer-section ul {
-    justify-content: center; 
-  }
-
-  .footer-section {
-    justify-content: center; 
-  }
-
-  .social-icons {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .footer-section h3,
-  .footer-section p,
-  .footer-bottom p {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .footer-section.links ul {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; 
-    gap: 0.5rem;
-  }
-
-  .footer-section.links li {
-    margin: 0.5rem; /* Add margin around each link for better spacing */
-  }
-}
-
-
-@media (min-width: 800px) {
-  .footer-content {
-    flex-direction: row; /* switch to row layout for larger screens */
-    justify-content: space-between; /* distribute space between sections */
-  }
-
-  .footer-section.links ul {
-    flex-direction: row; /* align Quick Links in a row */
-    justify-content: flex-start; /* align Quick Links to the start */
-    gap: 1rem; /* add a gap between the links */
-  }
-  
-  .footer-section {
-    margin-bottom: 0; /* remove the margin-bottom for larger screens if desired */
-  }
 }
 
 .footer-section li a {
