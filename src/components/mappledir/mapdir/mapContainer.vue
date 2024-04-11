@@ -29,36 +29,44 @@ export default {
 
       root.setThemes([am5themes_Animated.new(root)]);
 
+      // Create a MapChart instance with enhanced padding and a more defined background color
       let chart = root.container.children.push(am5map.MapChart.new(root, {
         panX: "rotateX",
         panY: "rotateY",
-        projection: am5map.geoOrthographic(),
+        projection: am5map.geoOrthographic(), // Orthographic projection for a globe-like appearance
         paddingBottom: 20,
         paddingTop: 20,
         paddingLeft: 20,
         paddingRight: 20,
-        backgroundSeries: am5map.MapPolygonSeries.new(root, { fill: am5.color(0xADD8E6) })
+        backgroundSeries: am5map.MapPolygonSeries.new(root, {
+          fill: am5.color(0xDEF2FA) // A softer blue for the ocean background
+        })
       }));
 
+      // Create a MapPolygonSeries instance with more visible and aesthetic borders
       let polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
         geoJSON: am5geodata_worldLow,
-        fill: am5.color(0x84BFA4),
-        stroke: am5.color(0x767676),
-        strokeWidth: 0.5
+        fill: am5.color(0xAAD3C1), // A lighter shade for land areas, for better contrast
+        stroke: am5.color(0x1A1A1A), // A nearly black color for contrast with the land areas
+        strokeWidth: 1.2, // Slightly thicker borders for better visibility
+        nonScalingStroke: true, // Ensures the stroke width remains consistent when the map is zoomed
       }));
 
-      polygonSeries.mapPolygons.template.setAll({
-        toggleKey: "active",
-        interactive: true,
-        fill: am5.color(0x84BFA4),
-        stroke: am5.color(0x767676),
-        strokeWidth: 0.5,
-        tooltipText: "{name}"
+      // eslint-disable-next-line no-unused-vars
+      let hoverState = polygonSeries.mapPolygons.template.states.create("hover", {
+        fill: am5.color(0xFBE5A2) // A pleasant hover color
       });
 
       polygonSeries.mapPolygons.template.states.create("active", {
-        fill: am5.color(0xFFA07A)
-      });
+          fill: am5.color(0xFFCCAA) // A distinct color for active (selected) countries
+        });
+
+        // Enhance interactivity with the polygons
+        polygonSeries.mapPolygons.template.setAll({
+          toggleKey: "active",
+          interactive: true,
+          cursorOverStyle: "pointer" // Change cursor to pointer on hover to indicate interactivity
+        });
 
       polygonSeries.mapPolygons.template.events.on("click", function(ev) {
         polygonSeries.mapPolygons.each(function(item) {
