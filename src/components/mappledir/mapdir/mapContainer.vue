@@ -39,9 +39,25 @@ export default {
         paddingRight: 20
       }));
 
+      chart.setAll({
+          background: am5.Circle.new(root, {
+            fill: am5.color(0xf3f4f5) // Light gray background, change as needed
+          })
+        });
+
+  // Configure series for higher contrast
       let polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-        geoJSON: am5geodata_worldLow
+        geoJSON: am5geodata_worldLow,
+        fill: am5.color(0xCCCCCC),
+        stroke: am5.color(0x000000), 
+        strokeWidth: 0.5 // Border line width
       }));
+
+      // For the ocean/sea, we can make it a darker color to contrast with the land
+      chart.set("backgroundSeries", am5map.MapPolygonSeries.new(root, {
+        fill: am5.color(0x88CCEE) // Ocean color, change as needed
+      }));
+
 
       polygonSeries.mapPolygons.template.setAll({
         tooltipText: "{name}",
