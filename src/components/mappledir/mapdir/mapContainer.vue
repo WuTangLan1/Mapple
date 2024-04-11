@@ -21,13 +21,16 @@ export default {
         e.stopImmediatePropagation();
       }
     };
-
     onMounted(() => {
-      window.addEventListener('error', suppressResizeObserverError);
-
       root = am5.Root.new("chartdiv");
 
+      if (!root) {
+        console.error("Failed to initialize amCharts root.");
+        return;
+      }
+
       root.setThemes([am5themes_Animated.new(root)]);
+      console.log("amCharts themes set.");
 
       let chart = root.container.children.push(am5map.MapChart.new(root, {
         panX: "rotateX",
@@ -39,24 +42,35 @@ export default {
         paddingRight: 20
       }));
 
-      chart.setAll({
-          background: am5.Circle.new(root, {
-            fill: am5.color(0xf3f4f5) // Light gray background, change as needed
-          })
-        });
+      if (!chart) {
+        console.error("Failed to initialize amCharts MapChart.");
+        return;
+      }
+      console.log("amCharts MapChart initialized.");
 
-  // Configure series for higher contrast
+    // Set the chart background to an off-white color
+    chart.chartContainer.set("background", am5.Rectangle.new(root, {
+      fill: am5.color(0xF0F0F0), // Off-white background
+      fillOpacity: 1
+    }));
+
+    // Set a darker color for the land to contrast with the ocean and off-white background
       let polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-        geoJSON: am5geodata_worldLow,
-        fill: am5.color(0xCCCCCC),
-        stroke: am5.color(0x000000), 
-        strokeWidth: 0.5 // Border line width
-      }));
+      geoJSON: am5geodata_worldLow,
+      fill: am5.color(0x84BFA4), // Green land color
+      stroke: am5.color(0x767676), // Border color for countries
+      strokeWidth: 0.5 // Border line width
+    }));
 
-      // For the ocean/sea, we can make it a darker color to contrast with the land
-      chart.set("backgroundSeries", am5map.MapPolygonSeries.new(root, {
-        fill: am5.color(0x88CCEE) // Ocean color, change as needed
-      }));
+    // Set a blue color for the ocean
+    chart.set("backgroundSeries", am5map.MapPolygonSeries.new(root, {
+      fill: am5.color(0xAAD3DF) // Blue ocean color
+    }));
+
+    // Set a color for the ocean that is lighter than the land but darker than the background
+    chart.set("backgroundSeries", am5map.MapPolygonSeries.new(root, {
+      fill: am5.color(0xCCEEFF) // Ocean color, lighter than the land
+    }));
 
 
       polygonSeries.mapPolygons.template.setAll({
@@ -86,11 +100,10 @@ export default {
 
 <style scoped>
 #chartdiv {
-  height: 100%;
+  height: 200px; /* Instead of 100%, you can set a fixed height */
   width: 100%;
 }
 .map-container {
-  height: 50%; /* Adjust based on your needs */
   width: 100%;
   background-color: #ddedea; /* A light gray that should contrast better with the map */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add some shadow for depth */

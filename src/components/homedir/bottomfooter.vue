@@ -76,12 +76,15 @@ export default {
 
 <style scoped>
 .footer {
+  position: fixed; /* or 'absolute' if you want it to scroll away */
+  bottom: 0;
+  left: 0;
+  width: 100%;
   background-color: #c9d2f3;
   color: #333;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  width:100%;
   transition: max-height 0.5s ease;
+  z-index: 1000; /* Ensure it sits above other content */
 }
 
 .footer-content {

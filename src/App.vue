@@ -28,7 +28,6 @@ export default {
     const difficultySelected = ref(false); // Reactive variable to track difficulty selection
     const gameStore = useGameStore(); // Use the game store
 
-    // Method to set difficulty and mark as selected
     function setDifficulty(level) {
       gameStore.setDifficulty(level); // Set difficulty in the store
       difficultySelected.value = true; // Mark as selected to render other components
@@ -54,7 +53,6 @@ export default {
   flex-grow: 1;
   width: 100%;
   overflow: auto; 
-  height: calc(100vh - var(--header-height) - var(--footer-height));
 }
 
 </style>
