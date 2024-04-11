@@ -2,14 +2,17 @@
 <template>
   <div class="map-container">
     <div id="chartdiv" class="map-container"></div>
-    <button 
-      :disabled="!selectedCountry" 
-      @click="logSelectedCountry"
-      class="submit-button">
-      Submit
-    </button>
+    <div class="info-container">
+      <div class="score-display">Score: {{ score }}</div>
+      <button :disabled="!selectedCountry || guessesRemaining === 0" 
+              @click="submitGuess"
+              class="submit-button">
+        Submit
+      </button>
+    </div>
   </div>
 </template>
+
 
 <script>
 import * as am5 from "@amcharts/amcharts5";
@@ -17,12 +20,16 @@ import * as am5map from "@amcharts/amcharts5/map";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import { onMounted, onBeforeUnmount, ref } from 'vue';
+import { useCountryStore } from '@/stores/useCountryStore';
 
 export default {
   name: 'MapContainer',
   setup() {
+    const countryStore = useCountryStore();
     let root;
-    const selectedCountry = ref(null); // Reactive variable to track selected country
+    const selectedCountry = ref(null); 
+    const score = ref(0);
+    const guessesRemaining = ref(3);
 
     onMounted(() => {
       root = am5.Root.new("chartdiv");
@@ -81,26 +88,36 @@ export default {
 
     });
 
+    function submitGuess() {
+        if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
+          score.value += 1; // Increase score
+          console.log("Correct guess! Your score: " + score.value);
+        } else {
+          guessesRemaining.value -= 1; // Decrease guesses remaining
+          if (guessesRemaining.value === 0) {
+            console.log("Game failed");
+          } else {
+            console.log("Try again. Guesses remaining: " + guessesRemaining.value);
+          }
+        }
+      }
+
+
     onBeforeUnmount(() => {
       if (root) {
         root.dispose();
       }
     });
 
-    function logSelectedCountry() {
-      if (selectedCountry.value) {
-        console.log(`Success, country name: ${selectedCountry.value}`);
-      }
-    }
 
-    return { selectedCountry, logSelectedCountry };
+    return { selectedCountry, guessesRemaining, score, submitGuess };
   }
 };
 </script>
 
 <style scoped>
 #chartdiv {
-  height: 330px;
+  height: 260px;
   width: 100%;
 }
 .map-container {
@@ -109,16 +126,26 @@ export default {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+.score-display {
+  color: white;
+  background-color: #4CAF50;
+  padding: 5px;
+  border-radius: 5px;
 }
 .submit-button {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  padding: 10px 20px;
-  border: none;
   background-color: #4CAF50;
   color: white;
   cursor: pointer;
   border-radius: 5px;
+  padding: 10px 20px;
+  border: none;
 }
 </style>
