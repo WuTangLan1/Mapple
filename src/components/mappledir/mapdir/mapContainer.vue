@@ -32,6 +32,7 @@ export default {
     const score = ref(0);
     const guessesRemaining = ref(3);
     const flashRed = ref(false);
+    const flashColor = ref(false);
 
     onMounted(() => {
       root = am5.Root.new("chartdiv");
@@ -93,12 +94,15 @@ export default {
     function submitGuess() {
       if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
         score.value += 1;
+        flashColor.value = true; // Flash purple for correct guess
+        setTimeout(() => { flashColor.value = false; }, 1000); // Turn off flash after 1 second
+        emit('correctGuess'); // Emit an event for a correct guess
       } else {
         guessesRemaining.value -= 1;
         flashRed.value = true;
-        setTimeout(() => { flashRed.value = false; }, 300);
+        setTimeout(() => { flashRed.value = false; }, 1000);
         if (guessesRemaining.value === 0) {
-          emit('gameOver', score.value);  // Use emit here
+          emit('gameOver', score.value);
         }
       }
     }
@@ -109,7 +113,7 @@ export default {
       }
     });
 
-    return { selectedCountry, guessesRemaining, score, submitGuess, flashRed };
+    return { selectedCountry, guessesRemaining, score, submitGuess, flashRed, flashColor };
   }
 };
 </script>
@@ -146,7 +150,17 @@ export default {
   cursor: pointer;
   border-radius: 5px;
   padding: 10px 20px;
+  animation: flashColor 1s 1; 
   border: none;
+}
+
+.flash-purple {
+  animation: flashPurple 1s 3; /* Flash purple when correct */
+}
+
+@keyframes flashPurple {
+  0%, 100% { background-color: #4CAF50; } /* original green */
+  50% { background-color: purple; }
 }
 
 .flash-red {

@@ -1,6 +1,8 @@
+// this is the code for the useCountryStore 
+
 import { defineStore } from 'pinia';
-import { db } from '@/components/fbdir/fbInit';
-import { collection,  getDocs } from 'firebase/firestore';
+import { db } from '@/components/fbdir/fbInit'; // Ensure this import path matches your project structure
+import { collection, getDocs } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
 // Initialize Firebase Storage
@@ -10,6 +12,7 @@ export const useCountryStore = defineStore('country', {
   state: () => ({
     countries: [],
     currentCountry: null,
+    experiencedCountries: [] // Store IDs of countries already seen
   }),
   actions: {
     async fetchCountries() {
@@ -17,37 +20,38 @@ export const useCountryStore = defineStore('country', {
       this.countries = querySnapshot.docs.map(doc => {
         return { id: doc.id, ...doc.data() };
       });
+      // Filter out any countries already experienced to reset if all have been seen
+      this.countries = this.countries.filter(c => !this.experiencedCountries.includes(c.id));
+      if (this.countries.length === 0) {
+        this.experiencedCountries = []; // Reset if all countries have been seen
+      }
     },
     async getRandomCountry() {
-      // Ensure there are countries to choose from
-      if (this.countries.length === 0) {
-        await this.fetchCountries();
+      // Filter countries to exclude those already experienced
+      let filteredCountries = this.countries.filter(c => !this.experiencedCountries.includes(c.id));
+      if (filteredCountries.length === 0) {
+        await this.fetchCountries(); // Re-fetch if all current countries have been experienced
+        filteredCountries = this.countries;
       }
-      const randomIndex = Math.floor(Math.random() * this.countries.length);
-      this.currentCountry = this.countries[randomIndex];
+      const randomIndex = Math.floor(Math.random() * filteredCountries.length);
+      this.currentCountry = filteredCountries[randomIndex];
+      this.experiencedCountries.push(this.currentCountry.id); // Add to experienced list
 
-      // Check if flag_dir is a Firebase Storage path and fetch the download URL
+      // Fetch the flag URL if stored in Firebase Storage
       if (this.currentCountry.flag_dir && this.currentCountry.flag_dir.startsWith('gs://')) {
         const flagRef = ref(storage, this.currentCountry.flag_dir);
         this.currentCountry.flag_url = await getDownloadURL(flagRef);
       } else {
-        // Set a default flag or handle the error
-        this.currentCountry.flag_url = '/path/to/default/flag/image.png';
+        this.currentCountry.flag_url = '/path/to/default/flag/image.png'; // Default or error handling
       }
 
-      // Fetch a random celebrity for the current country
-      const celebsRef = collection(db, 'countries', this.currentCountry.id, 'celebrities');
-      const celebsSnapshot = await getDocs(celebsRef);
-      const celebDocs = celebsSnapshot.docs.map(doc => doc.data());
-      const randomCelebIndex = Math.floor(Math.random() * celebDocs.length);
-      this.currentCountry.celebrity = celebDocs[randomCelebIndex].name;
-
-      // Fetch a random holiday for the current country
-      const holidaysRef = collection(db, 'countries', this.currentCountry.id, 'holidays');
-      const holidaysSnapshot = await getDocs(holidaysRef);
-      const holidayDocs = holidaysSnapshot.docs.map(doc => doc.data());
-      const randomHolidayIndex = Math.floor(Math.random() * holidayDocs.length);
-      this.currentCountry.holiday = holidayDocs[randomHolidayIndex].name;
-    },
-  },
+      // Additional logic to fetch details like celebrity or holidays can be added here
+      // Example: Fetching celebrity details
+      if (this.currentCountry.celebrity_dir && this.currentCountry.celebrity_dir.startsWith('gs://')) {
+        const celebRef = ref(storage, this.currentCountry.celebrity_dir);
+        this.currentCountry.celebrity_url = await getDownloadURL(celebRef);
+      }
+    }
+  }
 });
+

@@ -5,7 +5,7 @@ import PromptContainer from '@/components/mappledir/promptdir/promptContainer.vu
 import MapContainer from '@/components/mappledir/mapdir/mapContainer.vue';
 import { useCountryStore } from '@/stores/useCountryStore.js';
 import { useGameStore } from '@/stores/useGameStore';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 export default {
   name: 'HomeView',
@@ -30,15 +30,22 @@ export default {
     const gameStore = useGameStore();
     const difficulty = computed(() => gameStore.difficulty);
 
-    return { difficulty}
+    const componentKey = ref(0);
+
+    function refreshData() {
+      componentKey.value++; // Increment key to force re-render of PromptContainer
+    }
+
+
+    return { difficulty, componentKey, refreshData}
   }
 };
 </script>
 
 <template>
   <div class="home-view">
-    <PromptContainer v-if="difficulty" />
-    <MapContainer v-if="difficulty" @gameOver="handleGameOver"  />
+    <PromptContainer v-if="difficulty" :key="componentKey" />
+    <MapContainer v-if="difficulty" @gameOver="handleGameOver" @correctGuess="refreshData" />
   </div>
 </template>
 
