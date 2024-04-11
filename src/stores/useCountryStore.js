@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { db } from '@/components/fbdir/fbInit';
-import { collection, query, getDocs } from 'firebase/firestore';
+import { collection,  getDocs } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
 // Initialize Firebase Storage
@@ -37,11 +37,17 @@ export const useCountryStore = defineStore('country', {
 
       // Fetch a random celebrity for the current country
       const celebsRef = collection(db, 'countries', this.currentCountry.id, 'celebrities');
-      const q = query(celebsRef); // You can refine this to actually select random documents
-      const celebSnapshot = await getDocs(q);
-      const celebDocs = celebSnapshot.docs.map(doc => doc.data());
+      const celebsSnapshot = await getDocs(celebsRef);
+      const celebDocs = celebsSnapshot.docs.map(doc => doc.data());
       const randomCelebIndex = Math.floor(Math.random() * celebDocs.length);
       this.currentCountry.celebrity = celebDocs[randomCelebIndex].name;
+
+      // Fetch a random holiday for the current country
+      const holidaysRef = collection(db, 'countries', this.currentCountry.id, 'holidays');
+      const holidaysSnapshot = await getDocs(holidaysRef);
+      const holidayDocs = holidaysSnapshot.docs.map(doc => doc.data());
+      const randomHolidayIndex = Math.floor(Math.random() * holidayDocs.length);
+      this.currentCountry.holiday = holidayDocs[randomHolidayIndex].name;
     },
     // ... other actions you may have
   },
