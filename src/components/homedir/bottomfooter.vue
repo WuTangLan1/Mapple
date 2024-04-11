@@ -21,7 +21,7 @@ export default {
         });
       },
       updateFooterHeight() {
-        const newHeight = this.footerExpanded ? '500px' : '100px'; 
+        const newHeight = this.footerExpanded ? '400px' : '100px'; 
         this.footerMaxHeight = newHeight;
         document.documentElement.style.setProperty('--footer-height', newHeight);
       }
@@ -191,7 +191,7 @@ img {
 
 .footer-bottom {
   text-align: center;
-  margin-top: 1.5rem;
+  margin-top:0.5rem;
   font-size: 0.85rem;
 }
 

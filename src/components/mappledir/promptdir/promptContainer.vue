@@ -22,8 +22,7 @@ export default {
 <template>
   <div class="container">
     <div v-if="country" class="prompt-container">
-      <!-- Row 1 -->
-      <div class="data-card flag-card">
+      <div class="data-card">
         <div class="label">Flag</div>
         <img :src="country.flag_url" alt="National Flag" class="flag"/>
       </div>
@@ -35,8 +34,6 @@ export default {
         <div class="label">National Dish</div>
         <div class="data-value">{{ country.dish }}</div>
       </div>
-
-      <!-- Row 2 -->
       <div class="data-card">
         <div class="label">Celebrity</div>
         <div class="data-value">{{ country.celebrity }}</div>
@@ -45,35 +42,34 @@ export default {
         <div class="label">Currency</div>
         <div class="data-value">{{ country.currency }}</div>
       </div>
-
     </div>
   </div>
 </template>
 
 <style scoped>
 .container {
-  max-width: 1200px;
+  max-width: 800px; /* Reduced max-width for a tighter layout */
   margin: 0 auto;
   padding: 20px;
 }
 
 .prompt-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns for the first row */
-  grid-template-rows: auto auto; /* 2 rows */
-  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  gap: 20px;
   text-align: center;
 }
 
 .data-card {
   background: #f4f4f4;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px; /* Slightly more rounded corners */
+  padding: 20px; /* Adjust padding */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  min-height: 10%;
 }
 
 .flag-card {
@@ -81,16 +77,14 @@ export default {
 }
 
 .label {
-  font-weight: bold;
+  font-size: 1.1rem;
+  font-weight: 600;
   margin-bottom: 10px;
-  color: #333;
-  font-size: 1.2rem;
 }
 
 .data-value {
-  color: #555;
-  font-size: 1rem;
-  word-wrap: break-word;
+  font-size: 0.9rem;
+  color: #333;
 }
 
 .flag {
