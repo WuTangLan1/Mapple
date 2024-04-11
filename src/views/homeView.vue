@@ -20,9 +20,13 @@ export default {
   },
   async created() {
     const countryStore = useCountryStore();
-    await countryStore.fetchCountries(); // Ensure this method exists and fetches the countries on startup
+    if (typeof countryStore.fetchCountries === 'function') {
+      await countryStore.fetchCountries();
+    } else {
+      console.error('fetchCountries method is not defined');
+    }
   }
-}
+};
 </script>
 
 <style scoped>

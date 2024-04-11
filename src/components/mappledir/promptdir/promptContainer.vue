@@ -1,13 +1,15 @@
 <!-- This is the code for the src\components\mappledir\promptdir\promptContainer.vue -->
 
 <template>
-  <div class="prompt-container">
-    <img :src="country.flag_dir" alt="National Flag" class="flag"/>
+  <div v-if="country" class="prompt-container">
+    <div class="prompt-container">
+      <img :src="country.flag_url" alt="National Flag" class="flag"/>
     <h2>{{ country.cap_city }}</h2>
     <p>{{ country.language }}</p>
     <p>{{ country.celebrity }}</p>
     <p>{{ country.currency }}</p>
     <p>{{ country.national_dish }}</p>
+  </div>
   </div>
 </template>
 
