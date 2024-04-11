@@ -29,31 +29,31 @@ export default {
       <div class="data-card flag-card">
         <div class="label">Flag</div>
         <img v-if="difficulty === 'easy'" :src="country.flag_url" alt="National Flag" class="flag"/>
-        <img v-else src="@/assets/images/questionmark/question_mark.png" alt="Question Mark" class="placeholder"/>
+        <img v-else src="@/assets/images/questionmark/qmark.png" alt="Question Mark" class="placeholder"/>
       </div>
       <!-- Capital City card: shown on easy and medium level -->
       <div class="data-card capital-card">
         <div class="label">Capital City</div>
         <div v-if="difficulty === 'easy' || difficulty === 'medium'" class="data-value">{{ country.capital }}</div>
-        <img v-else src="@/assets/images/questionmark/question_mark.png" alt="Question Mark" class="placeholder"/>
+        <img v-else src="@/assets/images/questionmark/qmark.png" alt="Question Mark" class="placeholder"/>
       </div>
       <!-- National Dish card: shown on easy and hard level -->
       <div class="data-card dish-card">
         <div class="label">National Dish</div>
         <div v-if="difficulty === 'easy' || difficulty === 'hard'" class="data-value">{{ country.dish }}</div>
-        <img v-else src="@/assets/images/questionmark/question_mark.png" alt="Question Mark" class="placeholder"/>
+        <img v-else src="@/assets/images/questionmark/qmark.png" alt="Question Mark" class="placeholder"/>
       </div>
       <!-- Celebrity card: shown on easy and medium level -->
       <div class="data-card celebrity-card">
         <div class="label">Celebrity</div>
         <div v-if="difficulty === 'easy' || difficulty === 'medium'" class="data-value">{{ country.celebrity }}</div>
-        <img v-else src="@/assets/images/questionmark/question_mark.png" alt="Question Mark" class="placeholder"/>
+        <img v-else src="@/assets/images/questionmark/qmark.png" alt="Question Mark" class="placeholder"/>
       </div>
       <!-- Public Holiday card: shown on easy and medium level -->
       <div class="data-card holiday-card">
         <div class="label">Public Holiday</div>
         <div v-if="difficulty === 'easy' || difficulty === 'medium'" class="data-value">{{ country.holiday }}</div>
-        <img v-else src="@/assets/images/questionmark/question_mark.png" alt="Question Mark" class="placeholder"/>
+        <img v-else src="@/assets/images/questionmark/qmark.png" alt="Question Mark" class="placeholder"/>
       </div>
       <!-- Population card: always shown -->
       <div class="data-card population-card">
