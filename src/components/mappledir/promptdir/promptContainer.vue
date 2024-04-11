@@ -70,7 +70,6 @@ export default {
   margin-top: 5%;
   display: grid;
   width: 100%;
-  height: 90%;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr); /* Two equal rows */
   gap: 10px; /* Reduced gap between rows and columns */
@@ -85,8 +84,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Remove margin if you want to reduce space between cards */
-  height: calc(50% - 10px); /* Adjust the calc() to account for the new gap */
+  height: 50%;
 }
 
 
@@ -111,9 +109,10 @@ export default {
 }
 
 .flag {
-  max-width: 80%; /* Reduced width to fit in smaller card */
-  max-height: 80px; /* Reduced flag height */
+  max-width: 60%; /* Reduced width to fit in smaller card */
+  max-height: 60px; /* Reduced flag height */
   margin-bottom: 5px;
   border-radius: 4px;
+  margin: auto;
 }
 </style>
