@@ -32,7 +32,8 @@ export default {
         paddingBottom: 20,
         paddingTop: 20,
         paddingLeft: 20,
-        paddingRight: 20
+        paddingRight: 20,
+        backgroundSeries: am5map.MapPolygonSeries.new(root, { fill: am5.color(0xADD8E6) }) // Set sea color to light blue
       }));
 
       let polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
@@ -42,7 +43,6 @@ export default {
         strokeWidth: 0.5
       }));
 
-      // Define a pastel orange color for the active state
       let activeStateColor = am5.color(0xFFA07A); // Pastel orange color
 
       polygonSeries.mapPolygons.template.setAll({
@@ -63,18 +63,16 @@ export default {
         let polygon = ev.target;
         let alreadyActive = polygon.get("active");
 
-        // Deactivate all polygons
         polygonSeries.mapPolygons.each(function(item) {
           item.set("active", false);
         });
 
-        // Activate the clicked polygon if it wasn't already active
         if (!alreadyActive) {
           polygon.set("active", true);
         }
 
         const countryInfo = ev.target.dataItem.dataContext;
-        console.log(countryInfo.name); // Logs the country name
+        console.log('active country:', countryInfo.name); 
       });
 
     });
@@ -96,7 +94,7 @@ export default {
 }
 .map-container {
   width: 100%;
-  background-color:rgb(72, 97, 148)a;
+  background-color: rgb(173, 216, 230); /* Light blue color */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
