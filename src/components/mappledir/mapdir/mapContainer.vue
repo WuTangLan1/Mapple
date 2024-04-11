@@ -3,7 +3,6 @@
 <template>
   <div id="chartdiv" class="map-container"></div>
 </template>
-
 <script>
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
@@ -43,34 +42,39 @@ export default {
         strokeWidth: 0.5
       }));
 
-      chart.set("backgroundSeries", am5map.MapPolygonSeries.new(root, {
-        fill: am5.color(0xCCEEFF) // Adjusted for clarity
-      }));
+      // Define a pastel orange color for the active state
+      let activeStateColor = am5.color(0xFFA07A); // Pastel orange color
 
       polygonSeries.mapPolygons.template.setAll({
+        toggleKey: "active",
         interactive: true,
-        templateField: "settings",
-        crisp : true
+        fill: am5.color(0x84BFA4), // Default color
+        stroke: am5.color(0x767676),
+        strokeWidth: 0.5,
+        tooltipText: "{name}"
       });
 
-      // eslint-disable-next-line no-unused-vars
-      let activeState = polygonSeries.mapPolygons.template.states.create("active", {
-        properties: {
-          fill: am5.color(0xCC0000), // Color for active (selected) country
-        }
+      // Set up active state for polygons
+      polygonSeries.mapPolygons.template.states.create("active", {
+        fill: activeStateColor
       });
 
       polygonSeries.mapPolygons.template.events.on("click", function(ev) {
-        const countryInfo = ev.target.dataItem.dataContext;
-        console.log(countryInfo.name); // Logs the country name
+        let polygon = ev.target;
+        let alreadyActive = polygon.get("active");
 
-        // Deselect previously selected polygon
-        if (polygonSeries.mapPolygons.template.get("active")) {
-          polygonSeries.mapPolygons.template.get("active").set("active", true);
+        // Deactivate all polygons
+        polygonSeries.mapPolygons.each(function(item) {
+          item.set("active", false);
+        });
+
+        // Activate the clicked polygon if it wasn't already active
+        if (!alreadyActive) {
+          polygon.set("active", true);
         }
 
-        // Activate the clicked polygon
-        ev.target.set("active", !ev.target.get("active"));
+        const countryInfo = ev.target.dataItem.dataContext;
+        console.log(countryInfo.name); // Logs the country name
       });
 
     });
@@ -84,9 +88,10 @@ export default {
 };
 </script>
 
+
 <style scoped>
 #chartdiv {
-  height: 350px;
+  height: 330px;
   width: 100%;
 }
 .map-container {
