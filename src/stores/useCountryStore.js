@@ -27,29 +27,32 @@ export const useCountryStore = defineStore('country', {
       }
     },
     async getRandomCountry() {
-      // Filter countries to exclude those already experienced
+      // Ensure countries are fetched and filtered
       let filteredCountries = this.countries.filter(c => !this.experiencedCountries.includes(c.id));
       if (filteredCountries.length === 0) {
-        await this.fetchCountries(); // Re-fetch if all current countries have been experienced
+        await this.fetchCountries(); // Fetch again if all have been experienced
         filteredCountries = this.countries;
       }
       const randomIndex = Math.floor(Math.random() * filteredCountries.length);
       this.currentCountry = filteredCountries[randomIndex];
-      this.experiencedCountries.push(this.currentCountry.id); // Add to experienced list
-
-      // Fetch the flag URL if stored in Firebase Storage
-      if (this.currentCountry.flag_dir && this.currentCountry.flag_dir.startsWith('gs://')) {
-        const flagRef = ref(storage, this.currentCountry.flag_dir);
-        this.currentCountry.flag_url = await getDownloadURL(flagRef);
+      this.experiencedCountries.push(this.currentCountry.id);
+  
+      // Fetch additional data like flag, celebrity, etc.
+      await this.fetchAdditionalData(this.currentCountry);
+    },
+  
+    async fetchAdditionalData(country) {
+      if (country.flag_dir && country.flag_dir.startsWith('gs://')) {
+        const flagRef = ref(storage, country.flag_dir);
+        country.flag_url = await getDownloadURL(flagRef);
       } else {
-        this.currentCountry.flag_url = '/path/to/default/flag/image.png'; // Default or error handling
+        country.flag_url = '/path/to/default/flag/image.png'; // Default or error handling
       }
-
-      // Additional logic to fetch details like celebrity or holidays can be added here
-      // Example: Fetching celebrity details
-      if (this.currentCountry.celebrity_dir && this.currentCountry.celebrity_dir.startsWith('gs://')) {
-        const celebRef = ref(storage, this.currentCountry.celebrity_dir);
-        this.currentCountry.celebrity_url = await getDownloadURL(celebRef);
+  
+      // Example for fetching celebrity details
+      if (country.celebrity_dir && country.celebrity_dir.startsWith('gs://')) {
+        const celebRef = ref(storage, country.celebrity_dir);
+        country.celebrity_url = await getDownloadURL(celebRef);
       }
     }
   }

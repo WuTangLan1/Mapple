@@ -16,7 +16,13 @@ export default {
   methods : {
     handleGameOver(score) {
       this.$emit('gameOver', score);  // Emitting again to bubble up
-    }
+    },
+    refreshData() {
+    const countryStore = useCountryStore();
+    countryStore.getRandomCountry().then(() => {
+      this.componentKey++; // Trigger re-render by updating key
+    });
+  }
   },
   async created() {
     const countryStore = useCountryStore();
@@ -32,12 +38,7 @@ export default {
 
     const componentKey = ref(0);
 
-    function refreshData() {
-      componentKey.value++; // Increment key to force re-render of PromptContainer
-    }
-
-
-    return { difficulty, componentKey, refreshData}
+    return { difficulty, componentKey}
   }
 };
 </script>
