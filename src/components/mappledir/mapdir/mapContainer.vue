@@ -14,13 +14,8 @@ import { onMounted, onBeforeUnmount } from 'vue';
 export default {
   name: 'MapContainer',
   setup() {
-    let root; // Define root here to make it accessible in both onMounted and onBeforeUnmount
+    let root;
 
-    const suppressResizeObserverError = (e) => {
-      if (e.message === 'ResizeObserver loop limit exceeded' || e.message === 'ResizeObserver loop completed with undelivered notifications') {
-        e.stopImmediatePropagation();
-      }
-    };
     onMounted(() => {
       root = am5.Root.new("chartdiv");
 
@@ -30,7 +25,6 @@ export default {
       }
 
       root.setThemes([am5themes_Animated.new(root)]);
-      console.log("amCharts themes set.");
 
       let chart = root.container.children.push(am5map.MapChart.new(root, {
         panX: "rotateX",
@@ -42,36 +36,16 @@ export default {
         paddingRight: 20
       }));
 
-      if (!chart) {
-        console.error("Failed to initialize amCharts MapChart.");
-        return;
-      }
-      console.log("amCharts MapChart initialized.");
-
-    // Set the chart background to an off-white color
-    chart.chartContainer.set("background", am5.Rectangle.new(root, {
-      fill: am5.color(0xF0F0F0), // Off-white background
-      fillOpacity: 1
-    }));
-
-    // Set a darker color for the land to contrast with the ocean and off-white background
       let polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-      geoJSON: am5geodata_worldLow,
-      fill: am5.color(0x84BFA4), // Green land color
-      stroke: am5.color(0x767676), // Border color for countries
-      strokeWidth: 0.5 // Border line width
-    }));
+        geoJSON: am5geodata_worldLow,
+        fill: am5.color(0x84BFA4),
+        stroke: am5.color(0x767676),
+        strokeWidth: 0.5
+      }));
 
-    // Set a blue color for the ocean
-    chart.set("backgroundSeries", am5map.MapPolygonSeries.new(root, {
-      fill: am5.color(0xAAD3DF) // Blue ocean color
-    }));
-
-    // Set a color for the ocean that is lighter than the land but darker than the background
-    chart.set("backgroundSeries", am5map.MapPolygonSeries.new(root, {
-      fill: am5.color(0xCCEEFF) // Ocean color, lighter than the land
-    }));
-
+      chart.set("backgroundSeries", am5map.MapPolygonSeries.new(root, {
+        fill: am5.color(0xCCEEFF) // Adjusted for clarity
+      }));
 
       polygonSeries.mapPolygons.template.setAll({
         interactive: true,
@@ -79,16 +53,29 @@ export default {
         crisp : true
       });
 
+      // eslint-disable-next-line no-unused-vars
+      let activeState = polygonSeries.mapPolygons.template.states.create("active", {
+        properties: {
+          fill: am5.color(0xCC0000), // Color for active (selected) country
+        }
+      });
+
       polygonSeries.mapPolygons.template.events.on("click", function(ev) {
         const countryInfo = ev.target.dataItem.dataContext;
         console.log(countryInfo.name); // Logs the country name
+
+        // Deselect previously selected polygon
+        if (polygonSeries.mapPolygons.template.get("active")) {
+          polygonSeries.mapPolygons.template.get("active").set("active", true);
+        }
+
+        // Activate the clicked polygon
+        ev.target.set("active", !ev.target.get("active"));
       });
 
     });
 
     onBeforeUnmount(() => {
-      window.removeEventListener('error', suppressResizeObserverError);
-
       if (root) {
         root.dispose();
       }
@@ -97,16 +84,15 @@ export default {
 };
 </script>
 
-
 <style scoped>
 #chartdiv {
-  height: 350px; /* Instead of 100%, you can set a fixed height */
+  height: 350px;
   width: 100%;
 }
 .map-container {
   width: 100%;
-  background-color: #ddedea; /* A light gray that should contrast better with the map */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add some shadow for depth */
-  border-radius: 8px; /* Optional: rounded corners for a modern look */
+  background-color:rgb(72, 97, 148)a;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 </style>

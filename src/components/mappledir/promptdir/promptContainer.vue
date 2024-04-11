@@ -116,7 +116,7 @@ export default {
 }
 
 .placeholder {
-  max-width: 50%; /* Set the size of the placeholder image */
+  max-width: 70%; /* Set the size of the placeholder image */
   margin: auto; /* Center the placeholder image in the card */
 }
 
