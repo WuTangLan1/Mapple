@@ -4,7 +4,8 @@
     <div id="chartdiv" class="map-container"></div>
     <div class="info-container">
       <div class="score-display">Score: {{ score }}</div>
-      <button :disabled="!selectedCountry || guessesRemaining === 0" 
+      <button :class="{ 'flash-red': flashRed }" 
+              :disabled="!selectedCountry || guessesRemaining === 0" 
               @click="submitGuess"
               class="submit-button">
         Submit
@@ -30,6 +31,7 @@ export default {
     const selectedCountry = ref(null); 
     const score = ref(0);
     const guessesRemaining = ref(3);
+    const flashRed = ref(false);
 
     onMounted(() => {
       root = am5.Root.new("chartdiv");
@@ -89,19 +91,22 @@ export default {
     });
 
     function submitGuess() {
-        if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
-          score.value += 1; // Increase score
-          console.log("Correct guess! Your score: " + score.value);
+      if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
+        score.value += 1;
+        console.log("Correct guess! Your score: " + score.value);
+      } else {
+        guessesRemaining.value -= 1;
+        flashRed.value = true; // Trigger animation
+        setTimeout(() => { flashRed.value = false; }, 3000);
+        flashRed.value = true; // Trigger animation
+        setTimeout(() => { flashRed.value = false; }, 3000); // Reset animation trigger
+        if (guessesRemaining.value === 0) {
+          console.log("Game failed");
         } else {
-          guessesRemaining.value -= 1; // Decrease guesses remaining
-          if (guessesRemaining.value === 0) {
-            console.log("Game failed");
-          } else {
-            console.log("Try again. Guesses remaining: " + guessesRemaining.value);
-          }
+          console.log("Try again. Guesses remaining: " + guessesRemaining.value);
         }
       }
-
+    }
 
     onBeforeUnmount(() => {
       if (root) {
@@ -109,11 +114,11 @@ export default {
       }
     });
 
-
-    return { selectedCountry, guessesRemaining, score, submitGuess };
+    return { selectedCountry, guessesRemaining, score, submitGuess, flashRed };
   }
 };
 </script>
+
 
 <style scoped>
 #chartdiv {
@@ -147,5 +152,13 @@ export default {
   border-radius: 5px;
   padding: 10px 20px;
   border: none;
+}
+
+.flash-red {
+  animation: flashRed 1s 3; /* Run the animation 3 times */
+}
+@keyframes flashRed {
+  0%, 100% { background-color: #4CAF50; }
+  50% { background-color: red; }
 }
 </style>
