@@ -25,7 +25,7 @@ import { useCountryStore } from '@/stores/useCountryStore';
 
 export default {
   name: 'MapContainer',
-  setup() {
+  setup(props, { emit }) {  // Access emit from the setup context
     const countryStore = useCountryStore();
     let root;
     const selectedCountry = ref(null); 
@@ -93,17 +93,12 @@ export default {
     function submitGuess() {
       if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
         score.value += 1;
-        console.log("Correct guess! Your score: " + score.value);
       } else {
         guessesRemaining.value -= 1;
-        flashRed.value = true; // Trigger animation
-        setTimeout(() => { flashRed.value = false; }, 3000);
-        flashRed.value = true; // Trigger animation
-        setTimeout(() => { flashRed.value = false; }, 3000); // Reset animation trigger
+        flashRed.value = true;
+        setTimeout(() => { flashRed.value = false; }, 300);
         if (guessesRemaining.value === 0) {
-          console.log("Game failed");
-        } else {
-          console.log("Try again. Guesses remaining: " + guessesRemaining.value);
+          emit('gameOver', score.value);  // Use emit here
         }
       }
     }

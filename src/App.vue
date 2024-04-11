@@ -5,9 +5,10 @@
     <start-modal @difficultySelected="setDifficulty" v-if="!difficultySelected"/>
     <top-header/>
     <div class="router-view-container">
-      <router-view v-if="difficultySelected"/>
+      <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
     </div>
     <bottom-footer/>
+    <game-over-modal v-if="gameOver" :score="gameScore" @restartGame="restartGame"/>
   </div>
 </template>
 
@@ -16,27 +17,52 @@ import { ref } from 'vue';
 import TopHeader from './components/homedir/topheader.vue';
 import BottomFooter from './components/homedir/bottomfooter.vue';
 import StartModal from './components/homedir/startModal.vue';
+import GameOverModal from './components/mappledir/gameovermodal.vue'
 import { useGameStore } from '@/stores/useGameStore'; // Import the game store
 
 export default {
   components: {
     TopHeader,
     BottomFooter,
-    StartModal
+    StartModal,
+    GameOverModal
   },
   setup() {
-    const difficultySelected = ref(false); // Reactive variable to track difficulty selection
-    const gameStore = useGameStore(); // Use the game store
+    const difficultySelected = ref(false);
+    const gameStore = useGameStore();
+    const gameOver = ref(false);
+    const gameScore = ref(0);
 
     function setDifficulty(level) {
-      gameStore.setDifficulty(level); // Set difficulty in the store
-      difficultySelected.value = true; // Mark as selected to render other components
+      gameStore.setDifficulty(level);
+      difficultySelected.value = true;
+      gameOver.value = false; // Reset game over status
     }
 
-    return { difficultySelected, setDifficulty };
+    function restartGame(level) {
+      gameScore.value = 0; // Reset score
+      gameOver.value = false;
+      setDifficulty(level); // Set new difficulty and start the game
+    }
+
+    function handleGameOver(score) {
+      gameScore.value = score;
+      gameOver.value = true;
+      difficultySelected.value = false; // Hide other UI elements as necessary
+    }
+
+    return {
+      difficultySelected,
+      setDifficulty,
+      gameOver,
+      gameScore,
+      restartGame,
+      handleGameOver
+    };
   }
 }
 </script>
+
 
 
 <style>

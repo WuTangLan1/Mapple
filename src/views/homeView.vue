@@ -13,6 +13,11 @@ export default {
     PromptContainer,
     MapContainer
   },
+  methods : {
+    handleGameOver(score) {
+      this.$emit('gameOver', score);  // Emitting again to bubble up
+    }
+  },
   async created() {
     const countryStore = useCountryStore();
     if (typeof countryStore.fetchCountries === 'function') {
@@ -33,7 +38,7 @@ export default {
 <template>
   <div class="home-view">
     <PromptContainer v-if="difficulty" />
-    <MapContainer v-if="difficulty" />
+    <MapContainer v-if="difficulty" @gameOver="handleGameOver"  />
   </div>
 </template>
 
