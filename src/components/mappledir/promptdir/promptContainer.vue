@@ -22,8 +22,9 @@ export default {
 <template>
   <div class="container">
     <div v-if="country" class="prompt-container">
-      <div class="data-card">
-        <div class="label">National Flag</div>
+      <!-- Row 1 -->
+      <div class="data-card flag-card">
+        <div class="label">Flag</div>
         <img :src="country.flag_url" alt="National Flag" class="flag"/>
       </div>
       <div class="data-card">
@@ -31,9 +32,11 @@ export default {
         <div class="data-value">{{ country.capital }}</div>
       </div>
       <div class="data-card">
-        <div class="label">Primary Language</div>
-        <div class="data-value">{{ country.language }}</div>
+        <div class="label">National Dish</div>
+        <div class="data-value">{{ country.dish }}</div>
       </div>
+
+      <!-- Row 2 -->
       <div class="data-card">
         <div class="label">Celebrity</div>
         <div class="data-value">{{ country.celebrity }}</div>
@@ -42,24 +45,22 @@ export default {
         <div class="label">Currency</div>
         <div class="data-value">{{ country.currency }}</div>
       </div>
-      <div class="data-card">
-        <div class="label">National Dish</div>
-        <div class="data-value">{{ country.dish }}</div>
-      </div>
+
     </div>
   </div>
 </template>
 
 <style scoped>
 .container {
-  max-width: 1200px; /* Set a max-width for the container */
-  margin: 0 auto; /* Center the container */
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
 }
 
 .prompt-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* 3 columns for the first row */
+  grid-template-rows: auto auto; /* 2 rows */
   gap: 1rem;
   text-align: center;
 }
@@ -73,7 +74,10 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 150px; /* Or any other height */
+}
+
+.flag-card {
+  grid-row: 1 / 3; /* Make the flag card span two rows */
 }
 
 .label {
@@ -96,4 +100,5 @@ export default {
   border-radius: 4px; /* Optional: rounds the corners of the flag image */
 }
 </style>
+
 
