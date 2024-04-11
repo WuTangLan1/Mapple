@@ -3,50 +3,54 @@
 <script>
 import { computed } from 'vue';
 import { useCountryStore } from '@/stores/useCountryStore.js';
+import { useGameStore } from '@/stores/useGameStore';
 
 export default {
   name: 'PromptContainer',
   setup() {
     const countryStore = useCountryStore();
-    
-    // Computed property to reactively update the template when the current country changes
+    const gameStore = useGameStore();
+
     const country = computed(() => countryStore.currentCountry);
+    const difficulty = computed(() => gameStore.difficulty);
 
     return {
-      country
+      country,
+      difficulty,
     };
   }
-}
+};
+
 </script>
 
 <template>
   <div class="container">
     <div v-if="country" class="prompt-container">
-      <!-- Flag card with its unique class for pastel background color -->
-      <div class="data-card flag-card">
+      <!-- Flag card: shown on easy level -->
+      <div class="data-card flag-card" v-if="difficulty === 'easy'">
         <img :src="country.flag_url" alt="National Flag" class="flag"/>
       </div>
-      <!-- Capital City card with its unique class for pastel background color -->
-      <div class="data-card capital-card">
+      <!-- Capital City card: shown on easy and medium level -->
+      <div class="data-card capital-card" v-if="difficulty === 'easy' || difficulty === 'medium'">
         <div class="label">Capital City</div>
         <div class="data-value">{{ country.capital }}</div>
       </div>
-      <!-- National Dish card with its unique class for pastel background color -->
-      <div class="data-card dish-card">
+      <!-- National Dish card: shown on easy and hard level -->
+      <div class="data-card dish-card" v-if="difficulty === 'easy' || difficulty === 'hard'">
         <div class="label">National Dish</div>
         <div class="data-value">{{ country.dish }}</div>
       </div>
-      <!-- Celebrity card with its unique class for pastel background color -->
-      <div class="data-card celebrity-card">
+      <!-- Celebrity card: shown on easy and medium level -->
+      <div class="data-card celebrity-card" v-if="difficulty === 'easy' || difficulty === 'medium'">
         <div class="label">Celebrity</div>
         <div class="data-value">{{ country.celebrity }}</div>
       </div>
-      <!-- Public Holiday card with its unique class for pastel background color -->
-      <div class="data-card holiday-card">
+      <!-- Public Holiday card: shown on easy and medium level -->
+      <div class="data-card holiday-card" v-if="difficulty === 'easy' || difficulty === 'medium'">
         <div class="label">Public Holiday</div>
         <div class="data-value">{{ country.holiday }}</div>
       </div>
-      <!-- Population card with its unique class for pastel background color -->
+      <!-- Population card: always shown -->
       <div class="data-card population-card">
         <div class="label">Population</div>
         <div class="data-value">{{ country.population }}</div>
@@ -54,6 +58,7 @@ export default {
     </div>
   </div>
 </template>
+
 
 
 <style scoped>

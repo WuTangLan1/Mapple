@@ -2,7 +2,7 @@
 
 <template>
     <div class="map-container">
-      <p> the interactive globe will go here </p>
+      <p> the interactive globe will go here, will use AmCharts </p>
     </div>
   </template>
   
