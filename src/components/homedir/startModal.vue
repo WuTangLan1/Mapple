@@ -15,6 +15,7 @@
   </template>
   
   <script>
+  import { useCountryStore } from '@/stores/usecountryStore';
   export default {
     data() {
       return {
@@ -22,11 +23,14 @@
       };
     },
     methods: {
-      selectDifficulty(level) {
-        this.$emit('difficultySelected', level);
-        this.isVisible = false;
-      },
+    selectDifficulty(level) {
+      this.$emit('difficultySelected', level);
+      this.isVisible = false;
+      // Fetch a random country
+      const countryStore = useCountryStore();
+      countryStore.getRandomCountry();
     },
+  },
   };
   </script>
   

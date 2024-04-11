@@ -10,12 +10,17 @@
 <script>
 import PromptContainer from '@/components/mappledir/promptdir/promptContainer.vue';
 import MapContainer from '@/components/mappledir/mapdir/mapContainer.vue';
+import { useCountryStore } from '@/stores/usecountryStore.js';
 
 export default {
   name: 'HomeView',
   components: {
     PromptContainer,
     MapContainer
+  },
+  async created() {
+    const countryStore = useCountryStore();
+    await countryStore.fetchCountries(); // Ensure this method exists and fetches the countries on startup
   }
 }
 </script>
