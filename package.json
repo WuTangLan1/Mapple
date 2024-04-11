@@ -9,6 +9,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@amcharts/amcharts5": "^5.9.1",
+    "@amcharts/amcharts5-geodata": "^5.1.2",
     "core-js": "^3.8.3",
     "firebase": "^10.10.0",
     "pinia": "^2.1.7",
