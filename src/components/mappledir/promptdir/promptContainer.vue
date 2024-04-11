@@ -22,33 +22,38 @@ export default {
 };
 
 </script>
-
 <template>
   <div class="container">
     <div v-if="country" class="prompt-container">
       <!-- Flag card: shown on easy level -->
-      <div class="data-card flag-card" v-if="difficulty === 'easy'">
-        <img :src="country.flag_url" alt="National Flag" class="flag"/>
+      <div class="data-card flag-card">
+        <div class="label">Flag</div>
+        <img v-if="difficulty === 'easy'" :src="country.flag_url" alt="National Flag" class="flag"/>
+        <img v-else src="@/assets/images/questionmark/question_mark.png" alt="Question Mark" class="placeholder"/>
       </div>
       <!-- Capital City card: shown on easy and medium level -->
-      <div class="data-card capital-card" v-if="difficulty === 'easy' || difficulty === 'medium'">
+      <div class="data-card capital-card">
         <div class="label">Capital City</div>
-        <div class="data-value">{{ country.capital }}</div>
+        <div v-if="difficulty === 'easy' || difficulty === 'medium'" class="data-value">{{ country.capital }}</div>
+        <img v-else src="@/assets/images/questionmark/question_mark.png" alt="Question Mark" class="placeholder"/>
       </div>
       <!-- National Dish card: shown on easy and hard level -->
-      <div class="data-card dish-card" v-if="difficulty === 'easy' || difficulty === 'hard'">
+      <div class="data-card dish-card">
         <div class="label">National Dish</div>
-        <div class="data-value">{{ country.dish }}</div>
+        <div v-if="difficulty === 'easy' || difficulty === 'hard'" class="data-value">{{ country.dish }}</div>
+        <img v-else src="@/assets/images/questionmark/question_mark.png" alt="Question Mark" class="placeholder"/>
       </div>
       <!-- Celebrity card: shown on easy and medium level -->
-      <div class="data-card celebrity-card" v-if="difficulty === 'easy' || difficulty === 'medium'">
+      <div class="data-card celebrity-card">
         <div class="label">Celebrity</div>
-        <div class="data-value">{{ country.celebrity }}</div>
+        <div v-if="difficulty === 'easy' || difficulty === 'medium'" class="data-value">{{ country.celebrity }}</div>
+        <img v-else src="@/assets/images/questionmark/question_mark.png" alt="Question Mark" class="placeholder"/>
       </div>
       <!-- Public Holiday card: shown on easy and medium level -->
-      <div class="data-card holiday-card" v-if="difficulty === 'easy' || difficulty === 'medium'">
+      <div class="data-card holiday-card">
         <div class="label">Public Holiday</div>
-        <div class="data-value">{{ country.holiday }}</div>
+        <div v-if="difficulty === 'easy' || difficulty === 'medium'" class="data-value">{{ country.holiday }}</div>
+        <img v-else src="@/assets/images/questionmark/question_mark.png" alt="Question Mark" class="placeholder"/>
       </div>
       <!-- Population card: always shown -->
       <div class="data-card population-card">
@@ -58,8 +63,6 @@ export default {
     </div>
   </div>
 </template>
-
-
 
 <style scoped>
 .container {
@@ -111,6 +114,11 @@ export default {
 .data-value {
   font-size: 0.9rem;
   color: #333;
+}
+
+.placeholder {
+  max-width: 50%; /* Set the size of the placeholder image */
+  margin: auto; /* Center the placeholder image in the card */
 }
 
 .flag {

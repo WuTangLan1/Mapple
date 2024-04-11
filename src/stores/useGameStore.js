@@ -4,7 +4,7 @@ import { defineStore } from 'pinia';
 
 export const useGameStore = defineStore('game', {
   state: () => ({
-    difficulty: 'easy', // default difficulty
+    difficulty: null, // Initialize difficulty as null
   }),
   actions: {
     setDifficulty(level) {

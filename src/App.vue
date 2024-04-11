@@ -1,9 +1,22 @@
 <!-- This is the code for the src\App.vue -->
 
+<template>
+  <div id="app">
+    <start-modal @difficultySelected="setDifficulty" v-if="!difficultySelected"/>
+    <top-header/>
+    <div class="router-view-container">
+      <router-view v-if="difficultySelected"/>
+    </div>
+    <bottom-footer/>
+  </div>
+</template>
+
 <script>
+import { ref } from 'vue';
 import TopHeader from './components/homedir/topheader.vue';
 import BottomFooter from './components/homedir/bottomfooter.vue';
-import StartModal from './components/homedir/startModal.vue'
+import StartModal from './components/homedir/startModal.vue';
+import { useGameStore } from '@/stores/useGameStore'; // Import the game store
 
 export default {
   components: {
@@ -11,24 +24,21 @@ export default {
     BottomFooter,
     StartModal
   },
-  methods: {
-    setDifficulty(level) {
-      console.log("Difficulty selected:", level);
+  setup() {
+    const difficultySelected = ref(false); // Reactive variable to track difficulty selection
+    const gameStore = useGameStore(); // Use the game store
+
+    // Method to set difficulty and mark as selected
+    function setDifficulty(level) {
+      gameStore.setDifficulty(level); // Set difficulty in the store
+      difficultySelected.value = true; // Mark as selected to render other components
     }
+
+    return { difficultySelected, setDifficulty };
   }
 }
 </script>
 
-<template>
-  <div id="app">
-    <start-modal @difficultySelected="setDifficulty"/>
-    <top-header/>
-    <div class="router-view-container">
-      <router-view/>
-    </div>
-    <bottom-footer/>
-  </div>
-</template>
 
 <style>
 @import './assets/css/styles.css';
