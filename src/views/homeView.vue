@@ -1,16 +1,11 @@
 <!-- This is the code for the src\views\homeView.vue -->
 
-<template>
-  <div class="home-view">
-    <PromptContainer />
-    <MapContainer />
-  </div>
-</template>
-
 <script>
 import PromptContainer from '@/components/mappledir/promptdir/promptContainer.vue';
 import MapContainer from '@/components/mappledir/mapdir/mapContainer.vue';
 import { useCountryStore } from '@/stores/useCountryStore.js';
+import { useGameStore } from '@/stores/useGameStore';
+import { computed } from 'vue';
 
 export default {
   name: 'HomeView',
@@ -25,9 +20,22 @@ export default {
     } else {
       console.error('fetchCountries method is not defined');
     }
+  },
+  setup() {
+    const gameStore = useGameStore();
+    const difficulty = computed(() => gameStore.difficulty);
+
+    return { difficulty}
   }
 };
 </script>
+
+<template>
+  <div class="home-view">
+    <PromptContainer v-if="difficulty" />
+    <MapContainer v-if="difficulty" />
+  </div>
+</template>
 
 <style scoped>
   .home-view {
