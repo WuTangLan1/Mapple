@@ -49,7 +49,5 @@ export const useCountryStore = defineStore('country', {
       const randomHolidayIndex = Math.floor(Math.random() * holidayDocs.length);
       this.currentCountry.holiday = holidayDocs[randomHolidayIndex].name;
     },
-    // ... other actions you may have
   },
-  // ... other options you may have
 });
