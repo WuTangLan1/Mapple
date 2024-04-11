@@ -74,9 +74,9 @@ export default {
 
 
       polygonSeries.mapPolygons.template.setAll({
-        tooltipText: "{name}",
         interactive: true,
-        templateField: "settings"
+        templateField: "settings",
+        crisp : true
       });
 
       polygonSeries.mapPolygons.template.events.on("click", function(ev) {
@@ -100,7 +100,7 @@ export default {
 
 <style scoped>
 #chartdiv {
-  height: 200px; /* Instead of 100%, you can set a fixed height */
+  height: 350px; /* Instead of 100%, you can set a fixed height */
   width: 100%;
 }
 .map-container {

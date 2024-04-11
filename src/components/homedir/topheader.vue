@@ -7,7 +7,7 @@
     </div>
     <nav class="navigation">
       <router-link to="/" class="nav-link">Home</router-link>
-      <router-link to="/stay" class="nav-link">Stay of the week</router-link>
+      <router-link to="/daily" class="nav-link">Daily</router-link>
       <router-link to="/login" class="nav-link">Register/Login</router-link>
     </nav>
   </header>
@@ -49,7 +49,6 @@ export default {
 .nav-link {
   text-decoration: none;
   color: #000;
-  font-weight: bold;
   padding: 0.5em;
   font-size: clamp(0.8em, 2.5vw, 1em); /* Adjust font size for responsive design */
 }
