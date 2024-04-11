@@ -80,7 +80,7 @@ export default {
   width: 100%;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr); /* Two equal rows */
-  gap: 10px; /* Reduced gap between rows and columns */
+  gap: 1%; /* Reduced gap between rows and columns */
   text-align: center;
 }
 .data-card {
@@ -92,7 +92,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50%;
+  height: 70%;
 }
 
 
@@ -122,9 +122,7 @@ export default {
 }
 
 .flag {
-  max-width: 60%; /* Reduced width to fit in smaller card */
-  max-height: 60px; /* Reduced flag height */
-  margin-bottom: 5px;
+  max-width: 40%; /* Reduced width to fit in smaller card */
   border-radius: 4px;
   margin: auto;
 }
