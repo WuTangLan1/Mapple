@@ -39,8 +39,12 @@ export default {
         <div class="data-value">{{ country.celebrity }}</div>
       </div>
       <div class="data-card">
-        <div class="label">Currency</div>
-        <div class="data-value">{{ country.currency }}</div>
+        <div class="label">Public Holiday</div>
+        <div class="data-value">{{ country.holiday }}</div>
+      </div>
+      <div class="data-card">
+        <div class="label">Population</div>
+        <div class="data-value">{{ country.population }}</div>
       </div>
     </div>
   </div>
