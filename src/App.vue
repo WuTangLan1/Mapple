@@ -17,7 +17,7 @@ import { ref } from 'vue';
 import TopHeader from './components/homedir/topheader.vue';
 import BottomFooter from './components/homedir/bottomfooter.vue';
 import StartModal from './components/homedir/startModal.vue';
-import GameOverModal from './components/mappledir/gameovermodal.vue';
+import GameOverModal from './components/mappledir/additional/gameovermodal.vue';
 import { useGameStore } from '@/stores/useGameStore';
 import { useCountryStore } from '@/stores/useCountryStore'; // Ensure this is imported
 
