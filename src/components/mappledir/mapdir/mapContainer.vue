@@ -94,20 +94,21 @@ export default {
     });
 
     function submitGuess() {
-      if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
-        score.value += 1;
-        flashColor.value = true; // Flash purple for correct guess
-        setTimeout(() => { flashColor.value = false; }, 1000); // Turn off flash after 1 second
-        emit('correctGuess'); // Emit an event for a correct guess
-      } else {
-        guessesRemaining.value -= 1;
-        flashRed.value = true;
-        setTimeout(() => { flashRed.value = false; }, 1000);
-        if (guessesRemaining.value === 0) {
-          emit('gameOver', score.value);
+        if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
+          score.value += 1;
+          flashColor.value = true; // Flash purple for correct guess
+          setTimeout(() => { flashColor.value = false; }, 3000); // Turn off flash after 1 second
+          emit('refreshData'); // Request to refresh data
+        } else {
+          guessesRemaining.value -= 1;
+          flashRed.value = true;
+          setTimeout(() => { flashRed.value = false; }, 3000);
+          if (guessesRemaining.value === 0) {
+            emit('gameOver', score.value);
+          }
         }
       }
-    }
+
 
     onBeforeUnmount(() => {
       if (root) {

@@ -46,7 +46,7 @@ export default {
 <template>
   <div class="home-view">
     <PromptContainer v-if="difficulty" :key="componentKey" />
-    <MapContainer v-if="difficulty" @gameOver="handleGameOver" @correctGuess="refreshData" />
+    <MapContainer v-if="difficulty" @gameOver="handleGameOver" @correctGuess="refreshData" @refreshData="refreshData"/>
   </div>
 </template>
 
