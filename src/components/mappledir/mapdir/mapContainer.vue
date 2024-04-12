@@ -112,14 +112,13 @@ export default {
   });
 });
 
-    function submitGuess() {
-        if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
-          score.value += 1;
-          flashColor.value = true; // Flash purple for correct guess
-          emit('correctGuess'); // Correct usage of emit
-          emit('refreshData');
-          setTimeout(() => { flashColor.value = false; }, 3000); // Turn off flash after 1 second
-        } else {
+  function submitGuess() {
+      if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
+        score.value += 1;
+        flashColor.value = true; 
+        emit('correctGuess', countryStore.currentCountry); // Emit the country data
+        setTimeout(() => { flashColor.value = false; }, 3000);
+      } else {
           guessesRemaining.value -= 1;
           flashRed.value = true;
           setTimeout(() => { flashRed.value = false; }, 3000);

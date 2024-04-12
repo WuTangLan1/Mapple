@@ -30,16 +30,23 @@ export const useCountryStore = defineStore('country', {
       }
     },
     async fetchRandomCelebrityAndHoliday(countryId) {
-      // Fetch the celebrities subcollection
+
       const celebSubCollectionRef = collection(db, `countries/${countryId}/celebrities`);
       const celebSnapshot = await getDocs(celebSubCollectionRef);
       const celebrities = celebSnapshot.docs.map(doc => doc.data());
 
-
-      // Randomly select a celebrity
       if (celebrities.length > 0) {
         const randomCelebIndex = Math.floor(Math.random() * celebrities.length);
         this.currentCountry.celebrity = celebrities[randomCelebIndex].name;
+      }
+
+      const blurbSubCollectionRef = collection(db, `countries/${countryId}/blurbs`);
+      const blurbSnapshot = await getDocs(blurbSubCollectionRef);
+      const blurbs = blurbSnapshot.docs.map(doc => doc.data());
+
+      if (blurbs.length > 0) {
+        const randomBlurbIndex = Math.floor(Math.random() * blurbs.length);
+        this.currentCountry.blurb = blurbs[randomBlurbIndex].text;
       }
 
     },
