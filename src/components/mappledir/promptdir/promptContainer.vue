@@ -28,7 +28,6 @@ export default {
       <!-- Flag card: shown on easy level -->
       <transition name="wipe" mode="out-in">
         <div class="data-card flag-card">
-          <div v-if="difficulty === 'easy'" class="label">Flag</div>
           <img v-if="difficulty === 'easy'" :src="country.flag_url" alt="National Flag" class="flag"/>
           <img v-else src="@/assets/images/questionmark/qmark.png" alt="Question Mark" class="placeholder"/>
       </div>
@@ -133,8 +132,7 @@ export default {
 }
 
 .flag {
-  max-width: 40%; /* Reduced width to fit in smaller card */
-  border-radius: 4px;
+  max-width: 60%; 
   margin: auto;
 }
 </style>

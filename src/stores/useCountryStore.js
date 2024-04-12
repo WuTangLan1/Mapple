@@ -63,6 +63,7 @@ export const useCountryStore = defineStore('country', {
       this.experiencedCountries.push(this.currentCountry.id);
   
       await this.fetchRandomCelebrityAndHoliday(this.currentCountry.id);
+      await this.fetchAdditionalData(this.currentCountry)
     },
   
     async fetchAdditionalData(country) {
@@ -71,12 +72,6 @@ export const useCountryStore = defineStore('country', {
         country.flag_url = await getDownloadURL(flagRef);
       } else {
         country.flag_url = '/path/to/default/flag/image.png'; // Default or error handling
-      }
-  
-      // Example for fetching celebrity details
-      if (country.celebrity_dir && country.celebrity_dir.startsWith('gs://')) {
-        const celebRef = ref(storage, country.celebrity_dir);
-        country.celebrity_url = await getDownloadURL(celebRef);
       }
     }
   }
