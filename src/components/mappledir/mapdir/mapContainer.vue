@@ -25,9 +25,10 @@ import { useCountryStore } from '@/stores/useCountryStore';
 
 export default {
   name: 'MapContainer',
+  emits: ['correctGuess', 'gameOver', 'refreshData'],
   setup(props, { emit }) {  // Access emit from the setup context
     const countryStore = useCountryStore();
-    let root;
+    let root, chart, polygonSeries;
     const selectedCountry = ref(null); 
     const score = ref(0);
     const guessesRemaining = ref(3);
@@ -115,8 +116,9 @@ export default {
         if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
           score.value += 1;
           flashColor.value = true; // Flash purple for correct guess
+          emit('correctGuess'); // Correct usage of emit
+          emit('refreshData');
           setTimeout(() => { flashColor.value = false; }, 3000); // Turn off flash after 1 second
-          emit('refreshData'); // Request to refresh data
         } else {
           guessesRemaining.value -= 1;
           flashRed.value = true;
@@ -134,7 +136,15 @@ export default {
       }
     });
 
-    return { selectedCountry, guessesRemaining, score, submitGuess, flashRed, flashColor };
+    function resetMap() {
+      polygonSeries.mapPolygons.each(polygon => {
+        polygon.set("active", false); // Deactivate all polygons
+      });
+      chart.goHome(); // Reset zoom and position to initial state
+      selectedCountry.value = null; // Clear selected country
+    }
+
+    return { selectedCountry, guessesRemaining, score, submitGuess, flashRed, flashColor, resetMap };
   }
 };
 </script>

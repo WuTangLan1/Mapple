@@ -3,6 +3,7 @@
 <script>
 import PromptContainer from '@/components/mappledir/promptdir/promptContainer.vue';
 import MapContainer from '@/components/mappledir/mapdir/mapContainer.vue';
+import correctModal from '@/components/mappledir/additional/correctModal.vue'
 import { useCountryStore } from '@/stores/useCountryStore.js';
 import { useGameStore } from '@/stores/useGameStore';
 import { computed, ref } from 'vue';
@@ -11,9 +12,39 @@ export default {
   name: 'HomeView',
   components: {
     PromptContainer,
-    MapContainer
+    MapContainer,
+    correctModal
+  },
+  setup() {
+    const gameStore = useGameStore();
+    const difficulty = computed(() => gameStore.difficulty);
+
+    const componentKey = ref(0);
+
+    return { difficulty, componentKey}
+  },
+  data() {
+    return {
+    showCorrectModal: false
+  };
+  },
+  async created() {
+    const countryStore = useCountryStore();
+    if (typeof countryStore.fetchCountries === 'function') {
+      await countryStore.fetchCountries();
+    } else {
+      console.error('fetchCountries method is not defined');
+    }
   },
   methods : {
+    handleModalClose() {
+    this.showCorrectModal = false;
+    this.$refs.mapContainer.resetMap();
+    this.$refs.promptContainer.refreshPrompts();
+  },
+  correctGuessHandler() {
+    this.showCorrectModal = true;
+  },
     handleGameOver(score) {
       this.$emit('gameOver', score);  // Emitting again to bubble up
     },
@@ -24,29 +55,15 @@ export default {
     });
   }
   },
-  async created() {
-    const countryStore = useCountryStore();
-    if (typeof countryStore.fetchCountries === 'function') {
-      await countryStore.fetchCountries();
-    } else {
-      console.error('fetchCountries method is not defined');
-    }
-  },
-  setup() {
-    const gameStore = useGameStore();
-    const difficulty = computed(() => gameStore.difficulty);
 
-    const componentKey = ref(0);
-
-    return { difficulty, componentKey}
-  }
 };
 </script>
 
 <template>
   <div class="home-view">
     <PromptContainer v-if="difficulty" :key="componentKey" />
-    <MapContainer v-if="difficulty" @gameOver="handleGameOver" @correctGuess="refreshData" @refreshData="refreshData"/>
+    <MapContainer ref="mapContainer" v-if="difficulty" @gameOver="handleGameOver" @correctGuess="correctGuessHandler" @refreshData="refreshData"/>
+    <correct-modal :visible="showCorrectModal" @close="handleModalClose"/>
   </div>
 </template>
 
