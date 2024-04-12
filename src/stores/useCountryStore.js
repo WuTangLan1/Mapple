@@ -35,10 +35,6 @@ export const useCountryStore = defineStore('country', {
       const celebSnapshot = await getDocs(celebSubCollectionRef);
       const celebrities = celebSnapshot.docs.map(doc => doc.data());
 
-      // Fetch the holidays subcollection
-      const holidaySubCollectionRef = collection(db, `countries/${countryId}/holidays`);
-      const holidaySnapshot = await getDocs(holidaySubCollectionRef);
-      const holidays = holidaySnapshot.docs.map(doc => doc.data());
 
       // Randomly select a celebrity
       if (celebrities.length > 0) {
@@ -46,11 +42,6 @@ export const useCountryStore = defineStore('country', {
         this.currentCountry.celebrity = celebrities[randomCelebIndex].name;
       }
 
-      // Randomly select a holiday
-      if (holidays.length > 0) {
-        const randomHolidayIndex = Math.floor(Math.random() * holidays.length);
-        this.currentCountry.holiday = holidays[randomHolidayIndex].name;
-      }
     },
     async getRandomCountry() {
       let filteredCountries = this.countries.filter(c => !this.experiencedCountries.includes(c.id));

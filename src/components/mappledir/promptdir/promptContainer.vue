@@ -53,11 +53,10 @@ export default {
         <div v-if="difficulty === 'easy' || difficulty === 'medium'" class="data-value">{{ country.celebrity }}</div>
         <img v-else src="@/assets/images/questionmark/qmark.png" alt="Question Mark" class="placeholder"/>
       </div>
-      <!-- Public Holiday card: shown on easy and medium level -->
-      <div class="data-card holiday-card">
-        <div v-if="difficulty === 'easy' " class="label">Public Holiday</div>
-        <div v-if="difficulty === 'easy'" class="data-value">{{ country.holiday }}</div>
-        <img v-else src="@/assets/images/questionmark/qmark.png" alt="Question Mark" class="placeholder"/>
+      <!-- National Animal card: shown on easy and medium level -->
+      <div class="data-card animal-card">
+        <div class="label">National Animal</div>
+        <div class="data-value">{{ country.animal }}</div>
       </div>
       <!-- Population card: always shown -->
       <div class="data-card population-card">
@@ -111,7 +110,7 @@ export default {
 .capital-card { background-color: #e5f4ff; } /* Pastel blue */
 .dish-card { background-color: #e5ffe5; } /* Pastel green */
 .celebrity-card { background-color: #fff5e5; } /* Pastel orange */
-.holiday-card { background-color: #e5e5ff; } /* Pastel purple */
+.animal-card { background-color: #e5e5ff; } /* Pastel purple */
 .population-card { background-color: #f5e5ff; } /* Pastel pink */
 
 
