@@ -46,7 +46,6 @@ export default {
           paddingTop: 10,
           paddingLeft: 10,
           paddingRight: 10,
-          // Making the background more subtle
           backgroundSeries: am5map.MapPolygonSeries.new(root, {
             fill: am5.color(0xDEF2FA)
           })
@@ -60,9 +59,18 @@ export default {
           nonScalingStroke: true,
         }));
 
+        let zoomControl = chart.set("zoomControl", am5map.ZoomControl.new(root, {}));
+        zoomControl.slider.set("step", 0.15); 
+
+        // Enable drag (panning) on mobile devices
+        chart.seriesContainer.dragWhilePressing = true;
+        chart.seriesContainer.events.on("pointerdown", (e) => {
+          e.originalEvent.preventDefault(); // Prevent scrolling on touch devices
+        });
+
+        // Enable smooth interaction and gestures on mobile
         chart.seriesContainer.set("interactive", true);
         chart.seriesContainer.set("touchChildren", true);
-        chart.seriesContainer.dragWhilePressing = true;
 
       // eslint-disable-next-line no-unused-vars
       let hoverState = polygonSeries.mapPolygons.template.states.create("hover", {
@@ -129,7 +137,7 @@ export default {
 }
 .map-container {
   width: 100%;
-  background-color: rgb(173, 216, 230);
+  background-color: rgb(173, 167, 212);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   position: relative;

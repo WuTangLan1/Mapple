@@ -26,17 +26,23 @@ export default {
   <div class="container">
     <div v-if="country" class="prompt-container">
       <!-- Flag card: shown on easy level -->
-      <div class="data-card flag-card">
-        <div v-if="difficulty === 'easy'" class="label">Flag</div>
-        <img v-if="difficulty === 'easy'" :src="country.flag_url" alt="National Flag" class="flag"/>
-        <img v-else src="@/assets/images/questionmark/qmark.png" alt="Question Mark" class="placeholder"/>
+      <transition name="wipe" mode="out-in">
+        <div class="data-card flag-card">
+          <div v-if="difficulty === 'easy'" class="label">Flag</div>
+          <img v-if="difficulty === 'easy'" :src="country.flag_url" alt="National Flag" class="flag"/>
+          <img v-else src="@/assets/images/questionmark/qmark.png" alt="Question Mark" class="placeholder"/>
       </div>
+      </transition>
+
       <!-- Capital City card: shown on easy and medium level -->
-      <div class="data-card capital-card">
+      <transition name="wipe" mode="out-in">
+        <div class="data-card capital-card">
         <div v-if="difficulty === 'easy' || difficulty === 'medium'"  class="label">Capital City</div>
         <div v-if="difficulty === 'easy' || difficulty === 'medium'" class="data-value">{{ country.capital }}</div>
         <img v-else src="@/assets/images/questionmark/qmark.png" alt="Question Mark" class="placeholder"/>
       </div>
+      </transition>
+
       <!-- National Dish card: shown on easy and hard level -->
       <div class="data-card dish-card">
         <div class="label">National Dish</div>
@@ -94,8 +100,14 @@ export default {
   height: 70%;
 }
 
+.wipe-enter-active, .wipe-leave-active {
+  transition: opacity 0.5s, transform 0.5s;
+}
+.wipe-enter, .wipe-leave-to /* Starting and ending state for entering/leaving */ {
+  opacity: 0;
+  transform: translateX(100%);
+}
 
-/* Individual background colors for each card */
 .flag-card { background-color: #ffe5e5; } /* Pastel red */
 .capital-card { background-color: #e5f4ff; } /* Pastel blue */
 .dish-card { background-color: #e5ffe5; } /* Pastel green */
