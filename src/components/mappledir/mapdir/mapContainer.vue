@@ -35,75 +35,81 @@ export default {
     const flashColor = ref(false);
 
     onMounted(() => {
-        root = am5.Root.new("chartdiv");
-        root.setThemes([am5themes_Animated.new(root)]);
+  root = am5.Root.new("chartdiv");
+  root.setThemes([am5themes_Animated.new(root)]);
 
-        let chart = root.container.children.push(am5map.MapChart.new(root, {
-          panX: "rotateX",
-          panY: "rotateY",
-          projection: am5map.geoOrthographic(),
-          paddingBottom: 10,
-          paddingTop: 10,
-          paddingLeft: 10,
-          paddingRight: 10,
-          backgroundSeries: am5map.MapPolygonSeries.new(root, {
-            fill: am5.color(0xDEF2FA)
-          })
-        }));
+  let chart = root.container.children.push(am5map.MapChart.new(root, {
+    panX: "rotateX",
+    panY: "rotateY",
+    projection: am5map.geoOrthographic(),
+    paddingBottom: 10,
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    background: am5.Rectangle.new(root, { fill: am5.color(0xADD8E6) }) ,
+    backgroundSeries: am5map.MapPolygonSeries.new(root, {
+      fill: am5.color(0xDEF2FA)
+    })
+  }));
 
-        let polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-          geoJSON: am5geodata_worldLow,
-          fill: am5.color(0x38761d),
-          stroke: am5.color(0x1A1A1A),
-          strokeWidth: 0.5,
-          nonScalingStroke: true,
-        }));
+  let zoomControl = am5map.ZoomControl.new(root, {
+    slider: {
+      step: 0.15  // Adjust step directly at creation
+    }
+  });
 
-        // Enable drag (panning) on mobile devices
-        chart.seriesContainer.dragWhilePressing = true;
-        chart.seriesContainer.events.on("pointerdown", (e) => {
-          e.originalEvent.preventDefault(); // Prevent scrolling on touch devices
-        });
+  chart.set("zoomControl", zoomControl); 
 
-        polygonSeries.mapPolygons.template.events.on("pointerdown", function(ev) {
-          let polygon = ev.target;
-          polygon.states.applyAnimate("hover"); // Apply hover state on touch
-          selectedCountry.value = polygon.dataItem.dataContext.name; // Store the selected country
-        });
-
-
-        // Enable smooth interaction and gestures on mobile
-        chart.seriesContainer.set("interactive", true);
-        chart.seriesContainer.set("touchChildren", true);
-
-      // eslint-disable-next-line no-unused-vars
-      let hoverState = polygonSeries.mapPolygons.template.states.create("hover", {
-        fill: am5.color(0xFBE5A2) // A pleasant hover color
-      });
-
-      polygonSeries.mapPolygons.template.states.create("active", {
-          fill: am5.color(0xFFCCAA) // A distinct color for active (selected) countries
-        });
-
-        // Enhance interactivity with the polygons
-        polygonSeries.mapPolygons.template.setAll({
-          toggleKey: "active",
-          interactive: true,
-          cursorOverStyle: "pointer" // Change cursor to pointer on hover to indicate interactivity
-        });
-
-      polygonSeries.mapPolygons.template.events.on("click", function(ev) {
-        polygonSeries.mapPolygons.each(function(item) {
-          item.set("active", false);
-        });
-
-        let polygon = ev.target;
-        polygon.set("active", true);
-
-        selectedCountry.value = polygon.dataItem.dataContext.name; // Store the selected country
-      });
-
+  let backgroundSeries = am5map.MapPolygonSeries.new(root, {
+      fill: am5.color(0x0000FF), // A different shade of blue for the ocean on the globe
     });
+    chart.series.push(backgroundSeries);
+
+  let polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
+    geoJSON: am5geodata_worldLow,
+    fill: am5.color(0x38761d),
+    stroke: am5.color(0x1A1A1A),
+    strokeWidth: 0.5,
+    nonScalingStroke: true,
+  }));
+
+  chart.seriesContainer.dragWhilePressing = true;
+  chart.seriesContainer.events.on("pointerdown", (e) => {
+    e.originalEvent.preventDefault(); // Prevent scrolling on touch devices
+  });
+
+  chart.seriesContainer.set("interactive", true);
+  chart.seriesContainer.set("touchChildren", true);
+
+  // eslint-disable-next-line no-unused-vars
+  let hoverState = polygonSeries.mapPolygons.template.states.create("hover", {
+    fill: am5.color(0xFBE5A2)
+  });
+
+  polygonSeries.mapPolygons.template.states.create("active", {
+    fill: am5.color(0xFFCCAA)
+  });
+
+  polygonSeries.mapPolygons.template.setAll({
+    toggleKey: "active",
+    interactive: true,
+    cursorOverStyle: "pointer"
+  });
+
+  polygonSeries.mapPolygons.template.events.on("pointerdown", function(ev) {
+    polygonSeries.mapPolygons.each(function(item) {
+      item.set("active", false); // Reset all polygons to inactive state
+    });
+
+    let polygon = ev.target;
+    polygon.set("active", true);
+
+    selectedCountry.value = polygon.dataItem.dataContext.name;
+    if (navigator.vibrate) {
+      navigator.vibrate(50); // Vibrate for tactile feedback on selection
+    }
+  });
+});
 
     function submitGuess() {
         if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
@@ -141,7 +147,7 @@ export default {
 }
 .map-container {
   width: 100%;
-  background-color: rgb(173, 167, 212); 
+  background-color: #F0F8FF;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   position: relative;
