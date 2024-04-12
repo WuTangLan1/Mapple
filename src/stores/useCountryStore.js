@@ -20,14 +20,35 @@ export const useCountryStore = defineStore('country', {
       this.countries = querySnapshot.docs.map(doc => {
         return { id: doc.id, ...doc.data() };
       });
-      // Filter out any countries already experienced to reset if all have been seen
       this.countries = this.countries.filter(c => !this.experiencedCountries.includes(c.id));
       if (this.countries.length === 0) {
         this.experiencedCountries = []; // Reset if all countries have been seen
       }
     },
+    async fetchRandomCelebrityAndHoliday(countryId) {
+      // Fetch the celebrities subcollection
+      const celebSubCollectionRef = collection(db, `countries/${countryId}/celebrities`);
+      const celebSnapshot = await getDocs(celebSubCollectionRef);
+      const celebrities = celebSnapshot.docs.map(doc => doc.data());
+
+      // Fetch the holidays subcollection
+      const holidaySubCollectionRef = collection(db, `countries/${countryId}/holidays`);
+      const holidaySnapshot = await getDocs(holidaySubCollectionRef);
+      const holidays = holidaySnapshot.docs.map(doc => doc.data());
+
+      // Randomly select a celebrity
+      if (celebrities.length > 0) {
+        const randomCelebIndex = Math.floor(Math.random() * celebrities.length);
+        this.currentCountry.celebrity = celebrities[randomCelebIndex].name;
+      }
+
+      // Randomly select a holiday
+      if (holidays.length > 0) {
+        const randomHolidayIndex = Math.floor(Math.random() * holidays.length);
+        this.currentCountry.holiday = holidays[randomHolidayIndex].name;
+      }
+    },
     async getRandomCountry() {
-      // Ensure countries are fetched and filtered
       let filteredCountries = this.countries.filter(c => !this.experiencedCountries.includes(c.id));
       if (filteredCountries.length === 0) {
         await this.fetchCountries(); // Fetch again if all have been experienced
@@ -37,8 +58,7 @@ export const useCountryStore = defineStore('country', {
       this.currentCountry = filteredCountries[randomIndex];
       this.experiencedCountries.push(this.currentCountry.id);
   
-      // Fetch additional data like flag, celebrity, etc.
-      await this.fetchAdditionalData(this.currentCountry);
+      await this.fetchRandomCelebrityAndHoliday(this.currentCountry.id);
     },
   
     async fetchAdditionalData(country) {

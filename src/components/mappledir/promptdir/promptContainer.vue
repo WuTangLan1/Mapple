@@ -50,8 +50,8 @@ export default {
       </div>
       <!-- Public Holiday card: shown on easy and medium level -->
       <div class="data-card holiday-card">
-        <div v-if="difficulty === 'easy' || difficulty === 'medium'" class="label">Public Holiday</div>
-        <div v-if="difficulty === 'easy' || difficulty === 'medium'" class="data-value">{{ country.holiday }}</div>
+        <div v-if="difficulty === 'easy' " class="label">Public Holiday</div>
+        <div v-if="difficulty === 'easy'" class="data-value">{{ country.holiday }}</div>
         <img v-else src="@/assets/images/questionmark/qmark.png" alt="Question Mark" class="placeholder"/>
       </div>
       <!-- Population card: always shown -->
