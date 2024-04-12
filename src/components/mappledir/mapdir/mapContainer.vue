@@ -59,14 +59,18 @@ export default {
           nonScalingStroke: true,
         }));
 
-        // let zoomControl = chart.set("zoomControl", am5map.ZoomControl.new(root, {}));
-        // zoomControl.slider.set("step", 0.15); 
-
         // Enable drag (panning) on mobile devices
         chart.seriesContainer.dragWhilePressing = true;
         chart.seriesContainer.events.on("pointerdown", (e) => {
           e.originalEvent.preventDefault(); // Prevent scrolling on touch devices
         });
+
+        polygonSeries.mapPolygons.template.events.on("pointerdown", function(ev) {
+          let polygon = ev.target;
+          polygon.states.applyAnimate("hover"); // Apply hover state on touch
+          selectedCountry.value = polygon.dataItem.dataContext.name; // Store the selected country
+        });
+
 
         // Enable smooth interaction and gestures on mobile
         chart.seriesContainer.set("interactive", true);
@@ -137,8 +141,7 @@ export default {
 }
 .map-container {
   width: 100%;
-  background-color: rgb(173, 167, 212); /* Consider a gradient or a subtle texture for a more premium feel */
-  background-image: radial-gradient(circle at center, #606ac5 40%, #6188bb 50%);
+  background-color: rgb(173, 167, 212); 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   position: relative;
