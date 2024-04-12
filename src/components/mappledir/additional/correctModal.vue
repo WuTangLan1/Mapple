@@ -4,9 +4,6 @@
     <div v-if="visible" class="modal-overlay" @click.self="closeModal">
       <div class="modal-content">
         <span class="close" @click="closeModal">&times;</span>
-        <div class="modal-header">
-          <h1>Congratulations!</h1>
-        </div>
         <h2>You guessed correctly: {{ country.c_name }}</h2>
         <img :src="country.flag_url" alt="Flag of the country" class="flag">
         <p class="blurb">{{ country.blurb }}</p>
@@ -66,14 +63,6 @@
   transition: all 0.3s ease; /* Smoother transition */
 }
 
-.modal-header {
-  background-color: #4CAF50; /* A green header for success */
-  color: white;
-  padding: 0.5rem 1rem;
-  border-top-left-radius: 10px; /* Match with modal border radius */
-  border-top-right-radius: 10px;
-  margin: -2rem -2rem 2rem; /* Overlap the modal-content padding */
-}
 
 h2 {
   color: #333;
@@ -92,8 +81,8 @@ h2 {
 
 .close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.5rem;
+  right: 0.8rem;
   font-size: 2rem; /* Larger close icon */
   color: #333;
   cursor: pointer;
