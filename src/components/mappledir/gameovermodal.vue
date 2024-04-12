@@ -20,9 +20,9 @@ export default {
       <h2>Game Over!</h2>
       <p>Your score: {{ score }}</p>
       <div class="buttons-container">
-        <button @click="restartGame('easy')" class="button-easy">Easy</button>
-        <button @click="restartGame('medium')" class="button-medium">Medium</button>
-        <button @click="restartGame('hard')" class="button-hard">Hard</button>
+        <button @click="restartGame('easy')" class="button-easy">Restart on Easy</button>
+        <button @click="restartGame('medium')" class="button-medium">Restart on Medium</button>
+        <button @click="restartGame('hard')" class="button-hard">Restart on Hard</button>
       </div>
     </div>
   </div>

@@ -53,14 +53,14 @@ export default {
 
         let polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
           geoJSON: am5geodata_worldLow,
-          fill: am5.color(0xAAD3C1),
+          fill: am5.color(0x38761d),
           stroke: am5.color(0x1A1A1A),
           strokeWidth: 0.5,
           nonScalingStroke: true,
         }));
 
-        let zoomControl = chart.set("zoomControl", am5map.ZoomControl.new(root, {}));
-        zoomControl.slider.set("step", 0.15); 
+        // let zoomControl = chart.set("zoomControl", am5map.ZoomControl.new(root, {}));
+        // zoomControl.slider.set("step", 0.15); 
 
         // Enable drag (panning) on mobile devices
         chart.seriesContainer.dragWhilePressing = true;
@@ -137,7 +137,8 @@ export default {
 }
 .map-container {
   width: 100%;
-  background-color: rgb(173, 167, 212);
+  background-color: rgb(173, 167, 212); /* Consider a gradient or a subtle texture for a more premium feel */
+  background-image: radial-gradient(circle at center, #606ac5 40%, #6188bb 50%);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   position: relative;
@@ -150,10 +151,14 @@ export default {
   padding: 10px;
 }
 .score-display {
-  color: white;
-  background-color: #4CAF50;
+  color: black;
+  background-color: #b9c07f;
   padding: 5px;
   border-radius: 5px;
+}
+
+.am5zoomcontrol .am5button-group {
+  filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.6)); 
 }
 .submit-button {
   background-color: #4CAF50;

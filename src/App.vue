@@ -17,8 +17,9 @@ import { ref } from 'vue';
 import TopHeader from './components/homedir/topheader.vue';
 import BottomFooter from './components/homedir/bottomfooter.vue';
 import StartModal from './components/homedir/startModal.vue';
-import GameOverModal from './components/mappledir/gameovermodal.vue'
-import { useGameStore } from '@/stores/useGameStore'; // Import the game store
+import GameOverModal from './components/mappledir/gameovermodal.vue';
+import { useGameStore } from '@/stores/useGameStore';
+import { useCountryStore } from '@/stores/useCountryStore'; // Ensure this is imported
 
 export default {
   components: {
@@ -30,25 +31,28 @@ export default {
   setup() {
     const difficultySelected = ref(false);
     const gameStore = useGameStore();
+    const countryStore = useCountryStore(); // Use the country store
     const gameOver = ref(false);
     const gameScore = ref(0);
 
     function setDifficulty(level) {
       gameStore.setDifficulty(level);
+      countryStore.resetCountries(); // Reset the country experience
       difficultySelected.value = true;
-      gameOver.value = false; // Reset game over status
+      gameOver.value = false;
     }
 
     function restartGame(level) {
-      gameScore.value = 0; // Reset score
+      gameScore.value = 0;
       gameOver.value = false;
-      setDifficulty(level); // Set new difficulty and start the game
+      countryStore.resetCountries(); // Ensure this is called to reset the country list
+      setDifficulty(level);
     }
 
     function handleGameOver(score) {
       gameScore.value = score;
       gameOver.value = true;
-      difficultySelected.value = false; // Hide other UI elements as necessary
+      difficultySelected.value = false;
     }
 
     return {
@@ -62,6 +66,7 @@ export default {
   }
 }
 </script>
+
 
 
 

@@ -15,6 +15,10 @@ export const useCountryStore = defineStore('country', {
     experiencedCountries: [] // Store IDs of countries already seen
   }),
   actions: {
+    async resetCountries() {
+      this.experiencedCountries = []; // Clear the list of seen countries
+      await this.fetchCountries(); // Refetch the countries
+    },
     async fetchCountries() {
       const querySnapshot = await getDocs(collection(db, "countries"));
       this.countries = querySnapshot.docs.map(doc => {
