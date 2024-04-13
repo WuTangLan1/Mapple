@@ -61,7 +61,7 @@ export default {
           <a href="https://www.instagram.com/discover_mapple" target="_blank" rel="noopener noreferrer">
             <img src="@/assets/images/socials/insta_icon.jpg" alt="Instagram" />
           </a>
-          <a href="https://www.twitter.com/discover_mapple" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.twitter.com/epic_maps" target="_blank" rel="noopener noreferrer">
             <img src="@/assets/images/socials/x_icon.jpg" alt="Twitter" />
           </a>
         </div>
