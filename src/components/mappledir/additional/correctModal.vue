@@ -48,7 +48,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10; /* Ensure it's above other content */
+  z-index: 1000; /* Ensure it's above other content */
 }
 
 .modal-content {
@@ -56,11 +56,11 @@
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2); /* Smooth shadow for depth */
-  width: 90%;
   max-width: 60%; /* Limiting max width */
   text-align: center; /* Centering text */
   position: relative; /* For absolute positioning of the close button */
   transition: all 0.3s ease; /* Smoother transition */
+  margin-bottom: 20%;
 }
 
 

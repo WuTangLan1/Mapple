@@ -113,6 +113,7 @@ export default {
 });
 
   function submitGuess() {
+    console.log(selectedCountry.value)
       if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
         score.value += 1;
         flashColor.value = true; 
