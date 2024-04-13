@@ -5,14 +5,14 @@ import { db } from '@/components/fbdir/fbInit'; // Ensure this import path match
 import { collection, getDocs } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
-// Initialize Firebase Storage
 const storage = getStorage();
 
 export const useCountryStore = defineStore('country', {
   state: () => ({
     countries: [],
     currentCountry: null,
-    experiencedCountries: [] // Store IDs of countries already seen
+    experiencedCountries: [],
+    isLoadingFlag:false
   }),
   actions: {
     async resetCountries() {
@@ -65,12 +65,14 @@ export const useCountryStore = defineStore('country', {
     },
   
     async fetchAdditionalData(country) {
+      this.isLoadingFlag = true; 
       if (country.flag_dir && country.flag_dir.startsWith('gs://')) {
         const flagRef = ref(storage, country.flag_dir);
         country.flag_url = await getDownloadURL(flagRef);
       } else {
-        country.flag_url = '/path/to/default/flag/image.png'; // Default or error handling
+        country.flag_url = '/path/to/default/flag/image.png'; 
       }
+      this.isLoadingFlag = false; 
     }
   }
 });

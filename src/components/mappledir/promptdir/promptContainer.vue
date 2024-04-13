@@ -13,24 +13,27 @@ export default {
 
     const country = computed(() => countryStore.currentCountry);
     const difficulty = computed(() => gameStore.difficulty);
+    const isLoadingFlag = computed(() => countryStore.isLoadingFlag); // Access loading state
 
     return {
       country,
       difficulty,
+      isLoadingFlag, 
     };
   }
 };
-
 </script>
+
 <template>
   <div class="container">
     <div v-if="country" class="prompt-container">
       <!-- Flag card: shown on easy level -->
       <transition name="wipe" mode="out-in">
         <div class="data-card flag-card">
-          <img v-if="difficulty === 'easy'" :src="country.flag_url" alt="National Flag" class="flag"/>
+          <img v-if="difficulty === 'easy' && !isLoadingFlag" :src="country.flag_url" alt="National Flag" class="flag"/>
+          <img v-else-if="difficulty === 'easy' && isLoadingFlag" src="@/assets/images/loading.gif" alt="Loading" class="loading"/>
           <img v-else src="@/assets/images/questionmark/qmark.png" alt="Question Mark" class="placeholder"/>
-      </div>
+        </div>
       </transition>
 
       <!-- Capital City card: shown on easy and medium level -->
@@ -113,6 +116,11 @@ export default {
 .animal-card { background-color: #e5e5ff; } /* Pastel purple */
 .population-card { background-color: #f5e5ff; } /* Pastel pink */
 
+.loading {
+  width: 50px; /* Adjust size as necessary */
+  height: 50px;
+  margin: auto; /* Center the icon */
+}
 
 .label {
   font-size: 1.1rem;
