@@ -6,14 +6,20 @@
     <nav class="navigation">
       <router-link to="/" class="nav-link">Home</router-link>
       <router-link to="/daily" class="nav-link">Daily</router-link>
-      <router-link to="/login" class="nav-link">Register/Login</router-link>
+      <div class="nav-link" @click="openAuthModal">Register/Login</div>
     </nav>
   </header>
 </template>
 
 <script>
 export default {
-  name: 'TopHeader'
+  name: 'TopHeader',
+  methods : {
+    openAuthModal() {
+      console.log('log/reg modal clicked')
+      this.$emit('auth-modal-open');
+    }
+  }
 }
 </script>
 

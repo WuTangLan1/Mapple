@@ -2,7 +2,8 @@
 <template>
   <div id="app">
     <start-modal @difficultySelected="setDifficulty" v-if="showStartModal"/>
-    <top-header/>
+    <auth-modal v-if="showAuthModal"/>
+    <top-header @auth-modal-open="openAuthModal"/>
     <div class="router-view-container">
       <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
     </div>
@@ -11,10 +12,12 @@
   </div>
 </template>
 
+
 <script>
 import { ref } from 'vue';
 import TopHeader from './components/homedir/topheader.vue';
 import BottomFooter from './components/homedir/bottomfooter.vue';
+import AuthModal from './components/auth/authModal.vue';
 import StartModal from './components/homedir/startModal.vue';
 import GameOverModal from './components/mappledir/additional/gameovermodal.vue';
 import { useGameStore } from '@/stores/useGameStore';
@@ -24,6 +27,7 @@ export default {
   components: {
     TopHeader,
     BottomFooter,
+    AuthModal,
     StartModal,
     GameOverModal
   },
@@ -35,6 +39,7 @@ export default {
     const gameScore = ref(0);
     const showStartModal = ref(true);
     const showGameOverModal = ref(false);
+    const showAuthModal = ref(false);
 
     function setDifficulty(level) {
       gameStore.setDifficulty(level);
@@ -62,6 +67,10 @@ export default {
       showStartModal.value = false;
     }
 
+    function openAuthModal() {
+      showAuthModal.value = true;
+    }
+
     return {
       difficultySelected,
       setDifficulty,
@@ -70,7 +79,9 @@ export default {
       restartGame,
       handleGameOver,
       showStartModal,
-      showGameOverModal
+      showGameOverModal,
+      showAuthModal,
+      openAuthModal
     };
   }
 }

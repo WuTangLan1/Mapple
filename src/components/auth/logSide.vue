@@ -5,8 +5,7 @@
 </script>
 
 <template>
-
-
+    <p>hello log side</p>
 </template>
 
 <style scoped>
