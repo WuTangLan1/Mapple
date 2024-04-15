@@ -49,6 +49,18 @@ export default {
   text-align: center;
   width: 80%;
   max-width: 500px;
+  animation: dropAnimation 1.5s ease-in-out forwards;
+}
+
+@keyframes dropAnimation {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .buttons-container {

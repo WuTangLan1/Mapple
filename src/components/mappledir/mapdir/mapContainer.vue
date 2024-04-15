@@ -36,10 +36,10 @@ export default {
     const flashColor = ref(false);
 
     onMounted(() => {
-  root = am5.Root.new("chartdiv");
+      root = am5.Root.new("chartdiv");
   root.setThemes([am5themes_Animated.new(root)]);
 
-  let chart = root.container.children.push(am5map.MapChart.new(root, {
+  chart = root.container.children.push(am5map.MapChart.new(root, {
     panX: "rotateX",
     panY: "rotateY",
     projection: am5map.geoOrthographic(),
@@ -47,33 +47,27 @@ export default {
     paddingTop: 10,
     paddingLeft: 10,
     paddingRight: 10,
-    background: am5.Rectangle.new(root, { fill: am5.color(0xADD8E6) }) ,
-    backgroundSeries: am5map.MapPolygonSeries.new(root, {
-      fill: am5.color(0xDEF2FA)
-    })
+    background: am5.Rectangle.new(root, { fill: am5.color(0xADD8E6) }) // Set ocean color here
   }));
+
+  // This sets the background color of the entire chart area, which includes oceans
+  chart.set("background", am5.Rectangle.new(root, { fill: am5.color(0xADD8E6) }));
 
   let zoomControl = am5map.ZoomControl.new(root, {
     slider: {
-      step: 0.15  // Adjust step directly at creation
+      step: 0.15
     }
   });
+  chart.set("zoomControl", zoomControl);
 
-  chart.set("zoomControl", zoomControl); 
-
-  let backgroundSeries = am5map.MapPolygonSeries.new(root, {
-      fill: am5.color(0x0000FF), // A different shade of blue for the ocean on the globe
-    });
-    chart.series.push(backgroundSeries);
-
-  let polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
+  // Now let's add the country series
+  polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
     geoJSON: am5geodata_worldLow,
-    fill: am5.color(0x38761d),
+    fill: am5.color(0x38761d), // This color is for countries
     stroke: am5.color(0x1A1A1A),
     strokeWidth: 0.5,
     nonScalingStroke: true,
   }));
-
 
 
   chart.seriesContainer.dragWhilePressing = true;
