@@ -16,10 +16,12 @@ export const useCountryStore = defineStore('country', {
     isLoadingFlag:false
   }),
   actions: {
-    async resetCountries() {
-      this.experiencedCountries = []; 
+    async resetCountries(excludeLastCountry = false) {
+      this.experiencedCountries = [];
+      console.log('reset method called excluded country: ')
+      await this.fetchCountries(true, excludeLastCountry);
     },
-    async fetchCountries(shouldShuffle = false) {
+    async fetchCountries(shouldShuffle = false, excludeLastCountry = false) {
       const querySnapshot = await getDocs(collection(db, "countries"));
       let fetchedCountries = querySnapshot.docs.map(doc => ({
         id: doc.id,
@@ -28,9 +30,10 @@ export const useCountryStore = defineStore('country', {
       if (shouldShuffle) {
         fetchedCountries = this.shuffleCountries(fetchedCountries);
       }
+      if (excludeLastCountry && this.lastCountryId) {
+        fetchedCountries = fetchedCountries.filter(c => c.id !== this.lastCountryId);
+      }
       this.countries = fetchedCountries;
-      this.countries = this.countries.filter(c => !this.experiencedCountries.includes(c.id));
-      console.log("Countries after shuffle and filter: ", this.countries);
     },
     shuffleCountries(array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -58,17 +61,17 @@ export const useCountryStore = defineStore('country', {
         const randomBlurbIndex = Math.floor(Math.random() * blurbs.length);
         this.currentCountry.blurb = blurbs[randomBlurbIndex].text;
       }
-
     },
     async getRandomCountry() {
-      let filteredCountries = this.countries.filter(c => !this.experiencedCountries.includes(c.id) && c.id !== this.lastCountryId);
+      let filteredCountries = this.countries.filter(c => !this.experiencedCountries.includes(c.id));
       if (filteredCountries.length === 0) {
-        await this.fetchCountries(true);
+        await this.fetchCountries(true, true); // Also exclude the last country on refresh
         filteredCountries = this.countries;
       }
       const randomIndex = Math.floor(Math.random() * filteredCountries.length);
       this.currentCountry = filteredCountries[randomIndex];
       this.experiencedCountries.push(this.currentCountry.id);
+      this.lastCountryId = this.currentCountry.id; 
       console.log("Selected new country: ", this.currentCountry);
       await this.fetchAdditionalData(this.currentCountry);
       await this.fetchRandomCelebrityAndHoliday(this.currentCountry.id);

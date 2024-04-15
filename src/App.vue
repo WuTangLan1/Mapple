@@ -31,13 +31,14 @@ export default {
   setup() {
     const difficultySelected = ref(false);
     const gameStore = useGameStore();
-    const countryStore = useCountryStore(); // Use the country store
+    const countryStore = useCountryStore();
     const gameOver = ref(false);
     const gameScore = ref(0);
 
     function setDifficulty(level) {
       gameStore.setDifficulty(level);
-      countryStore.resetCountries(); // Reset the country experience
+      countryStore.resetCountries(); 
+      countryStore.getRandomCountry();
       difficultySelected.value = true;
       gameOver.value = false;
     }
@@ -45,7 +46,7 @@ export default {
     function restartGame(level) {
       gameScore.value = 0;
       gameOver.value = false;
-      countryStore.resetCountries(); // Ensure this is called to reset the country list
+      countryStore.resetCountries(); 
       setDifficulty(level);
     }
 
