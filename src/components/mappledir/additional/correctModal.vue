@@ -61,8 +61,19 @@
   position: relative; /* For absolute positioning of the close button */
   transition: all 0.3s ease; /* Smoother transition */
   margin-bottom: 20%;
+  animation: dropAnimation 1.5s ease-in-out forwards;
 }
 
+@keyframes dropAnimation {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
 h2 {
   color: #333;

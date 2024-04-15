@@ -5,12 +5,12 @@
     <div class="info-container">
       <div class="score-display">Score: {{ score }}</div>
       <div class="guesses-display">Guesses: {{ guessesRemaining }}</div>
-      <button :class="{ 'flash-red': flashRed }" 
-              :disabled="!selectedCountry || guessesRemaining === 0" 
-              @click="submitGuess"
-              class="submit-button">
-        Submit
-      </button>
+      <button :class="{ 'flash-red': flashRed, 'disabled-button': !selectedCountry || guessesRemaining === 0 }"
+            :disabled="!selectedCountry || guessesRemaining === 0"
+            @click="submitGuess"
+            class="submit-button">
+      Submit
+    </button>
     </div>
   </div>
 </template>
@@ -132,6 +132,7 @@ export default {
         flashColor.value = true; 
         emit('correctGuess', countryStore.currentCountry); // Emit the country data
         setTimeout(() => { flashColor.value = false; }, 3000);
+        selectedCountry.value = "";
       } else {
           guessesRemaining.value -= 1;
           flashRed.value = true;
@@ -181,9 +182,11 @@ export default {
   justify-content: space-between;
   padding: 10px;
 }
-.score-display, .guesses-display { /* Styling for score and guesses display */
+
+.score-display, .guesses-display, .submit-button {
+  font-size: 1em; /* Adjust the font size as needed */
   color: white;
-  padding: 5px;
+  padding: 9px;
   border-radius: 5px;
   width: 25%;
   text-align: center;
@@ -209,6 +212,12 @@ export default {
   animation: flashColor 1s 1; 
   border: none;
   width: 25%;
+}
+
+.disabled-button {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6; /* Make the button look inactive */
 }
 
 .flash-purple {
