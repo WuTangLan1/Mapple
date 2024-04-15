@@ -26,7 +26,6 @@
     selectDifficulty(level) {
       this.$emit('difficultySelected', level);
       this.isVisible = false;
-      // Fetch a random country
       const countryStore = useCountryStore();
       countryStore.getRandomCountry();
     },
@@ -84,17 +83,16 @@
   border-radius: 5px;
   color: white;
   cursor: pointer;
-  flex-grow: 1; /* Allows buttons to grow to fill the container */
-  max-width: 120px; /* Maximum width of the buttons */
+  flex-grow: 1; 
 }
 
 @media (max-width: 600px) {
   .modal-content {
     padding: 15px;
-    width: 80%; /* Increase width on smaller screens for better use of space */
+    width: 80%; 
   }
   .button-easy, .button-medium, .button-hard {
-    padding: 8px 10px; /* Reduce padding on smaller screens */
+    padding: 8px 10px; 
   }
 }
   </style>
