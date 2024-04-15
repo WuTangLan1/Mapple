@@ -1,7 +1,7 @@
 <!-- This is the code for src\components\auth\authModal.vue -->
 
 <template>
-    <div class="modal-backdrop" v-if="isVisible">
+    <div class="modal-backdrop">
       <div class="modal">
         <component :is="currentComponent"></component>
         <button @click="toggleComponent">Toggle</button>
@@ -41,11 +41,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+    z-index: 1000;  }
   
   .modal {
     background: white;

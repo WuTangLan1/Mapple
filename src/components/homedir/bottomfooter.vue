@@ -84,7 +84,6 @@ export default {
   color: #333;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
   transition: max-height 0.5s ease;
-  z-index: 1000; /* Ensure it sits above other content */
 }
 
 .footer-content {
