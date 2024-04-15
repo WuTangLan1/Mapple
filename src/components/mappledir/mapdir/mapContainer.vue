@@ -66,6 +66,12 @@ export default {
           stroke: am5.color(0xffffff, 0.3)
         }));
 
+        if (window.innerWidth <= 768) {
+      root.setThemes([]);
+    } else {
+      root.setThemes([am5themes_Animated.new(root)]);
+    }
+
 
     polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
       geoJSON: am5geodata_worldLow,
@@ -158,7 +164,7 @@ export default {
 
 <style scoped>
 #chartdiv {
-  height: 260px;
+  height: 40vh; /* Example of setting the height relative to the viewport height */
   width: 100%;
 }
 .map-container {
