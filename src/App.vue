@@ -2,7 +2,7 @@
 <template>
   <div id="app">
     <start-modal @difficultySelected="setDifficulty" v-if="showStartModal"/>
-    <auth-modal v-if="showAuthModal"/>
+    <auth-modal v-if="showAuthModal" />
     <top-header @auth-modal-open="openAuthModal"/>
     <div class="router-view-container">
       <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>

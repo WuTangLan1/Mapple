@@ -19,7 +19,6 @@ export const useAuthStore = defineStore('auth', {
 
         // Save additional user details in Firestore
         const userProfile = {
-          uid: user.uid,
           full_name: fullName,
           dob: dateOfBirth,
           dayscomp: [],  // Assuming it's an empty array to start with

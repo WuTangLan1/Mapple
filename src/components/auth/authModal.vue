@@ -3,8 +3,9 @@
 <template>
     <div class="modal-backdrop">
       <div class="modal">
-        <component :is="currentComponent"></component>
         <button @click="toggleComponent">Toggle</button>
+        <button class="close-button" @click="closeModal">✕</button>
+        <component :is="currentComponent"></component>
       </div>
     </div>
   </template>
@@ -19,19 +20,23 @@
       RegSide,
       LogSide
     },
-    props: ['isVisible'],
-    emits: ['update:isVisible'],
-    setup() {
+    setup(props, { emit }) {
       const currentComponent = ref('RegSide');
   
       function toggleComponent() {
         currentComponent.value = currentComponent.value === 'RegSide' ? 'LogSide' : 'RegSide';
       }
   
-      return { currentComponent, toggleComponent };
+      function closeModal() {
+        console.log('closemodal clicked')
+        emit('update:isVisible', false);
+      }
+  
+      return { currentComponent, toggleComponent, closeModal };
     }
   };
   </script>
+  
   
   
   <style scoped>
@@ -64,6 +69,33 @@
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.toggle-button {
+  position: absolute;
+  background: none;
+  left: 0;
+  top:0;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+
+.close-button {
+  position: absolute;
+  background: none;
+  right: 0;
+  top:0;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.close-button:hover {
+  transform: rotate(180deg);
 }
 
   </style>
