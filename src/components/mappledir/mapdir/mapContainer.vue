@@ -82,6 +82,8 @@ export default {
     console.log("Polygon series for countries has been added.");
 
 
+
+
   chart.seriesContainer.dragWhilePressing = true;
   chart.seriesContainer.events.on("pointerdown", (e) => {
     e.originalEvent.preventDefault(); // Prevent scrolling on touch devices

@@ -59,10 +59,10 @@ export default {
         <h3>Follow Us</h3>
         <div class="social-icons">
           <a href="https://www.instagram.com/discover_mapple" target="_blank" rel="noopener noreferrer">
-            <img src="@/assets/images/socials/insta_icon.jpg" alt="Instagram" />
+            <img src="@/assets/images/socials/insta_icon.png" alt="Instagram" />
           </a>
           <a href="https://www.twitter.com/epic_maps" target="_blank" rel="noopener noreferrer">
-            <img src="@/assets/images/socials/x_icon.jpg" alt="Twitter" />
+            <img src="@/assets/images/socials/x_icon.png" alt="Twitter" />
           </a>
         </div>
       </div>
