@@ -38,90 +38,99 @@ export default {
 
     onMounted(() => {
       try {
-    root = am5.Root.new("chartdiv");
-    root.setThemes([am5themes_Animated.new(root)]);
+        root = am5.Root.new("chartdiv");
+        root.setThemes([am5themes_Animated.new(root)]);
 
-    chart = root.container.children.push(am5map.MapChart.new(root, {
-      panX: "rotateX",
-      panY: "rotateY",
-      background: am5.Rectangle.new(root, { fill: am5.color(0xADD8E6) }),
-      projection: am5map.geoOrthographic(),
-      paddingBottom: 10,
-      paddingTop: 10,
-      paddingLeft: 10,
-      paddingRight: 10
-    }));
-
-    chart.set("background", am5.Rectangle.new(root, { fill: am5.color(0x8AADB8) }));
-   
-
-    let zoomControl = am5map.ZoomControl.new(root, {
-      slider: {
-        step: 0.15
-      }
-    });
-    chart.set("zoomControl", zoomControl);
-
-    graticuleSeries = chart.series.push(am5map.GraticuleSeries.new(root, {
-          stroke: am5.color(0xffffff, 0.3)
+        chart = root.container.children.push(am5map.MapChart.new(root, {
+          panX: "rotateX",
+          panY: "rotateY",
+          background: am5.Rectangle.new(root, { fill: am5.color(0xADD8E6) }),
+          projection: am5map.geoOrthographic(),
+          paddingBottom: 10,
+          paddingTop: 10,
+          paddingLeft: 10,
+          paddingRight: 10
         }));
 
-        if (window.innerWidth <= 768) {
-      root.setThemes([]);
-    } else {
-      root.setThemes([am5themes_Animated.new(root)]);
+        chart.events.on("zoomlevelchanged", function(ev) {
+          const level = ev.target.zoomLevel;
+          const panFactor = 0.1 + (1 - level) * 0.9;
+          chart.set("panXSpeed", panFactor);
+          chart.set("panYSpeed", panFactor);
+        });
+
+
+        chart.set("background", am5.Rectangle.new(root, { fill: am5.color(0x8AADB8) }));
+      
+
+        let zoomControl = am5map.ZoomControl.new(root, {
+          slider: {
+            step: 0.15
+          }
+        });
+        chart.set("zoomControl", zoomControl);
+
+        graticuleSeries = chart.series.push(am5map.GraticuleSeries.new(root, {
+              stroke: am5.color(0xffffff, 0.3)
+            }));
+
+            if (window.innerWidth <= 768) {
+          root.setThemes([]);
+        } else {
+          root.setThemes([am5themes_Animated.new(root)]);
+        }
+
+
+        polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
+          geoJSON: am5geodata_worldLow,
+          fill: am5.color(0x38761d), 
+          stroke: am5.color(0x1A1A1A),
+          strokeWidth: 0.5,
+          nonScalingStroke: true,
+        }));
+
+      chart.seriesContainer.dragWhilePressing = true;
+      chart.seriesContainer.events.on("pointerdown", (e) => {
+        e.originalEvent.preventDefault(); 
+      });
+
+      chart.seriesContainer.set("interactive", true);
+      chart.seriesContainer.set("touchChildren", true);
+
+        // eslint-disable-next-line no-unused-vars
+        let hoverState = polygonSeries.mapPolygons.template.states.create("hover", {
+        fill: am5.color(0xFBE5A2)
+      });
+
+      polygonSeries.mapPolygons.template.states.create("active", {
+        fill: am5.color(0xFFCCAA)
+      });
+
+      polygonSeries.mapPolygons.template.setAll({
+        toggleKey: "active",
+        interactive: true,
+        cursorOverStyle: "pointer"
+      });
+
+      polygonSeries.mapPolygons.template.events.on("pointerdown", function(ev) {
+        polygonSeries.mapPolygons.each(function(item) {
+          item.set("active", false); 
+        });
+        
+
+        let polygon = ev.target;
+        polygon.set("active", true);
+
+        selectedCountry.value = polygon.dataItem.dataContext.name;
+        if (navigator.vibrate) {
+          navigator.vibrate(50); 
+        }
+      });
     }
-
-
-    polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-      geoJSON: am5geodata_worldLow,
-      fill: am5.color(0x38761d), 
-      stroke: am5.color(0x1A1A1A),
-      strokeWidth: 0.5,
-      nonScalingStroke: true,
-    }));
-
-  chart.seriesContainer.dragWhilePressing = true;
-  chart.seriesContainer.events.on("pointerdown", (e) => {
-    e.originalEvent.preventDefault(); 
-  });
-
-  chart.seriesContainer.set("interactive", true);
-  chart.seriesContainer.set("touchChildren", true);
-
-    // eslint-disable-next-line no-unused-vars
-    let hoverState = polygonSeries.mapPolygons.template.states.create("hover", {
-    fill: am5.color(0xFBE5A2)
-  });
-
-  polygonSeries.mapPolygons.template.states.create("active", {
-    fill: am5.color(0xFFCCAA)
-  });
-
-  polygonSeries.mapPolygons.template.setAll({
-    toggleKey: "active",
-    interactive: true,
-    cursorOverStyle: "pointer"
-  });
-
-  polygonSeries.mapPolygons.template.events.on("pointerdown", function(ev) {
-    polygonSeries.mapPolygons.each(function(item) {
-      item.set("active", false); 
+     catch (error) {
+        console.error("An error occurred while creating the chart:", error);
+      }
     });
-    
-
-    let polygon = ev.target;
-    polygon.set("active", true);
-
-    selectedCountry.value = polygon.dataItem.dataContext.name;
-    if (navigator.vibrate) {
-      navigator.vibrate(50); 
-    }
-  });
-} catch (error) {
-    console.error("An error occurred while creating the chart:", error);
-  }
-});
 
 
   function submitGuess() {
@@ -164,7 +173,7 @@ export default {
 
 <style scoped>
 #chartdiv {
-  height: 35.5vh; 
+  height: 43.5vh; 
   width: 100%;
 }
 .map-container {
