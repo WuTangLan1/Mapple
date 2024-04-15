@@ -92,14 +92,14 @@ export default {
 .data-card {
   background: #f4f4f4;
   border-radius: 10px;
-  padding: 10px; /* Further reduced padding if necessary */
+  padding: 5px; /* Further reduced padding if necessary */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 70%;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.2em;
 }
 
 .wipe-enter-active, .wipe-leave-active {
