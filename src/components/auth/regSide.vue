@@ -29,6 +29,7 @@
   
   <script>
   import { ref } from 'vue';
+  import { useAuthStore } from '@/stores/useAuthStore';
   
   export default {
     name: 'RegSide',
@@ -41,13 +42,25 @@
         confirmPassword: ''
       });
   
-      const register = () => {
+      const authStore = useAuthStore();
+  
+      const register = async () => {
         if (form.value.password !== form.value.confirmPassword) {
           alert("Passwords do not match!");
           return;
         }
-        console.log("Registration form submitted", form.value);
-        // Here you would typically send the form data to a backend server.
+  
+        try {
+          await authStore.registerUser({
+            username: form.value.username,
+            fullName: form.value.fullName,
+            dateOfBirth: form.value.dateOfBirth,
+            password: form.value.password
+          });
+          // Handle successful registration, like redirecting the user or clearing the form
+        } catch (error) {
+         console.log(error)
+        }
       };
   
       return {
@@ -57,6 +70,7 @@
     }
   };
   </script>
+  
   
   <style scoped>
   .registration-form {
