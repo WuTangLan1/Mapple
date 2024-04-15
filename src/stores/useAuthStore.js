@@ -7,7 +7,7 @@ import { auth, db } from '@/components/fbdir/fbInit';
 export const useAuthStore = defineStore('auth', {
   actions: {
     async registerUser(details) {
-      const { username, fullName, dateOfBirth, password } = details;
+      const { username, fullName, password } = details;
       try {
         const userCredential = await createUserWithEmailAndPassword(auth, username, password);
         const user = userCredential.user;
@@ -20,7 +20,6 @@ export const useAuthStore = defineStore('auth', {
         // Save additional user details in Firestore
         const userProfile = {
           full_name: fullName,
-          dob: dateOfBirth,
           dayscomp: [],  // Assuming it's an empty array to start with
           highscore: 0
         };

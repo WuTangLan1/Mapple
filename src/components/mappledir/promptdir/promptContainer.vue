@@ -39,7 +39,7 @@ export default {
       <!-- Capital City card: shown on easy and medium level -->
       <transition name="wipe" mode="out-in">
         <div class="data-card capital-card">
-        <div v-if="difficulty === 'easy' || difficulty === 'medium'"  class="label">Capital City</div>
+        <div v-if="difficulty === 'easy' || difficulty === 'medium'"  class="label">Capital</div>
         <div v-if="difficulty === 'easy' || difficulty === 'medium'" class="data-value">{{ country.capital }}</div>
         <img v-else src="@/assets/images/questionmark/qmark.png" alt="Question Mark" class="placeholder"/>
       </div>
@@ -47,7 +47,7 @@ export default {
 
       <!-- National Dish card: shown on easy and hard level -->
       <div class="data-card dish-card">
-        <div class="label">National Dish</div>
+        <div class="label">Dish</div>
         <div class="data-value">{{ country.dish }}</div>
       </div>
       <!-- Celebrity card: shown on easy and medium level -->
@@ -58,7 +58,7 @@ export default {
       </div>
       <!-- National Animal card: shown on easy and medium level -->
       <div class="data-card animal-card">
-        <div class="label">National Animal</div>
+        <div class="label">Animal</div>
         <div class="data-value">{{ country.animal }}</div>
       </div>
       <!-- Population card: always shown -->
@@ -77,7 +77,7 @@ export default {
   padding: 1%; /* Adjust as necessary to maintain the overall size */
   display: flex;
   flex-direction: column;
-  justify-content: center; /* This will center the content vertically */
+  justify-content: center; 
 }
 
 .prompt-container {
@@ -99,6 +99,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 70%;
+  margin-bottom: 0.5em;
 }
 
 .wipe-enter-active, .wipe-leave-active {
@@ -139,7 +140,7 @@ export default {
 }
 
 .flag {
-  max-width: 60%; 
+  max-width: 50%; 
   margin: auto;
 }
 </style>

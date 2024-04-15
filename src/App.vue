@@ -2,7 +2,7 @@
 <template>
   <div id="app">
     <start-modal @difficultySelected="setDifficulty" v-if="showStartModal"/>
-    <auth-modal v-if="showAuthModal" />
+    <auth-modal v-if="showAuthModal" @close-modal="closeAuthModal" />
     <top-header @auth-modal-open="openAuthModal"/>
     <div class="router-view-container">
       <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
@@ -71,6 +71,11 @@ export default {
       showAuthModal.value = true;
     }
 
+    function closeAuthModal() {
+      showAuthModal.value = false;
+    }
+
+
     return {
       difficultySelected,
       setDifficulty,
@@ -81,7 +86,8 @@ export default {
       showStartModal,
       showGameOverModal,
       showAuthModal,
-      openAuthModal
+      openAuthModal,
+      closeAuthModal
     };
   }
 }

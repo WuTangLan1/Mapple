@@ -29,7 +29,7 @@
   
       function closeModal() {
         console.log('closemodal clicked')
-        emit('update:isVisible', false);
+        emit('closeModal');
       }
   
       return { currentComponent, toggleComponent, closeModal };
@@ -40,24 +40,31 @@
   
   
   <style scoped>
-  .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;  }
-  
-  .modal {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    animation: dropAnimation 1.5s ease-in-out forwards;
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: auto;
+  max-width: 90%;
+  max-height: 90vh; /* Adjust max-height as needed */
+  overflow: auto;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  animation: dropAnimation 1.5s ease-in-out forwards;
+  position: relative; /* For absolute positioning of child elements like close button */
 }
 
 @keyframes dropAnimation {
@@ -79,7 +86,6 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  margin-bottom: 10px;
 }
 
 
@@ -91,7 +97,6 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  margin-bottom: 10px;
 }
 
 .close-button:hover {

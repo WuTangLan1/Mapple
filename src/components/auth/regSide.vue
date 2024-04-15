@@ -13,10 +13,6 @@
         <input type="text" id="fullName" v-model.trim="form.fullName" required placeholder="Enter your full name">
       </div>
       <div class="form-group">
-        <label for="dateOfBirth">Date of Birth</label>
-        <input type="date" id="dateOfBirth" v-model="form.dateOfBirth" required>
-      </div>
-      <div class="form-group">
         <label for="password">Password</label>
         <input type="password" id="password" v-model="form.password" required minlength="6" placeholder="Enter a password">
       </div>
@@ -39,7 +35,6 @@ export default {
     const form = ref({
       username: '',
       fullName: '',
-      dateOfBirth: '',
       password: '',
       confirmPassword: ''
     });
@@ -56,7 +51,6 @@ export default {
         await authStore.registerUser({
           username: form.value.username,
           fullName: form.value.fullName,
-          dateOfBirth: form.value.dateOfBirth,
           password: form.value.password
         });
         // Handle successful registration, like redirecting the user or clearing the form
@@ -84,7 +78,7 @@ export default {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   max-width: 95%;
   max-height: 70vh;
-  margin: 40px auto;
+  margin-top: 0.5rem;
 }
 
 .registration-form h2 {
@@ -114,8 +108,9 @@ export default {
 
 .submit-button {
   display: block;
-  width: 100%;
   padding: 15px;
+  width:50%;
+  margin:0;
   background-color: #5cb85c;
   color: white;
   border: none;
