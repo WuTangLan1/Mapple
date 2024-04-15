@@ -4,6 +4,7 @@
     <div id="chartdiv" class="map-container"></div>
     <div class="info-container">
       <div class="score-display">Score: {{ score }}</div>
+      <div class="guesses-display">Guesses: {{ guessesRemaining }}</div>
       <button :class="{ 'flash-red': flashRed }" 
               :disabled="!selectedCountry || guessesRemaining === 0" 
               @click="submitGuess"
@@ -45,6 +46,7 @@ export default {
     chart = root.container.children.push(am5map.MapChart.new(root, {
       panX: "rotateX",
       panY: "rotateY",
+      background: am5.Rectangle.new(root, { fill: am5.color(0xADD8E6) }),
       projection: am5map.geoOrthographic(),
       paddingBottom: 10,
       paddingTop: 10,
@@ -168,7 +170,6 @@ export default {
 }
 .map-container {
   width: 100%;
-  background-color: #F0F8FF;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   position: relative;
@@ -180,11 +181,20 @@ export default {
   justify-content: space-between;
   padding: 10px;
 }
-.score-display {
-  color: black;
-  background-color: #b9c07f;
+.score-display, .guesses-display { /* Styling for score and guesses display */
+  color: white;
   padding: 5px;
   border-radius: 5px;
+  width: 25%;
+  text-align: center;
+}
+
+.score-display {
+  background-color: rgb(119, 80, 121);
+}
+
+.guesses-display {
+  background-color: rgb(69, 115, 134);
 }
 
 .am5zoomcontrol .am5button-group {
@@ -198,6 +208,7 @@ export default {
   padding: 10px 20px;
   animation: flashColor 1s 1; 
   border: none;
+  width: 25%;
 }
 
 .flash-purple {
