@@ -29,7 +29,7 @@ export default {
   emits: ['correctGuess', 'gameOver', 'refreshData'],
   setup(props, { emit }) {  // Access emit from the setup context
     const countryStore = useCountryStore();
-    let root, chart, polygonSeries;
+    let root, chart, polygonSeries, graticuleSeries;
     const selectedCountry = ref(null); 
     const score = ref(0);
     const guessesRemaining = ref(3);
@@ -61,6 +61,11 @@ export default {
       }
     });
     chart.set("zoomControl", zoomControl);
+
+    graticuleSeries = chart.series.push(am5map.GraticuleSeries.new(root, {
+          stroke: am5.color(0xffffff, 0.3)
+        }));
+
 
     polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
       geoJSON: am5geodata_worldLow,
@@ -145,7 +150,7 @@ export default {
       selectedCountry.value = null; // Clear selected country
     }
 
-    return { selectedCountry, guessesRemaining, score, submitGuess, flashRed, flashColor, resetMap };
+    return { selectedCountry, guessesRemaining, score, submitGuess, flashRed, flashColor, resetMap, graticuleSeries };
   }
 };
 </script>
