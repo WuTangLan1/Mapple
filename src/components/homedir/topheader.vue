@@ -1,5 +1,3 @@
-<!-- This is the code for the src\components\homedir\topheader.vue -->
-
 <template>
   <header class="top-header">
     <div class="logo-container">
@@ -24,11 +22,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #c9d2f3;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-height: 100px;
-  overflow: hidden;
+  padding: 0 20px; 
+  background-color: #34568B;
+  color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
 .logo-container {
@@ -36,24 +33,28 @@ export default {
 }
 
 .logo {
-  max-height: clamp(50px, 8vw, 120px); 
-  max-width: 100%;
+  height: auto;
+  width: auto;
+  max-height: 60px; 
 }
 
 .navigation {
   display: flex;
-  justify-content: flex-end; 
-  gap: 2rem; 
+  gap: 1rem; 
 }
 
 .nav-link {
   text-decoration: none;
-  color: #000;
-  padding: 0.5em;
-  font-size: clamp(0.8em, 2.5vw, 1em); /* Adjust font size for responsive design */
+  color: #FFF;
+  padding: 10px 15px; 
+  border-radius: 5px; 
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-.nav-link:hover {
-  text-decoration: underline;
+.nav-link:hover, .nav-link.router-link-exact-active {
+  background-color: #D9EAD3;
+  color: #34568B; 
+  text-decoration: none;
 }
 </style>
