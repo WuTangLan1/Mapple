@@ -32,6 +32,17 @@ export const useAuthStore = defineStore('auth', {
         console.error('Error registering user', error);
         throw error;
       }
+    },
+    async loginUser(details) {
+      const { username, password } = details;
+      try {
+        const userCredential = await auth.signInWithEmailAndPassword(username, password);
+        console.log('Successfully logged in', userCredential.user);
+        return userCredential.user;
+      } catch (error) {
+        console.error('Error logging in', error);
+        throw error;
+      }
     }
   }
 });

@@ -27,7 +27,7 @@ import { useCountryStore } from '@/stores/useCountryStore';
 export default {
   name: 'MapContainer',
   emits: ['correctGuess', 'gameOver', 'refreshData'],
-  setup(props, { emit }) {  // Access emit from the setup context
+  setup(props, { emit }) {  
     const countryStore = useCountryStore();
     let root, chart, polygonSeries, graticuleSeries;
     const selectedCountry = ref(null); 
@@ -75,7 +75,7 @@ export default {
 
     polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
       geoJSON: am5geodata_worldLow,
-      fill: am5.color(0x38761d), // This color is for countries
+      fill: am5.color(0x38761d), 
       stroke: am5.color(0x1A1A1A),
       strokeWidth: 0.5,
       nonScalingStroke: true,
@@ -83,7 +83,7 @@ export default {
 
   chart.seriesContainer.dragWhilePressing = true;
   chart.seriesContainer.events.on("pointerdown", (e) => {
-    e.originalEvent.preventDefault(); // Prevent scrolling on touch devices
+    e.originalEvent.preventDefault(); 
   });
 
   chart.seriesContainer.set("interactive", true);
@@ -106,7 +106,7 @@ export default {
 
   polygonSeries.mapPolygons.template.events.on("pointerdown", function(ev) {
     polygonSeries.mapPolygons.each(function(item) {
-      item.set("active", false); // Reset all polygons to inactive state
+      item.set("active", false); 
     });
     
 
@@ -115,7 +115,7 @@ export default {
 
     selectedCountry.value = polygon.dataItem.dataContext.name;
     if (navigator.vibrate) {
-      navigator.vibrate(50); // Vibrate for tactile feedback on selection
+      navigator.vibrate(50); 
     }
   });
 } catch (error) {
@@ -128,7 +128,7 @@ export default {
       if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
         score.value += 1;
         flashColor.value = true; 
-        emit('correctGuess', countryStore.currentCountry); // Emit the country data
+        emit('correctGuess', countryStore.currentCountry); 
         setTimeout(() => { flashColor.value = false; }, 3000);
         selectedCountry.value = "";
       } else {
@@ -150,10 +150,10 @@ export default {
 
     function resetMap() {
       polygonSeries.mapPolygons.each(polygon => {
-        polygon.set("active", false); // Deactivate all polygons
+        polygon.set("active", false); 
       });
-      chart.goHome(); // Reset zoom and position to initial state
-      selectedCountry.value = null; // Clear selected country
+      chart.goHome(); 
+      selectedCountry.value = null; 
     }
 
     return { selectedCountry, guessesRemaining, score, submitGuess, flashRed, flashColor, resetMap, graticuleSeries };
@@ -164,7 +164,7 @@ export default {
 
 <style scoped>
 #chartdiv {
-  height: 40vh; /* Example of setting the height relative to the viewport height */
+  height: 38vh; 
   width: 100%;
 }
 .map-container {
@@ -182,7 +182,7 @@ export default {
 }
 
 .score-display, .guesses-display, .submit-button {
-  font-size: 1em; /* Adjust the font size as needed */
+  font-size: 1em; 
   color: white;
   padding: 9px;
   border-radius: 5px;
@@ -215,20 +215,20 @@ export default {
 .disabled-button {
   background-color: #ccc;
   cursor: not-allowed;
-  opacity: 0.6; /* Make the button look inactive */
+  opacity: 0.6; 
 }
 
 .flash-purple {
-  animation: flashPurple 1s 3; /* Flash purple when correct */
+  animation: flashPurple 1s 3; 
 }
 
 @keyframes flashPurple {
-  0%, 100% { background-color: #4CAF50; } /* original green */
+  0%, 100% { background-color: #4CAF50; }
   50% { background-color: purple; }
 }
 
 .flash-red {
-  animation: flashRed 1s 3; /* Run the animation 3 times */
+  animation: flashRed 1s 3;
 }
 @keyframes flashRed {
   0%, 100% { background-color: #4CAF50; }
