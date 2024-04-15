@@ -36,38 +36,48 @@ export default {
     const flashColor = ref(false);
 
     onMounted(() => {
-      root = am5.Root.new("chartdiv");
-  root.setThemes([am5themes_Animated.new(root)]);
+      try {
+    root = am5.Root.new("chartdiv");
+    root.setThemes([am5themes_Animated.new(root)]);
 
-  chart = root.container.children.push(am5map.MapChart.new(root, {
-    panX: "rotateX",
-    panY: "rotateY",
-    projection: am5map.geoOrthographic(),
-    paddingBottom: 10,
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    background: am5.Rectangle.new(root, { fill: am5.color(0xADD8E6) }) // Set ocean color here
-  }));
+    console.log("Root and theme have been set.");
 
-  // This sets the background color of the entire chart area, which includes oceans
-  chart.set("background", am5.Rectangle.new(root, { fill: am5.color(0xADD8E6) }));
+    chart = root.container.children.push(am5map.MapChart.new(root, {
+      panX: "rotateX",
+      panY: "rotateY",
+      projection: am5map.geoOrthographic(),
+      paddingBottom: 10,
+      paddingTop: 10,
+      paddingLeft: 10,
+      paddingRight: 10
+    }));
 
-  let zoomControl = am5map.ZoomControl.new(root, {
-    slider: {
-      step: 0.15
-    }
-  });
-  chart.set("zoomControl", zoomControl);
+    console.log("MapChart has been created with geoOrthographic projection.");
 
-  // Now let's add the country series
-  polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-    geoJSON: am5geodata_worldLow,
-    fill: am5.color(0x38761d), // This color is for countries
-    stroke: am5.color(0x1A1A1A),
-    strokeWidth: 0.5,
-    nonScalingStroke: true,
-  }));
+    chart.set("background", am5.Rectangle.new(root, { fill: am5.color(0x46585E) }));
+    console.log("Background has been set to the ocean color.");   // this sets the background for the entire chart, please can you write code to set the ocean colour below this 
+
+    let zoomControl = am5map.ZoomControl.new(root, {
+      slider: {
+        step: 0.15
+      }
+    });
+    chart.set("zoomControl", zoomControl);
+
+    console.log("ZoomControl has been added.");
+    console.log("Chart settings:", chart);
+    console.log("Polygon series settings:", polygonSeries);
+
+    // Now let's add the country series
+    polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
+      geoJSON: am5geodata_worldLow,
+      fill: am5.color(0x38761d), // This color is for countries
+      stroke: am5.color(0x1A1A1A),
+      strokeWidth: 0.5,
+      nonScalingStroke: true,
+    }));
+
+    console.log("Polygon series for countries has been added.");
 
 
   chart.seriesContainer.dragWhilePressing = true;
@@ -107,6 +117,9 @@ export default {
       navigator.vibrate(50); // Vibrate for tactile feedback on selection
     }
   });
+} catch (error) {
+    console.error("An error occurred while creating the chart:", error);
+  }
 });
 
 

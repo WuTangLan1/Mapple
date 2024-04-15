@@ -1,14 +1,13 @@
 <!-- This is the code for the src\App.vue -->
-
 <template>
   <div id="app">
-    <start-modal @difficultySelected="setDifficulty" v-if="!difficultySelected"/>
+    <start-modal @difficultySelected="setDifficulty" v-if="showStartModal"/>
     <top-header/>
     <div class="router-view-container">
       <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
     </div>
     <bottom-footer/>
-    <game-over-modal v-if="gameOver" :score="gameScore" @restartGame="restartGame"/>
+    <game-over-modal v-if="showGameOverModal" :score="gameScore" @restartGame="restartGame"/>
   </div>
 </template>
 
@@ -19,7 +18,7 @@ import BottomFooter from './components/homedir/bottomfooter.vue';
 import StartModal from './components/homedir/startModal.vue';
 import GameOverModal from './components/mappledir/additional/gameovermodal.vue';
 import { useGameStore } from '@/stores/useGameStore';
-import { useCountryStore } from '@/stores/useCountryStore'; // Ensure this is imported
+import { useCountryStore } from '@/stores/useCountryStore'; 
 
 export default {
   components: {
@@ -34,26 +33,33 @@ export default {
     const countryStore = useCountryStore();
     const gameOver = ref(false);
     const gameScore = ref(0);
+    const showStartModal = ref(true);
+    const showGameOverModal = ref(false);
 
     function setDifficulty(level) {
       gameStore.setDifficulty(level);
-      countryStore.resetCountries(); 
+      countryStore.resetCountries(true); 
       countryStore.getRandomCountry();
       difficultySelected.value = true;
-      gameOver.value = false;
+      showStartModal.value = false;
+      showGameOverModal.value = false;
     }
 
     function restartGame(level) {
       gameScore.value = 0;
       gameOver.value = false;
-      countryStore.resetCountries(); 
+      countryStore.resetCountries(true);
       setDifficulty(level);
+      showGameOverModal.value = false;
+      showStartModal.value = false;
     }
 
     function handleGameOver(score) {
       gameScore.value = score;
       gameOver.value = true;
       difficultySelected.value = false;
+      showGameOverModal.value = true;
+      showStartModal.value = false;
     }
 
     return {
@@ -62,7 +68,9 @@ export default {
       gameOver,
       gameScore,
       restartGame,
-      handleGameOver
+      handleGameOver,
+      showStartModal,
+      showGameOverModal
     };
   }
 }
