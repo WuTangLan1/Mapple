@@ -8,6 +8,7 @@ export default {
   emits: ['restartGame'],
   methods: {
     restartGame(level) {
+      console.log('game is restarting')
       this.$emit('restartGame', level);
     }
   }

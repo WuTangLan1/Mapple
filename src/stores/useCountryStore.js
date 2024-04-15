@@ -12,22 +12,32 @@ export const useCountryStore = defineStore('country', {
     countries: [],
     currentCountry: null,
     experiencedCountries: [],
+    lastCountryId: null ,
     isLoadingFlag:false
   }),
   actions: {
     async resetCountries() {
-      this.experiencedCountries = []; // Clear the list of seen countries
-      await this.fetchCountries(); // Refetch the countries
+      this.experiencedCountries = []; 
     },
-    async fetchCountries() {
+    async fetchCountries(shouldShuffle = false) {
       const querySnapshot = await getDocs(collection(db, "countries"));
-      this.countries = querySnapshot.docs.map(doc => {
-        return { id: doc.id, ...doc.data() };
-      });
-      this.countries = this.countries.filter(c => !this.experiencedCountries.includes(c.id));
-      if (this.countries.length === 0) {
-        this.experiencedCountries = []; // Reset if all countries have been seen
+      let fetchedCountries = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      if (shouldShuffle) {
+        fetchedCountries = this.shuffleCountries(fetchedCountries);
       }
+      this.countries = fetchedCountries;
+      this.countries = this.countries.filter(c => !this.experiencedCountries.includes(c.id));
+      console.log("Countries after shuffle and filter: ", this.countries);
+    },
+    shuffleCountries(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
     },
     async fetchRandomCelebrityAndHoliday(countryId) {
 
@@ -51,28 +61,27 @@ export const useCountryStore = defineStore('country', {
 
     },
     async getRandomCountry() {
-      let filteredCountries = this.countries.filter(c => !this.experiencedCountries.includes(c.id));
+      let filteredCountries = this.countries.filter(c => !this.experiencedCountries.includes(c.id) && c.id !== this.lastCountryId);
       if (filteredCountries.length === 0) {
-        await this.fetchCountries(); // Fetch again if all have been experienced
+        await this.fetchCountries(true);
         filteredCountries = this.countries;
       }
       const randomIndex = Math.floor(Math.random() * filteredCountries.length);
       this.currentCountry = filteredCountries[randomIndex];
       this.experiencedCountries.push(this.currentCountry.id);
-  
+      console.log("Selected new country: ", this.currentCountry);
+      await this.fetchAdditionalData(this.currentCountry);
       await this.fetchRandomCelebrityAndHoliday(this.currentCountry.id);
-      await this.fetchAdditionalData(this.currentCountry)
     },
-  
     async fetchAdditionalData(country) {
-      this.isLoadingFlag = true; 
+      this.isLoadingFlag = true;
       if (country.flag_dir && country.flag_dir.startsWith('gs://')) {
         const flagRef = ref(storage, country.flag_dir);
         country.flag_url = await getDownloadURL(flagRef);
       } else {
-        country.flag_url = '/path/to/default/flag/image.png'; 
+        country.flag_url = '/path/to/default/flag/image.png';
       }
-      this.isLoadingFlag = false; 
+      this.isLoadingFlag = false;
     }
   }
 });
