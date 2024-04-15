@@ -41,8 +41,6 @@ export default {
     root = am5.Root.new("chartdiv");
     root.setThemes([am5themes_Animated.new(root)]);
 
-    console.log("Root and theme have been set.");
-
     chart = root.container.children.push(am5map.MapChart.new(root, {
       panX: "rotateX",
       panY: "rotateY",
@@ -54,10 +52,8 @@ export default {
       paddingRight: 10
     }));
 
-    console.log("MapChart has been created with geoOrthographic projection.");
-
-    chart.set("background", am5.Rectangle.new(root, { fill: am5.color(0x46585E) }));
-    console.log("Background has been set to the ocean color.");   // this sets the background for the entire chart, please can you write code to set the ocean colour below this 
+    chart.set("background", am5.Rectangle.new(root, { fill: am5.color(0x8AADB8) }));
+   
 
     let zoomControl = am5map.ZoomControl.new(root, {
       slider: {
@@ -66,11 +62,6 @@ export default {
     });
     chart.set("zoomControl", zoomControl);
 
-    console.log("ZoomControl has been added.");
-    console.log("Chart settings:", chart);
-    console.log("Polygon series settings:", polygonSeries);
-
-    // Now let's add the country series
     polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
       geoJSON: am5geodata_worldLow,
       fill: am5.color(0x38761d), // This color is for countries
@@ -78,11 +69,6 @@ export default {
       strokeWidth: 0.5,
       nonScalingStroke: true,
     }));
-
-    console.log("Polygon series for countries has been added.");
-
-
-
 
   chart.seriesContainer.dragWhilePressing = true;
   chart.seriesContainer.events.on("pointerdown", (e) => {
@@ -128,7 +114,6 @@ export default {
 
 
   function submitGuess() {
-    console.log(selectedCountry.value)
       if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
         score.value += 1;
         flashColor.value = true; 

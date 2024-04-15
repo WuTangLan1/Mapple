@@ -18,7 +18,6 @@ export const useCountryStore = defineStore('country', {
   actions: {
     async resetCountries(excludeLastCountry = false) {
       this.experiencedCountries = [];
-      console.log('reset method called excluded country: ')
       await this.fetchCountries(true, excludeLastCountry);
     },
     async fetchCountries(shouldShuffle = false, excludeLastCountry = false) {
@@ -72,7 +71,6 @@ export const useCountryStore = defineStore('country', {
       this.currentCountry = filteredCountries[randomIndex];
       this.experiencedCountries.push(this.currentCountry.id);
       this.lastCountryId = this.currentCountry.id; 
-      console.log("Selected new country: ", this.currentCountry);
       await this.fetchAdditionalData(this.currentCountry);
       await this.fetchRandomCelebrityAndHoliday(this.currentCountry.id);
     },
@@ -82,7 +80,7 @@ export const useCountryStore = defineStore('country', {
         const flagRef = ref(storage, country.flag_dir);
         country.flag_url = await getDownloadURL(flagRef);
       } else {
-        country.flag_url = '/path/to/default/flag/image.png';
+        country.flag_dir = "src/assets/images/questionmark/qmark.png"
       }
       this.isLoadingFlag = false;
     }

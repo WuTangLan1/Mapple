@@ -4,7 +4,7 @@
     <div v-if="visible" class="modal-overlay" @click.self="closeModal">
       <div class="modal-content">
         <span class="close" @click="closeModal">&times;</span>
-        <h2>You guessed correctly: {{ country.c_name }}</h2>
+        <p class="correct">You guessed correctly: {{ country.c_name }}</p>
         <img :src="country.flag_url" alt="Flag of the country" class="flag">
         <p class="blurb">{{ country.blurb }}</p>
         <p class="encouragement">Keep up the great work!</p>
@@ -90,6 +90,15 @@ h2 {
   font-weight: bold;
 }
 
+.correct {
+  background-color: #d8def0; /* Light green for additional success highlight */
+  color: #000000; /* Darker text for contrast */
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
 .close {
   position: absolute;
   top: 0.5rem;
@@ -114,7 +123,7 @@ h1 {
   max-width: 100%; /* Make flag responsive */
   height: auto; /* Maintain aspect ratio */
   margin: 1rem 0; /* Space around the flag */
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for the flag */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.7); /* Subtle shadow for the flag */
 }
 
 p {
