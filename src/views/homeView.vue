@@ -49,7 +49,8 @@ export default {
       showCorrectModal,
       correctGuessHandler,
       closeModal,
-      fetchNextCountry // Make sure to return new methods
+      fetchNextCountry ,
+      correctCountry
     };
   },
   async created() {

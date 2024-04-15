@@ -84,6 +84,11 @@ export default {
   chart.seriesContainer.set("interactive", true);
   chart.seriesContainer.set("touchChildren", true);
 
+    // eslint-disable-next-line no-unused-vars
+    let hoverState = polygonSeries.mapPolygons.template.states.create("hover", {
+    fill: am5.color(0xFBE5A2)
+  });
+
   polygonSeries.mapPolygons.template.states.create("active", {
     fill: am5.color(0xFFCCAA)
   });
@@ -98,6 +103,7 @@ export default {
     polygonSeries.mapPolygons.each(function(item) {
       item.set("active", false); // Reset all polygons to inactive state
     });
+    
 
     let polygon = ev.target;
     polygon.set("active", true);
@@ -108,6 +114,7 @@ export default {
     }
   });
 });
+
 
   function submitGuess() {
     console.log(selectedCountry.value)

@@ -53,15 +53,14 @@
   padding: 20px;
   border-radius: 5px;
   text-align: center;
-  width: 80%; /* Make the modal width responsive */
-  max-width: 500px; /* Maximum width of the modal */
+  width: 80%; 
 }
 
 .buttons-container {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Center buttons in the container */
+  justify-content: center; 
 }
 
 .button-easy {
@@ -78,7 +77,7 @@
 
 .button-easy, .button-medium, .button-hard {
   margin: 10px;
-  padding: 10px 20px;
+  padding: 15px 20px;
   border: none;
   border-radius: 5px;
   color: white;
@@ -92,7 +91,7 @@
     width: 80%; 
   }
   .button-easy, .button-medium, .button-hard {
-    padding: 8px 10px; 
+    padding: 12px 10px; 
   }
 }
   </style>
