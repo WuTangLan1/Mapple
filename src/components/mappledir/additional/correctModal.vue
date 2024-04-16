@@ -4,7 +4,7 @@
     <div v-if="visible" class="modal-overlay" @click.self="closeModal">
       <div class="modal-content">
         <span class="close" @click="closeModal">&times;</span>
-        <p class="correct">You guessed correctly: {{ country.c_name }}</p>
+        <p class="correct">{{ country.c_name }}</p>
         <img :src="country.flag_url" alt="Flag of the country" class="flag">
         <p class="blurb">{{ country.blurb }}</p>
         <p class="encouragement">Keep up the great work!</p>
@@ -95,6 +95,7 @@ h2 {
   color: #000000; /* Darker text for contrast */
   padding: 0.5rem;
   border-radius: 5px;
+  font-size: 1.5rem;
   margin-top: 1rem;
   font-weight: bold;
 }
