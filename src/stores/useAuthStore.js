@@ -1,6 +1,6 @@
 // src/stores/useAuthStore.js
 import { defineStore } from 'pinia';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '@/components/fbdir/fbInit';
 
@@ -36,7 +36,7 @@ export const useAuthStore = defineStore('auth', {
     async loginUser(details) {
       const { username, password } = details;
       try {
-        const userCredential = await auth.signInWithEmailAndPassword(username, password);
+        const userCredential = await signInWithEmailAndPassword(username, password);
         console.log('Successfully logged in', userCredential.user);
         return userCredential.user;
       } catch (error) {

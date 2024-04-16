@@ -26,7 +26,7 @@
   
   export default {
     name: 'LogSide',
-    setup() {
+    setup(_, {emit}) {
       const loginForm = ref({
         email: '',
         password: ''
@@ -57,7 +57,7 @@
 
 <style scoped>
 .login-container {
-    background: #ffffff;
+  background: #e1e8eb;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
@@ -116,5 +116,5 @@ h2 {
     text-align: center;
     margin-bottom: 20px;
   }
-  
+
 </style>
