@@ -33,15 +33,18 @@
 
       watch(() => authStore.user, (newUser) => {
         if (newUser) {
+          console.log('New User logged in, closing modal...');
           closeModal(); 
         }
       });
 
       function toggleComponent() {
         currentComponent.value = currentComponent.value === 'RegSide' ? 'LogSide' : 'RegSide';
+        console.log('here: ', authStore.user)
       }
 
       function closeModal() {
+        console.log('auth modal closed in the authModal.vue')
         emit('closeModal');
       }
 

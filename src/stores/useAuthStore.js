@@ -1,13 +1,12 @@
 // src/stores/useAuthStore.js
 import { defineStore } from 'pinia';
 import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
-import router from '@/router/index.js';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '@/components/fbdir/fbInit';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: null, // Will hold the user object when logged in
+    user: null, 
   }),
   actions: {
     async registerUser(details) {
@@ -23,7 +22,7 @@ export const useAuthStore = defineStore('auth', {
 
         const userProfile = {
           full_name: fullName,
-          dayscomp: [],  // Assuming it's an empty array to start with
+          dayscomp: [],
           highscore: 0
         };
 
@@ -49,7 +48,6 @@ export const useAuthStore = defineStore('auth', {
     },
     async logout() {
       await signOut(auth);
-      router.replace({ name: 'home' });
       this.resetInp();
     },
     initializeAuthListener() {
