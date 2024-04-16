@@ -106,20 +106,26 @@ export default {
   font-size: 16px;
 }
 
-.submit-button {
-  display: block;
-  padding: 15px;
-  width:50%;
-  margin:0;
-  background-color: #5cb85c;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 18px;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
-}
+.button-group {
+    display: flex;
+    justify-content: flex-end; /* Aligns button to the right */
+    width:100%  }
+
+  .submit-button {
+    display: block;
+    padding: 15px;
+    margin: 0;
+    width:50%;
+    margin:0;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
 
 .submit-button:hover, .submit-button:focus {
   background-color: #4cae4c;

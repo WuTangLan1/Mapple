@@ -3,7 +3,9 @@
 <template>
     <div class="modal-backdrop">
       <div class="modal">
-        <button @click="toggleComponent">Toggle</button>
+        <button @click="toggleComponent" class="toggle-button">
+          Switch to {{ toggleButtonText }}
+        </button>
         <button class="close-button" @click="closeModal">✕</button>
         <component :is="currentComponent"></component>
       </div>
@@ -11,7 +13,7 @@
   </template>
   
   <script>
-  import { ref } from 'vue';
+  import { ref} from 'vue';
   import RegSide from './regSide.vue';
   import LogSide from './logSide.vue';
   
@@ -19,6 +21,11 @@
     components: {
       RegSide,
       LogSide
+    },
+    computed: {
+      toggleButtonText() {
+        return this.currentComponent === 'RegSide' ? 'Log In' : 'Register';
+      }
     },
     setup(props, { emit }) {
       const currentComponent = ref('RegSide');
@@ -79,15 +86,20 @@
 }
 
 .toggle-button {
-  position: absolute;
-  background: none;
-  left: 0;
-  top:0;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
+    /* Style adjustments */
+    background-color: #759acd; /* Light grey background */
+    color: #ffffff; /* Dark text color for contrast */
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Light border */
+    font-weight: bold; /* Make text bold */
+    position: absolute;
+    top: 20px; /* Distance from the top */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for exact centering */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
 
 .close-button {
   position: absolute;
