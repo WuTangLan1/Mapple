@@ -14,7 +14,6 @@ export const useAuthStore = defineStore('auth', {
       try {
         const userCredential = await createUserWithEmailAndPassword(auth, username, password);
         const user = userCredential.user;
-        console.log('succwesfully auth reg user')
 
         await updateProfile(user, {
           displayName: fullName
@@ -27,8 +26,6 @@ export const useAuthStore = defineStore('auth', {
         };
 
         await setDoc(doc(db, 'profiles', user.uid), userProfile);
-
-        console.log('User registered and profile created in Firestore');
         return user;
       } catch (error) {
         console.error('Error registering user', error);
@@ -39,7 +36,6 @@ export const useAuthStore = defineStore('auth', {
       const { username, password } = details;
       try {
         const userCredential = await signInWithEmailAndPassword(auth,username, password);
-        console.log('Successfully logged in', userCredential.user);
         return userCredential.user;
       } catch (error) {
         console.error('Error logging in', error);
@@ -55,7 +51,6 @@ export const useAuthStore = defineStore('auth', {
             if (user) {
                 this.isAuthenticated = true;
                 this.user = user;
-                console.log('onAuthStateChanged invoked')
             } else {
                 this.isAuthenticated = false;
                 this.user = null;

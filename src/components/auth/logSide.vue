@@ -41,10 +41,8 @@
             password: loginForm.value.password
           });
           loginForm.value = { email: '', password: '' }; 
-          console.log('login method from logSide has ended')
           await nextTick();
           emit('closeModal'); 
-          console.log('modal should be closed by now')
         } catch (error) {
           console.error(error);
         }

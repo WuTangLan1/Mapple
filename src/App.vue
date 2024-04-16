@@ -72,7 +72,6 @@ export default {
     }
 
     function closeAuthModal() {
-      console.log('auth modal closed in the app.vue')
       showAuthModal.value = false;
     }
 
