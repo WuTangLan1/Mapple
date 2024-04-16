@@ -1,11 +1,11 @@
 <!-- This is the code for the src\components\mappledir\mapdir\mapContainer.vue -->
 <template>
   <div class="map-container">
-    <div class="high-score-container" v-if="isAuthenticated && highScore > 0">
-      High Score: {{ highScore }}
-    </div>
     <div id="chartdiv" class="map-container"></div>
     <div class="info-container">
+      <div class="high-score-container" v-if="isAuthenticated && highScore > 0">
+      High Score: {{ highScore }}
+    </div>
       <div class="score-display">Score: {{ score }}</div>
       <div class="guesses-display">Guesses: {{ guessesRemaining }}</div>
       <button :class="{ 'flash-red': flashRed, 'disabled-button': !selectedCountry || guessesRemaining === 0 }"
@@ -67,7 +67,7 @@ export default {
           chart.set("panYSpeed", panFactor);
         });
 
-        console.log('is there a high score ? : ', highScore)
+        console.log('is there a high score ? : ', highScore.value)
 
 
         chart.set("background", am5.Rectangle.new(root, { fill: am5.color(0x8AADB8) }));
@@ -205,6 +205,7 @@ export default {
 
 .high-score-container {
   font-size: 1em; 
+  background-color: #2d8d61;
   color: white;
   padding: 9px;
   border-radius: 5px;

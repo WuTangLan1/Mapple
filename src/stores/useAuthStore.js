@@ -48,26 +48,24 @@ export const useAuthStore = defineStore('auth', {
     },
     async fetchUserProfile() {
       if (!this.user) return;
-    
       const docRef = doc(db, "profiles", this.user.uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        return docSnap.data().highscore; 
+        this.user = { ...this.user, ...docSnap.data() };  // Ensure reactive update
       } else {
         console.error("No such profile!");
-        return 0; 
       }
     },
     initializeAuthListener() {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                this.isAuthenticated = true;
-                this.user = user;
-            } else {
-                this.isAuthenticated = false;
-                this.user = null;
-            }
-        });
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          this.user = user;
+          this.fetchUserProfile();  
+        } else {
+          this.isAuthenticated = false;
+          this.user = null;
+        }
+      });
     },
   }
 });
