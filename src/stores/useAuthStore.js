@@ -48,13 +48,14 @@ export const useAuthStore = defineStore('auth', {
     },
     async logout() {
       await signOut(auth);
-      this.resetInp();
+      this.user = null;
     },
     initializeAuthListener() {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 this.isAuthenticated = true;
                 this.user = user;
+                console.log('onAuthStateChanged invoked')
             } else {
                 this.isAuthenticated = false;
                 this.user = null;

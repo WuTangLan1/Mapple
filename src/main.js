@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+import { useAuthStore } from './stores/useAuthStore';
 import { createPinia } from 'pinia'; // Import createPinia
 
 // Debounce function
@@ -24,6 +25,10 @@ window.ResizeObserver = class extends OriginalResizeObserver {
 
 const app = createApp(App);
 app.use(createPinia());
+
+const authStore = useAuthStore();
+authStore.initializeAuthListener();
+
 app.use(router);
 
 app.mount('#app');
