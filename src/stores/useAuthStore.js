@@ -1,7 +1,7 @@
 // src/stores/useAuthStore.js
 import { defineStore } from 'pinia';
 import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { auth, db } from '@/components/fbdir/fbInit';
 
 export const useAuthStore = defineStore('auth', {
@@ -45,6 +45,18 @@ export const useAuthStore = defineStore('auth', {
     async logout() {
       await signOut(auth);
       this.user = null;
+    },
+    async fetchUserProfile() {
+      if (!this.user) return;
+    
+      const docRef = doc(db, "profiles", this.user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        return docSnap.data().highscore; // return the highscore
+      } else {
+        console.error("No such profile!");
+        return 0; // default to 0 if no profile exists
+      }
     },
     initializeAuthListener() {
         onAuthStateChanged(auth, (user) => {
