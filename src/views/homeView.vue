@@ -6,6 +6,7 @@ import MapContainer from '@/components/mappledir/mapdir/mapContainer.vue';
 import correctModal from '@/components/mappledir/additional/correctModal.vue'
 import { useCountryStore } from '@/stores/useCountryStore.js';
 import { useGameStore } from '@/stores/useGameStore';
+import { useAuthStore } from '@/stores/useAuthStore';
 import { computed, ref } from 'vue';
 
 export default {
@@ -34,8 +35,6 @@ export default {
         showCorrectModal.value = false;
         fetchNextCountry();
     }
-
-
     function fetchNextCountry() {
       const countryStore = useCountryStore();
       countryStore.getRandomCountry().then(() => {
@@ -50,7 +49,7 @@ export default {
       correctGuessHandler,
       closeModal,
       fetchNextCountry ,
-      correctCountry
+      correctCountry,
     };
   },
   async created() {
@@ -67,9 +66,11 @@ export default {
     this.$refs.mapContainer.resetMap();
     this.$refs.promptContainer.refreshPrompts();
   },
-    handleGameOver(score) {
-      this.$emit('gameOver', score);  // Emitting again to bubble up
-    },
+  handleGameOver(score) {
+    this.$emit('gameOver', score);  // Emitting to bubble up
+    const authStore = useAuthStore();
+    authStore.updateHighScore(score);  // Update high score if new score is higher
+  },
     refreshData() {
     const countryStore = useCountryStore();
     countryStore.getRandomCountry().then(() => {

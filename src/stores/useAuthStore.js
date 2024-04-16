@@ -1,7 +1,7 @@
 // src/stores/useAuthStore.js
 import { defineStore } from 'pinia';
 import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '@/components/fbdir/fbInit';
 
 export const useAuthStore = defineStore('auth', {
@@ -54,6 +54,17 @@ export const useAuthStore = defineStore('auth', {
         this.user = { ...this.user, ...docSnap.data() };  // Ensure reactive update
       } else {
         console.error("No such profile!");
+      }
+    },
+    async updateHighScore(newScore) {
+      if (!this.user) return;
+      const currentHighScore = this.user.highscore || 0;
+      if (newScore > currentHighScore) {
+        this.user.highscore = newScore;
+        const userDocRef = doc(db, 'profiles', this.user.uid);
+        await updateDoc(userDocRef, {
+          highscore: newScore
+        });
       }
     },
     initializeAuthListener() {
