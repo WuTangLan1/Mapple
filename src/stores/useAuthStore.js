@@ -36,7 +36,7 @@ export const useAuthStore = defineStore('auth', {
     async loginUser(details) {
       const { username, password } = details;
       try {
-        const userCredential = await signInWithEmailAndPassword(username, password);
+        const userCredential = await signInWithEmailAndPassword(auth,username, password);
         console.log('Successfully logged in', userCredential.user);
         return userCredential.user;
       } catch (error) {
