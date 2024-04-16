@@ -51,10 +51,6 @@ export default {
             <li><a href="#">Support</a></li>
           </ul>
         </div>
-      <div class="footer-section about" v-show="footerExpanded">
-        <h3>About Mapple</h3>
-        <p>Mapple is a daily geographical challenge that tests your knowledge of the world's countries. Join the adventure and learn with us every day!</p>
-      </div>
       <div class="footer-section social" v-show="footerExpanded">
         <h3>Follow Us</h3>
         <div class="social-icons">

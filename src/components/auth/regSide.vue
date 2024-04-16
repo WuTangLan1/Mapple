@@ -20,7 +20,9 @@
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" id="confirmPassword" v-model="form.confirmPassword" required minlength="6" placeholder="Confirm your password">
       </div>
-      <button type="submit" class="submit-button">Register</button>
+      <div class="btn-grp">
+        <button type="submit" class="submit-button">Register</button>
+      </div>
     </form>
   </div>
 </template>
@@ -53,9 +55,7 @@ export default {
           fullName: form.value.fullName,
           password: form.value.password
         });
-        // Handle successful registration, like redirecting the user or clearing the form
       } catch (error) {
-        // Handle registration errors, such as displaying an error message
         console.error(error);
       }
     };
@@ -104,9 +104,9 @@ export default {
   font-size: 16px;
 }
 
-.button-group {
+.btn-grp {
   display: flex;
-  justify-content: center; /* Center the button horizontally */
+  justify-content: flex-end; /* Aligns the button to the right */
   margin-top: 10px; /* Space above the button */
 }
 
@@ -115,10 +115,11 @@ export default {
   background-color: #5cb85c;
   color: white;
   border: none;
+  width:50%;
   border-radius: 5px;
   cursor: pointer;
   font-size: 18px;
-  width: auto; 
+  margin-top: 10px;
   transition: background-color 0.3s ease;
 }
 
@@ -126,12 +127,10 @@ export default {
   background-color: #4cae4c;
 }
 
-  h2 {
+h2 {
     text-align: center;
     margin-bottom: 20px;
   }
-
-/* Add additional media queries and styling as necessary */
 </style>
 
   
