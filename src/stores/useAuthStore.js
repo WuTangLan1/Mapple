@@ -52,10 +52,10 @@ export const useAuthStore = defineStore('auth', {
       const docRef = doc(db, "profiles", this.user.uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        return docSnap.data().highscore; // return the highscore
+        return docSnap.data().highscore; 
       } else {
         console.error("No such profile!");
-        return 0; // default to 0 if no profile exists
+        return 0; 
       }
     },
     initializeAuthListener() {

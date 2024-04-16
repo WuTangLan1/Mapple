@@ -1,6 +1,9 @@
 <!-- This is the code for the src\components\mappledir\mapdir\mapContainer.vue -->
 <template>
   <div class="map-container">
+    <div class="high-score-container" v-if="isAuthenticated && highScore > 0">
+      High Score: {{ highScore }}
+    </div>
     <div id="chartdiv" class="map-container"></div>
     <div class="info-container">
       <div class="score-display">Score: {{ score }}</div>
@@ -21,13 +24,18 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
-import { onMounted, onBeforeUnmount, ref } from 'vue';
+import { onMounted, onBeforeUnmount, ref, computed } from 'vue';
 import { useCountryStore } from '@/stores/useCountryStore';
+import { useAuthStore } from '@/stores/useAuthStore'; 
 
 export default {
   name: 'MapContainer',
   emits: ['correctGuess', 'gameOver', 'refreshData'],
   setup(props, { emit }) {  
+    const authStore = useAuthStore();
+    const isAuthenticated = computed(() => authStore.user !== null);
+    const highScore = computed(() => isAuthenticated.value ? authStore.user.highscore : 0);
+
     const countryStore = useCountryStore();
     let root, chart, polygonSeries, graticuleSeries;
     const selectedCountry = ref(null); 
@@ -58,6 +66,8 @@ export default {
           chart.set("panXSpeed", panFactor);
           chart.set("panYSpeed", panFactor);
         });
+
+        console.log('is there a high score ? : ', highScore)
 
 
         chart.set("background", am5.Rectangle.new(root, { fill: am5.color(0x8AADB8) }));
@@ -168,7 +178,7 @@ export default {
       selectedCountry.value = null; 
     }
 
-    return { selectedCountry, guessesRemaining, score, submitGuess, flashRed, flashColor, resetMap, graticuleSeries };
+    return { selectedCountry, guessesRemaining, score, submitGuess, flashRed, flashColor, resetMap, graticuleSeries, highScore, isAuthenticated };
   }
 };
 </script>
@@ -191,6 +201,15 @@ export default {
   display: flex;
   justify-content: space-between;
   padding: 10px;
+}
+
+.high-score-container {
+  font-size: 1em; 
+  color: white;
+  padding: 9px;
+  border-radius: 5px;
+  width: 25%;
+  text-align: center;
 }
 
 .score-display, .guesses-display, .submit-button {
