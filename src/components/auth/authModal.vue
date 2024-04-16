@@ -13,38 +13,39 @@
   </template>
   
   <script>
-  import { ref} from 'vue';
-  import RegSide from './regSide.vue';
-  import LogSide from './logSide.vue';
-  
-  export default {
-    components: {
-      RegSide,
-      LogSide
-    },
-    computed: {
-      toggleButtonText() {
-        return this.currentComponent === 'RegSide' ? 'Log In' : 'Register';
+    import { ref, watch } from 'vue';
+    import { useAuthStore } from '@/stores/useAuthStore';
+    import RegSide from './regSide.vue';
+    import LogSide from './logSide.vue';
+    
+    export default {
+      components: {
+        RegSide,
+        LogSide
+      },
+      setup(props, { emit }) {
+        const currentComponent = ref('RegSide');
+        const authStore = useAuthStore();
+    
+        // Watch for changes in the user state
+        watch(() => authStore.user, (newUser) => {
+          if (newUser) {
+            closeModal(); // Closes the modal if a user is logged in
+          }
+        });
+    
+        function toggleComponent() {
+          currentComponent.value = currentComponent.value === 'RegSide' ? 'LogSide' : 'RegSide';
+        }
+    
+        function closeModal() {
+          emit('closeModal');
+        }
+    
+        return { currentComponent, toggleComponent, closeModal };
       }
-    },
-    setup(props, { emit }) {
-      const currentComponent = ref('RegSide');
-  
-      function toggleComponent() {
-        currentComponent.value = currentComponent.value === 'RegSide' ? 'LogSide' : 'RegSide';
-      }
-  
-      function closeModal() {
-        console.log('closemodal clicked')
-        emit('closeModal');
-      }
-  
-      return { currentComponent, toggleComponent, closeModal };
-    }
-  };
+    };
   </script>
-  
-  
   
   <style scoped>
 .modal-backdrop {

@@ -6,19 +6,31 @@
     <nav class="navigation">
       <router-link to="/" class="nav-link">Home</router-link>
       <router-link to="/daily" class="nav-link">Daily</router-link>
-      <div class="nav-link" @click="openAuthModal">Register/Login</div>
+      <div class="nav-link" @click="handleAuthAction">
+        {{ authStore.user ? 'Logout' : 'Register/Login' }}
+      </div>
     </nav>
   </header>
 </template>
 
 <script>
+import { useAuthStore } from '@/stores/useAuthStore';
+
 export default {
   name: 'TopHeader',
-  methods : {
-    openAuthModal() {
-      console.log('log/reg modal clicked')
-      this.$emit('auth-modal-open');
+  emits: ['auth-modal-open'], 
+  setup(props, { emit }) {
+    const authStore = useAuthStore();
+
+    const handleAuthAction = () => {
+      if (authStore.user) {
+        authStore.logout();
+      } else {
+        emit('auth-modal-open');
+      }
     }
+
+    return { authStore, handleAuthAction };
   }
 }
 </script>
