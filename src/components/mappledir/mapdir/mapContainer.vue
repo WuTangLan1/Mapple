@@ -141,7 +141,9 @@ export default {
         emit('correctGuess', countryStore.currentCountry); 
         setTimeout(() => { flashColor.value = false; }, 3000);
         selectedCountry.value = "";
-      } else {
+        resetMap();
+      } 
+      else {
           guessesRemaining.value -= 1;
           flashRed.value = true;
           setTimeout(() => { flashRed.value = false; }, 3000);
