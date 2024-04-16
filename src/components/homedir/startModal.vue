@@ -88,14 +88,15 @@
    background-color: rgb(128, 33, 159);     
  }
 
-.button-easy, .button-medium, .button-hard {
+ .button-easy, .button-medium, .button-hard {
   margin: 10px;
   padding: 15px 20px;
   border: none;
   border-radius: 5px;
   color: white;
   cursor: pointer;
-  flex-grow: 1; 
+  flex-grow: 1;
+  font-size: 1em; 
 }
 
 @media (max-width: 600px) {
