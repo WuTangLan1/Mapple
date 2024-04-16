@@ -76,7 +76,6 @@ export default {
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  max-width: 95%;
   max-height: 70vh;
   margin-top: 0.5rem;
 }
@@ -99,7 +98,6 @@ export default {
 }
 
 .form-group input {
-  width: 100%;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ddd;
@@ -107,25 +105,22 @@ export default {
 }
 
 .button-group {
-    display: flex;
-    justify-content: flex-end; /* Aligns button to the right */
-    width:100%  }
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  margin-top: 10px; /* Space above the button */
+}
 
-  .submit-button {
-    display: block;
-    padding: 15px;
-    margin: 0;
-    width:50%;
-    margin:0;
-    background-color: #5cb85c;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-  }
+.submit-button {
+  padding: 15px;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  width: auto; 
+  transition: background-color 0.3s ease;
+}
 
 .submit-button:hover, .submit-button:focus {
   background-color: #4cae4c;

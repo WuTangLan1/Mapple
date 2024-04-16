@@ -67,7 +67,7 @@
   border-radius: 5px;
   width: auto;
   max-width: 90%;
-  max-height: 90vh; /* Adjust max-height as needed */
+  max-height: 95vh;
   overflow: auto;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   animation: dropAnimation 1.5s ease-in-out forwards;
