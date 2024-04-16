@@ -41,8 +41,8 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 0 0px; 
-  background-color: #34568B;
-  color: #FFFFFF;
+  background-color: #c9d2f3;
+  color: black;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
@@ -63,7 +63,7 @@ export default {
 
 .nav-link {
   text-decoration: none;
-  color: #FFF;
+  color: black;
   padding: 10px 15px; 
   border-radius: 5px; 
   font-size: 1rem;
@@ -71,8 +71,8 @@ export default {
 }
 
 .nav-link:hover, .nav-link.router-link-exact-active {
-  background-color: #D9EAD3;
-  color: #34568B; 
+  background-color: #3a5f70;
+  color: white; 
   text-decoration: none;
 }
 </style>

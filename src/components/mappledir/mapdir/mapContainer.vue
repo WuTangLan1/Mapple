@@ -99,7 +99,7 @@ export default {
 
         // eslint-disable-next-line no-unused-vars
         let hoverState = polygonSeries.mapPolygons.template.states.create("hover", {
-        fill: am5.color(0xFBE5A2)
+        fill: am5.color(0xFF9E5E)
       });
 
       polygonSeries.mapPolygons.template.states.create("active", {
@@ -134,13 +134,16 @@ export default {
 
 
   function submitGuess() {
+    console.log(selectedCountry.value,'submited as a guess')
       if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
         score.value += 1;
         flashColor.value = true; 
         emit('correctGuess', countryStore.currentCountry); 
         setTimeout(() => { flashColor.value = false; }, 3000);
         selectedCountry.value = "";
-      } else {
+        resetMap();
+      } 
+      else {
           guessesRemaining.value -= 1;
           flashRed.value = true;
           setTimeout(() => { flashRed.value = false; }, 3000);
