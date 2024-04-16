@@ -4,10 +4,10 @@
     <div id="chartdiv" class="map-container"></div>
     <div class="info-container">
       <div class="high-score-container" v-if="isAuthenticated && highScore > 0">
-      High Score: {{ highScore }}
+      HS: {{ highScore }}
     </div>
-      <div class="score-display">Score: {{ score }}</div>
-      <div class="guesses-display">Guesses: {{ guessesRemaining }}</div>
+      <div class="score-display">CS: {{ score }}</div>
+      <div class="guesses-display">Rem: {{ guessesRemaining }}</div>
       <button :class="{ 'flash-red': flashRed, 'disabled-button': !selectedCountry || guessesRemaining === 0 }"
             :disabled="!selectedCountry || guessesRemaining === 0"
             @click="submitGuess"

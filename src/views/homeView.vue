@@ -38,7 +38,7 @@ export default {
     function fetchNextCountry() {
       const countryStore = useCountryStore();
       countryStore.getRandomCountry().then(() => {
-        componentKey.value++; // Trigger re-render by updating key
+        componentKey.value++; 
       });
     }
 
