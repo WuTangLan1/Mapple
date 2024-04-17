@@ -1,7 +1,7 @@
 /* src/assets/css/styles.css */
 :root {
-    --header-height: 100px; /* Adjust based on your actual header height */
-    --footer-height: 100px; /* Adjust based on your footer's default height */
+    --header-height: 100px; 
+    --footer-height: 100px; 
   }
 
 

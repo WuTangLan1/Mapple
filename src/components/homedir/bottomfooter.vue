@@ -21,7 +21,7 @@ export default {
         });
       },
       updateFooterHeight() {
-        const newHeight = this.footerExpanded ? '400px' : '100px'; 
+        const newHeight = this.footerExpanded ? '250px' : '100px'; 
         this.footerMaxHeight = newHeight;
         document.documentElement.style.setProperty('--footer-height', newHeight);
       }
@@ -47,24 +47,30 @@ export default {
           <h3>Quick Links</h3>
           <ul>
             <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Support</a></li>
+            <li><a href="#">Information</a></li>
           </ul>
         </div>
       <div class="footer-section social" v-show="footerExpanded">
-        <h3>Follow Us</h3>
+        <h3>Some accounts I like</h3>
         <div class="social-icons">
-          <a href="https://www.instagram.com/discover_mapple" target="_blank" rel="noopener noreferrer">
-            <img src="@/assets/images/socials/insta_icon.png" alt="Instagram" />
-          </a>
           <a href="https://www.twitter.com/epic_maps" target="_blank" rel="noopener noreferrer">
             <img src="@/assets/images/socials/x_icon.png" alt="Twitter" />
           </a>
+          <!-- I want to add a label here called Epic Maps -->
+          <a href="https://www.twitter.com/Locati0ns" target="_blank" rel="noopener noreferrer">
+            <img src="@/assets/images/socials/x_icon.png" alt="Twitter" />
+          </a>
+          <!-- I want to add a label here called Epic Maps -->
+          <a href="https://www.instagram.com/loveofgeography" target="_blank" rel="noopener noreferrer">
+            <img src="@/assets/images/socials/insta_icon.png" alt="Instagram" />
+          </a>
+          <!-- I want to add a label here called CEO of GEO -->
+          <a href="https://www.twitter.com/vintagemapstore" target="_blank" rel="noopener noreferrer">
+            <img src="@/assets/images/socials/x_icon.png" alt="Twitter" />
+          </a>
+          <!-- I want to add a label here called Vintage Maps -->
         </div>
       </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2024 Mapple. All rights reserved.</p>
     </div>
   </footer>
 </template>
@@ -148,13 +154,14 @@ img {
 
 
 .footer-section {
-  width: 100%; /* Set width to 100% for proper centering */
-  display: flex; /* Use flexbox for centering content */
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center items horizontally */
-  text-align: center; /* Center text */
-  margin-bottom: 1.5rem;
+  width: 100%;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  text-align: center; 
 }
+
+
 
 
 .footer-section h3 {
@@ -170,7 +177,7 @@ img {
 
 
 .footer-section.links li {
-  padding: 0 1rem; /* Add some spacing between the links */
+  padding: 0 0.5rem; /* Add some spacing between the links */
 }
 
 .footer-section ul {
@@ -189,7 +196,7 @@ img {
 
 .footer-bottom {
   text-align: center;
-  margin-top:0.5rem;
+  margin-top:0.2rem;
   font-size: 0.85rem;
 }
 
