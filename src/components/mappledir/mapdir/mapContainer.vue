@@ -62,7 +62,7 @@ export default {
 
         chart.events.on("zoomlevelchanged", function(ev) {
           const level = ev.target.zoomLevel;
-          const panFactor = 0.1 + (1 - level) * 0.9;
+          const panFactor = 0.1 + (1 - Math.sqrt(level)) * 0.9;
           chart.set("panXSpeed", panFactor);
           chart.set("panYSpeed", panFactor);
         });

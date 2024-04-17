@@ -44,6 +44,7 @@ export default {
   justify-content: space-between;
   padding: 0 0px; 
   background-color: #c9d2f3;
+  width: 100%;
   color: black;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 }

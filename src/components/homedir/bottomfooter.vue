@@ -50,28 +50,36 @@ export default {
             <li><a href="#">Information</a></li>
           </ul>
         </div>
-      <div class="footer-section social" v-show="footerExpanded">
-        <h3>Some accounts I like</h3>
-        <div class="social-icons">
-          <a href="https://www.twitter.com/epic_maps" target="_blank" rel="noopener noreferrer">
-            <img src="@/assets/images/socials/x_icon.png" alt="Twitter" />
-          </a>
-          <!-- I want to add a label here called Epic Maps -->
-          <a href="https://www.twitter.com/Locati0ns" target="_blank" rel="noopener noreferrer">
-            <img src="@/assets/images/socials/x_icon.png" alt="Twitter" />
-          </a>
-          <!-- I want to add a label here called Epic Maps -->
-          <a href="https://www.instagram.com/loveofgeography" target="_blank" rel="noopener noreferrer">
-            <img src="@/assets/images/socials/insta_icon.png" alt="Instagram" />
-          </a>
-          <!-- I want to add a label here called CEO of GEO -->
-          <a href="https://www.twitter.com/vintagemapstore" target="_blank" rel="noopener noreferrer">
-            <img src="@/assets/images/socials/x_icon.png" alt="Twitter" />
-          </a>
-          <!-- I want to add a label here called Vintage Maps -->
-        </div>
-      </div>
-    </div>
+        <div class="footer-section social" v-show="footerExpanded">
+            <h3>Some accounts I like</h3>
+            <div class="social-icons">
+              <div class="social-icon">
+                <a href="https://www.twitter.com/epic_maps" target="_blank" rel="noopener noreferrer">
+                  <img src="@/assets/images/socials/x_icon.png" alt="Twitter" />
+                  <span>Epic Maps</span>
+                </a>
+              </div>
+              <div class="social-icon">
+                <a href="https://www.twitter.com/Locati0ns" target="_blank" rel="noopener noreferrer">
+                  <img src="@/assets/images/socials/x_icon.png" alt="Twitter" />
+                  <span>Locati0ns</span>
+                </a>
+              </div>
+              <div class="social-icon">
+                <a href="https://www.instagram.com/loveofgeography" target="_blank" rel="noopener noreferrer">
+                  <img src="@/assets/images/socials/insta_icon.png" alt="Instagram" />
+                  <span>CEO of GEO</span>
+                </a>
+              </div>
+              <div class="social-icon">
+                <a href="https://www.twitter.com/vintagemapstore" target="_blank" rel="noopener noreferrer">
+                  <img src="@/assets/images/socials/x_icon.png" alt="Twitter" />
+                  <span>Vintage Maps</span>
+                </a>
+              </div>
+            </div>
+          </div>
+       </div>
   </footer>
 </template>
 
@@ -131,27 +139,27 @@ export default {
   gap: 2rem;
 }
 
-.social-icons {
-  justify-content: center;
-  gap: 2rem;
-}
-
-.social-icon a {
-  text-decoration: none;
-}
-
-img {
-  height: 2.5rem;
-  width: auto;
-  display: block; 
+.social-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* This ensures that the content is centered horizontally within the .social-icon container */
 }
 
 .social-icon span {
   font-size: 0.75rem;
   color: #333;
-  margin-top: 0.5rem;
+  margin-top: 0.5rem; /* Adjust if necessary to control space between the icon and the label */
 }
 
+img {
+  height: 2.5rem;
+  width: auto;
+  display: block; /* This ensures that the image does not inline with the text */
+}
+
+.social-icon a {
+  text-decoration: none;
+}
 
 .footer-section {
   width: 100%;
@@ -159,10 +167,8 @@ img {
   flex-direction: column; 
   align-items: center;
   text-align: center; 
+  border: 1px thin black;
 }
-
-
-
 
 .footer-section h3 {
   color: #333;
@@ -170,6 +176,7 @@ img {
 }
 
 .footer-section.links ul {
+  border: 1px thin black;
   display: flex;
   justify-content: center;
   padding: 0;
