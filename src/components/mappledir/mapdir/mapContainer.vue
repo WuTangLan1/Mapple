@@ -67,9 +67,6 @@ export default {
           chart.set("panYSpeed", panFactor);
         });
 
-        console.log('is there a high score ? : ', highScore.value)
-
-
         chart.set("background", am5.Rectangle.new(root, { fill: am5.color(0x8AADB8) }));
       
 

@@ -1,18 +1,4 @@
-<!-- This is the code for the src\App.vue -->
-<template>
-  <div id="app">
-    <start-modal @difficultySelected="setDifficulty" v-if="showStartModal"/>
-    <auth-modal v-if="showAuthModal" @close-modal="closeAuthModal" />
-    <top-header @auth-modal-open="openAuthModal"/>
-    <div class="router-view-container">
-      <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
-    </div>
-    <bottom-footer/>
-    <game-over-modal v-if="showGameOverModal" :score="gameScore" @restartGame="restartGame"/>
-  </div>
-</template>
-
-
+<!-- src\App.vue -->
 <script>
 import { ref } from 'vue';
 import TopHeader from './components/homedir/topheader.vue';
@@ -93,15 +79,24 @@ export default {
 </script>
 
 
-
+<template>
+  <div id="app">
+    <start-modal @difficultySelected="setDifficulty" v-if="showStartModal"/>
+    <auth-modal v-if="showAuthModal" @close-modal="closeAuthModal" />
+    <top-header @auth-modal-open="openAuthModal"/>
+    <div class="router-view-container">
+      <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
+    </div>
+    <bottom-footer/>
+    <game-over-modal v-if="showGameOverModal" :score="gameScore" @restartGame="restartGame"/>
+  </div>
+</template>
 
 <style>
 @import './assets/css/styles.css';
 #app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; 
-  max-height: 100vh;
   width: 100%;
 }
 

@@ -1,18 +1,5 @@
-<template>
-  <header class="top-header">
-    <div class="logo-container">
-      <img src="@/assets/images/logo/mapple_logo.png" alt="Mapple Logo" class="logo"/>
-    </div>
-    <nav class="navigation">
-      <router-link to="/" class="nav-link">Home</router-link>
-      <router-link to="/daily" class="nav-link">Daily</router-link>
-      <div class="nav-link" @click="handleAuthAction">
-        {{ authStore.user ? 'Logout' : 'Register/Login' }}
-      </div>
-    </nav>
-  </header>
-</template>
 
+<!-- src\components\homedir\topheader.vue -->
 <script>
 import { useAuthStore } from '@/stores/useAuthStore';
 
@@ -34,6 +21,21 @@ export default {
   }
 }
 </script>
+
+<template>
+  <header class="top-header">
+    <div class="logo-container">
+      <img src="@/assets/images/logo/mapple_logo.png" alt="Mapple Logo" class="logo"/>
+    </div>
+    <nav class="navigation">
+      <router-link to="/" class="nav-link">Home</router-link>
+      <router-link to="/daily" class="nav-link">Daily</router-link>
+      <div class="nav-link" @click="handleAuthAction">
+        {{ authStore.user ? 'Logout' : 'Register/Login' }}
+      </div>
+    </nav>
+  </header>
+</template>
 
 <style scoped>
 .top-header {

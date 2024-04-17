@@ -5,8 +5,7 @@
 </script>
 
 <template>
-
-
+    <p>hello we are on dailyView</p>
 </template>
 
 <style scoped>
