@@ -184,7 +184,7 @@ export default {
 <style scoped>
 #chartdiv {
   width: 100%;
-  height: 35vh;
+  height: 25vh;
 }
 .map-container {
   width: 100%;

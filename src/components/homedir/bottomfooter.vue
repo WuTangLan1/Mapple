@@ -15,14 +15,15 @@ export default {
   },
   methods: {
     toggleFooter() {
-          this.footerExpanded = !this.footerExpanded;
-          this.$nextTick(() => {
-            const newHeight = this.footerExpanded ? '250px' : '100px';
+        this.footerExpanded = !this.footerExpanded;
+        this.$nextTick(() => {
+            const newHeight = this.footerExpanded ? '212px' : '100px';
             this.footerMaxHeight = newHeight;
             document.documentElement.style.setProperty('--footer-height', newHeight);
-            this.$emit('footer-size-change', newHeight);
-          });
-      },
+            // Emitting the change to parent component
+            this.$emit('footer-height-changed', newHeight);
+        });
+    },
       updateFooterHeight() {
         const newHeight = this.footerExpanded ? '250px' : '100px'; 
         this.footerMaxHeight = newHeight;

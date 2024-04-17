@@ -97,7 +97,7 @@ export default {
     <div class="router-view-container">
       <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
     </div>
-    <bottom-footer/>
+    <bottom-footer @footer-height-changed="updateRouterViewHeight"/>
     <game-over-modal v-if="showGameOverModal" :score="gameScore" @restartGame="restartGame"/>
   </div>
 </template>
@@ -108,16 +108,14 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100vh;
 }
 
 .router-view-container {
-    flex-grow: 1;
-    width: 100%;
     height: var(--router-view-height);
-    overflow: auto; /* Add scroll if content is too large */
     transition: height 0.3s ease-in-out;
-  }
-
+    overflow: auto;
+}
 </style>
 
 

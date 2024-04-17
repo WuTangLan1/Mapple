@@ -1,6 +1,6 @@
 /* src/assets/css/styles.css */
 :root {
-  --header-height: 100px; 
+  --header-height: 64px; 
   --footer-height: 100px;
   --router-view-height: calc(100vh - var(--header-height) - var(--footer-height));
 }
