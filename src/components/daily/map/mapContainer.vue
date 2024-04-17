@@ -5,8 +5,7 @@
 </script>
 
 <template>
-
-
+    <p>this is the mapContainer</p>
 </template>
 
 <style scoped>

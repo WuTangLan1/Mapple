@@ -5,8 +5,7 @@
 </script>
 
 <template>
-
-
+    <p>This is the info container</p>
 </template>
 
 <style scoped>
