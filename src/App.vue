@@ -74,10 +74,20 @@ export default {
       openAuthModal,
       closeAuthModal
     };
+  },
+  mounted() {
+    this.updateRouterViewHeight(); // Call this method on initial load
+  },
+  methods: {
+    updateRouterViewHeight() {
+      const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height'), 10);
+      const footerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--footer-height'), 10);
+      const newRouterViewHeight = `calc(100vh - ${headerHeight}px - ${footerHeight}px)`;
+      document.documentElement.style.setProperty('--router-view-height', newRouterViewHeight);
+    }
   }
 }
 </script>
-
 
 <template>
   <div id="app">
@@ -93,7 +103,7 @@ export default {
 </template>
 
 <style>
-@import './assets/css/styles.css';
+ @import '@/assets/css/styles.css';
 #app {
   display: flex;
   flex-direction: column;
@@ -101,10 +111,12 @@ export default {
 }
 
 .router-view-container {
-  flex-grow: 1;
-  width: 100%;
-  overflow: auto; 
-}
+    flex-grow: 1;
+    width: 100%;
+    height: var(--router-view-height);
+    overflow: auto; /* Add scroll if content is too large */
+    transition: height 0.3s ease-in-out;
+  }
 
 </style>
 

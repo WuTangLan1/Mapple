@@ -1,4 +1,4 @@
-<!-- This is the code for the src\components\homedir\bottomfooter.vue -->
+<!-- src\components\homedir\bottomfooter.vue -->
 
 <script>
 export default {
@@ -14,16 +14,20 @@ export default {
     this.updateFooterHeight();
   },
   methods: {
-      toggleFooter() {
-        this.footerExpanded = !this.footerExpanded;
-        this.$nextTick(() => {
-          this.updateFooterHeight();
-        });
+    toggleFooter() {
+          this.footerExpanded = !this.footerExpanded;
+          this.$nextTick(() => {
+            const newHeight = this.footerExpanded ? '250px' : '100px';
+            this.footerMaxHeight = newHeight;
+            document.documentElement.style.setProperty('--footer-height', newHeight);
+            this.$emit('footer-size-change', newHeight);
+          });
       },
       updateFooterHeight() {
         const newHeight = this.footerExpanded ? '250px' : '100px'; 
         this.footerMaxHeight = newHeight;
         document.documentElement.style.setProperty('--footer-height', newHeight);
+        this.$emit('footer-size-change', newHeight);
       }
     },
   watch: {
@@ -85,6 +89,7 @@ export default {
 
 
 <style scoped>
+ @import '@/assets/css/styles.css';
 .footer {
   position: fixed; /* or 'absolute' if you want it to scroll away */
   bottom: 0;
