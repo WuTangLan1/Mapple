@@ -15,20 +15,18 @@ export default {
   },
   methods: {
     toggleFooter() {
-        this.footerExpanded = !this.footerExpanded;
-        this.$nextTick(() => {
-            const newHeight = this.footerExpanded ? '212px' : '100px';
-            this.footerMaxHeight = newHeight;
-            document.documentElement.style.setProperty('--footer-height', newHeight);
-            // Emitting the change to parent component
-            this.$emit('footer-height-changed', newHeight);
-        });
-    },
-      updateFooterHeight() {
-        const newHeight = this.footerExpanded ? '250px' : '100px'; 
+    this.footerExpanded = !this.footerExpanded;
+    this.$nextTick(() => {
+        const newHeight = this.footerExpanded ? '215px' : '100px'; // Use consistent value
         this.footerMaxHeight = newHeight;
         document.documentElement.style.setProperty('--footer-height', newHeight);
-        this.$emit('footer-size-change', newHeight);
+        this.$emit('footer-height-changed');
+    });
+  },
+      updateFooterHeight() {
+        const newHeight = this.footerExpanded ? '215px' : '100px'; 
+        this.footerMaxHeight = newHeight;
+        document.documentElement.style.setProperty('--footer-height', newHeight);
       }
     },
   watch: {
@@ -99,7 +97,7 @@ export default {
   background-color: #c9d2f3;
   color: #333;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-  transition: max-height 0.5s ease;
+  transition: max-height 0.9s ease;
 }
 
 .footer-content {

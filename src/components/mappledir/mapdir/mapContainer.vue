@@ -182,17 +182,18 @@ export default {
 
 
 <style scoped>
-#chartdiv {
-  width: 100%;
-  height: 25vh;
-}
 .map-container {
   width: 100%;
+  height: 70%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   position: relative;
   display: flex;
   flex-direction: column;
+}
+#chartdiv {
+  width: 100%;
+  height: 40vh;
 }
 .info-container {
   display: flex;

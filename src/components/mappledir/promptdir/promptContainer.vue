@@ -72,7 +72,7 @@ export default {
 
 <style scoped>
 .container {
-  height: 50%;
+  height: 30%;
   margin: 0 auto;
   padding: 1%; /* Adjust as necessary to maintain the overall size */
   display: flex;

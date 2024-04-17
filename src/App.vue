@@ -76,7 +76,10 @@ export default {
     };
   },
   mounted() {
-    this.updateRouterViewHeight(); // Call this method on initial load
+    this.updateRouterViewHeight();
+  },
+  updated() {
+    this.updateRouterViewHeight();
   },
   methods: {
     updateRouterViewHeight() {
@@ -86,6 +89,7 @@ export default {
       document.documentElement.style.setProperty('--router-view-height', newRouterViewHeight);
     }
   }
+
 }
 </script>
 
