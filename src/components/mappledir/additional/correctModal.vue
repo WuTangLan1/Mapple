@@ -3,7 +3,6 @@
 <template>
     <div v-if="visible" class="modal-overlay" @click.self="closeModal">
       <div class="modal-content">
-        <span class="close" @click="closeModal">&times;</span>
         <p class="correct">{{ country.c_name }}</p>
         <img :src="country.flag_url" alt="Flag of the country" class="flag">
         <p class="blurb">{{ country.blurb }}</p>
@@ -98,20 +97,6 @@ h2 {
   font-size: 1.5rem;
   margin-top: 1rem;
   font-weight: bold;
-}
-
-.close {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.8rem;
-  font-size: 2rem; /* Larger close icon */
-  color: #333;
-  cursor: pointer;
-  transition: color 0.2s ease; /* Color transition for hover effect */
-}
-
-.close:hover {
-  color: #666; /* Darker shade when hovered */
 }
 
 h1 {

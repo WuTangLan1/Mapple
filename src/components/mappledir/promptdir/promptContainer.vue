@@ -105,28 +105,28 @@ export default {
 .wipe-enter-active, .wipe-leave-active {
   transition: opacity 0.5s, transform 0.5s;
 }
-.wipe-enter, .wipe-leave-to /* Starting and ending state for entering/leaving */ {
+.wipe-enter, .wipe-leave-to  {
   opacity: 0;
   transform: translateX(100%);
 }
 
-.flag-card { background-color: #ffe5e5; } /* Pastel red */
-.capital-card { background-color: #e5f4ff; } /* Pastel blue */
-.dish-card { background-color: #e5ffe5; } /* Pastel green */
-.celebrity-card { background-color: #fff5e5; } /* Pastel orange */
-.animal-card { background-color: #e5e5ff; } /* Pastel purple */
-.population-card { background-color: #f5e5ff; } /* Pastel pink */
+.flag-card { background-color: #ffe5e5; } 
+.capital-card { background-color: #e5f4ff; }
+.dish-card { background-color: #e5ffe5; } 
+.celebrity-card { background-color: #fff5e5; } 
+.animal-card { background-color: #e5e5ff; } 
+.population-card { background-color: #f5e5ff; } 
 
 .loading {
-  width: 50px; /* Adjust size as necessary */
+  width: 50px;
   height: 50px;
-  margin: auto; /* Center the icon */
+  margin: auto; 
 }
 
 .label {
   font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 5px; /* Reduced bottom margin */
+  margin-bottom: 5px;
 }
 
 .data-value {
@@ -135,8 +135,8 @@ export default {
 }
 
 .placeholder {
-  max-width: 70%; /* Set the size of the placeholder image */
-  margin: auto; /* Center the placeholder image in the card */
+  max-width: 70%; 
+  margin: auto; 
 }
 
 .flag {
