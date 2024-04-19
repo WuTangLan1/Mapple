@@ -1,15 +1,17 @@
 <!-- This is the code for hte src\components\mappledir\additional\correctModal.vue -->
 
 <template>
-    <div v-if="visible" class="modal-overlay" @click.self="closeModal">
-      <div class="modal-content">
-        <p class="correct">{{ country.c_name }}</p>
-        <img :src="country.flag_url" alt="Flag of the country" class="flag">
-        <p class="blurb">{{ country.blurb }}</p>
-        <p class="encouragement">Keep up the great work!</p>
-      </div>
+  <div v-if="visible" class="modal-overlay" @click.self="closeModal">
+    <div class="modal-content">
+      <p class="correct">{{ country.c_name }}</p>
+      <img :src="country.flag_url" alt="Flag of the country" class="flag">
+      <p class="blurb">{{ country.blurb }}</p>
+      <p class="encouragement">Keep up the great work!</p>
+      <button class="next-button" @click="closeModal">Next</button>
     </div>
-  </template>
+  </div>
+</template>
+
   
   <script>
   import { computed} from 'vue';
@@ -85,7 +87,8 @@ h2 {
   color: #3c763d; /* Darker text for contrast */
   padding: 0.5rem;
   border-radius: 5px;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   font-weight: bold;
 }
 
@@ -95,7 +98,8 @@ h2 {
   padding: 0.5rem;
   border-radius: 5px;
   font-size: 1.5rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   font-weight: bold;
 }
 
@@ -110,6 +114,24 @@ h1 {
   height: auto; /* Maintain aspect ratio */
   margin: 1rem 0; /* Space around the flag */
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.7); /* Subtle shadow for the flag */
+}
+
+.next-button {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  margin-top: 0.5em;
+  padding: 0.5rem 1rem;
+  background-color: #3498db; /* A nice blue color for the button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s; /* Smooth transition for hover effect */
+}
+
+.next-button:hover {
+  background-color: #2980b9; /* A slightly darker blue for the hover state */
 }
 
 p {
