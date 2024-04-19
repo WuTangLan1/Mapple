@@ -1,18 +1,4 @@
-<!-- This is the code for hte src\components\mappledir\additional\correctModal.vue -->
-
-<template>
-  <div v-if="visible" class="modal-overlay" @click.self="closeModal">
-    <div class="modal-content">
-      <p class="correct">{{ country.c_name }}</p>
-      <img :src="country.flag_url" alt="Flag of the country" class="flag">
-      <p class="blurb">{{ country.blurb }}</p>
-      <p class="encouragement">Keep up the great work!</p>
-      <button class="next-button" @click="closeModal">Next</button>
-    </div>
-  </div>
-</template>
-
-  
+<!-- This is the code for hte src\components\mappledir\additional\correctModal.vue --> 
   <script>
   import { computed} from 'vue';
   import { useCountryStore } from '@/stores/useCountryStore';
@@ -36,9 +22,24 @@
     }
   }
   </script>
+
+<template>
+  <div v-if="visible" class="modal-overlay" @click.self="closeModal">
+    <div class="modal-content">
+      <p class="correct">{{ country.c_name }}</p>
+      <img :src="country.flag_url" alt="Flag of the country" class="flag">
+      <p class="blurb">{{ country.blurb }}</p>
+      <p class="encouragement">Keep up the great work!</p>
+      <div class="btn-container">
+        <button class="next-button" @click="closeModal">Next</button>
+      </div>
+    </div>
+  </div>
+</template>
+
   
   
-  <style scoped>
+<style scoped>
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -55,13 +56,13 @@
 .modal-content {
   background: #fff;
   padding: 2rem;
+  margin:0;
   border-radius: 10px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2); 
   max-width: 60%; 
   text-align: center;
   position: relative; 
   transition: all 0.3s ease; 
-  margin-bottom: 20%;
   animation: dropAnimation 1.5s ease-in-out forwards;
 }
 
@@ -90,6 +91,7 @@ h2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   font-weight: bold;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 
 .correct {
@@ -104,23 +106,29 @@ h2 {
 }
 
 h1 {
-  margin: 0 0 1rem 0; /* Spacing under the title */
+  margin: 0 0 1rem 0;
   color: #333;
   font-size: 1.75rem;
 }
 
 .flag {
-  max-width: 100%; /* Make flag responsive */
-  height: auto; /* Maintain aspect ratio */
-  margin: 1rem 0; /* Space around the flag */
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.7); /* Subtle shadow for the flag */
+  max-width: 100%; 
+  height: auto; 
+  margin: 1rem 0; 
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.btn-container {
+  width:100;
+  border: thin 1px purple;
+  padding: 1rem;
 }
 
 .next-button {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  margin-top: 0.5em;
   padding: 0.5rem 1rem;
   background-color: #3498db; /* A nice blue color for the button */
   color: white;
@@ -133,6 +141,7 @@ h1 {
 .next-button:hover {
   background-color: #2980b9; /* A slightly darker blue for the hover state */
 }
+
 
 p {
   color: #555;
