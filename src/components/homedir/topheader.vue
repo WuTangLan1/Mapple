@@ -85,10 +85,7 @@ export default {
 }
 
 .nav-link:hover .nav-icon {
-  transform: scale(1.1); /* Slightly increase the size on hover for a visual effect */
-  background-color: #3a5f70;
-  color: white; 
-  text-decoration: none;
+  transform: scale(1.3); /* Slightly increase the size on hover for a visual effect */
 }
 
 
