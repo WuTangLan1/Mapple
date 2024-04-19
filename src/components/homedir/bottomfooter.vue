@@ -29,7 +29,6 @@ export default {
         document.documentElement.style.setProperty('--footer-height', newHeight);
       },
       openPrivacyModal() {
-        console.log('privacy modal opened in footer')
       this.$emit('open-privacy-modal');
       },
       openToSModal() {

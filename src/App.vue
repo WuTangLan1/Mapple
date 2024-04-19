@@ -70,12 +70,10 @@ export default {
 
     function openPrivacyModal() {
       showPrivacyModal.value = true;
-      console.log('show privacy modal')
     }
 
     function closePrivacyModal() {
       showPrivacyModal.value = false;
-      console.log('c;lose privacy modal')
     }
 
     function openToSModal() {

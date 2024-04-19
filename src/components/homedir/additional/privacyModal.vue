@@ -51,15 +51,15 @@ export default {
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
-  max-width: 80%; /* Adjusted for better readability */
-  text-align: left; /* Align text to the left for readability */
+  max-width: 80%;
+  text-align: left; 
   position: relative;
   transition: all 0.3s ease;
   margin-bottom: 20%;
   animation: dropAnimation 1.5s ease-in-out forwards;
-  cursor: default; /* To prevent text selection cursor */
-  overflow-y: auto; /* Allows scrolling */
-  max-height: 80%; /* Limits height and enables scrolling */
+  cursor: default;
+  overflow-y: auto; 
+  max-height: 80%; 
 }
 
 button {
