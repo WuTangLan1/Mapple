@@ -6,6 +6,8 @@ import BottomFooter from './components/homedir/bottomfooter.vue';
 import AuthModal from './components/auth/authModal.vue';
 import StartModal from './components/homedir/startModal.vue';
 import GameOverModal from './components/mappledir/additional/gameovermodal.vue';
+import PrivacyModal from './components/homedir/additional/privacyModal.vue';
+import tosModal from './components/homedir/additional/tosModal.vue';
 import { useGameStore } from '@/stores/useGameStore';
 import { useCountryStore } from '@/stores/useCountryStore'; 
 
@@ -15,7 +17,9 @@ export default {
     BottomFooter,
     AuthModal,
     StartModal,
-    GameOverModal
+    GameOverModal,
+    PrivacyModal,
+    tosModal
   },
   setup() {
     const difficultySelected = ref(false);
@@ -61,6 +65,25 @@ export default {
       showAuthModal.value = false;
     }
 
+    const showPrivacyModal = ref(false);
+    const showToSModal = ref(false);
+
+    function openPrivacyModal() {
+      showPrivacyModal.value = true;
+    }
+
+    function closePrivacyModal() {
+      showPrivacyModal.value = false;
+    }
+
+    function openToSModal() {
+      showToSModal.value = true;
+    }
+
+    function closeToSModal() {
+      showToSModal.value = false;
+    }
+
     return {
       difficultySelected,
       setDifficulty,
@@ -72,7 +95,11 @@ export default {
       showGameOverModal,
       showAuthModal,
       openAuthModal,
-      closeAuthModal
+      closeAuthModal,
+      openPrivacyModal,
+      closePrivacyModal,
+      openToSModal,
+      closeToSModal
     };
   },
   mounted() {
@@ -102,6 +129,8 @@ export default {
       <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
     </div>
     <bottom-footer @footer-height-changed="updateRouterViewHeight"/>
+    <privacy-modal v-if="showPrivacyModal" @close-modal="closePrivacyModal" />
+    <tos-modal v-if="showToSModal" @close-modal="closeToSModal" />
     <game-over-modal v-if="showGameOverModal" :score="gameScore" @restartGame="restartGame"/>
   </div>
 </template>

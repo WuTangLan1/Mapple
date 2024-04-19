@@ -27,6 +27,12 @@ export default {
         const newHeight = this.footerExpanded ? '215px' : '100px'; 
         this.footerMaxHeight = newHeight;
         document.documentElement.style.setProperty('--footer-height', newHeight);
+      },
+      openPrivacyModal() {
+      this.$emit('open-privacy-modal');
+      },
+      openToSModal() {
+        this.$emit('open-tos-modal');
       }
     },
   watch: {
@@ -49,8 +55,8 @@ export default {
       <div class="footer-section links">
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Information</a></li>
+            <li><a href="#" @click="openPrivacyModal">Privacy Policy</a></li>
+            <li><a href="#" @click="openToSModal">Terms of Service</a></li>
           </ul>
         </div>
         <div class="footer-section social" v-show="footerExpanded">
