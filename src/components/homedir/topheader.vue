@@ -25,13 +25,18 @@ export default {
 <template>
   <header class="top-header">
     <div class="logo-container">
-      <img src="@/assets/images/logo/mapple_logo.png" alt="Mapple Logo" class="logo"/>
+      <img src="@/assets/images/logo/logo.png" alt="Mapple Logo" class="logo"/>
     </div>
     <nav class="navigation">
-      <router-link to="/" class="nav-link">Home</router-link>
-      <router-link to="/daily" class="nav-link">Daily</router-link>
+      <router-link to="/" class="nav-link">
+        <img src="@/assets/images/header/home.png" alt="Home" class="nav-icon"/>
+      </router-link>
+      <router-link to="/daily" class="nav-link">
+        <img src="@/assets/images/header/calender.png" alt="Daily" class="nav-icon"/>
+      </router-link>
       <div class="nav-link" @click="handleAuthAction">
-        {{ authStore.user ? 'Logout' : 'Register/Login' }}
+        <img v-if="authStore.user" src="@/assets/images/header/logout.png" alt="Logout" class="nav-icon"/>
+        <img v-else src="@/assets/images/header/login.png" alt="Reg/Login" class="nav-icon"/>
       </div>
     </nav>
   </header>
@@ -67,15 +72,24 @@ export default {
 .nav-link {
   text-decoration: none;
   color: black;
-  padding: 10px 15px; 
+  padding: 0.2em 0.8em; 
   border-radius: 5px; 
   font-size: 1rem;
   transition: background-color 0.3s ease;
 }
 
-.nav-link:hover, .nav-link.router-link-exact-active {
+.nav-icon {
+  height: 35px; /* Adjust the size to fit your navigation bar */
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover .nav-icon {
+  transform: scale(1.1); /* Slightly increase the size on hover for a visual effect */
   background-color: #3a5f70;
   color: white; 
   text-decoration: none;
 }
+
+
 </style>

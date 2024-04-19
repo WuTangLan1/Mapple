@@ -1,24 +1,4 @@
 <!-- This is the code for the src\components\mappledir\mapdir\mapContainer.vue -->
-<template>
-  <div class="map-container">
-    <div id="chartdiv" class="map-container"></div>
-    <div class="info-container">
-      <div class="high-score-container" v-if="isAuthenticated && highScore > 0">
-      HS: {{ highScore }}
-    </div>
-      <div class="score-display">CS: {{ score }}</div>
-      <div class="guesses-display">Rem: {{ guessesRemaining }}</div>
-      <button :class="{ 'flash-red': flashRed, 'disabled-button': !selectedCountry || guessesRemaining === 0 }"
-            :disabled="!selectedCountry || guessesRemaining === 0"
-            @click="submitGuess"
-            class="submit-button">
-      Submit
-    </button>
-    </div>
-  </div>
-</template>
-
-
 <script>
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
@@ -180,11 +160,29 @@ export default {
 };
 </script>
 
+<template>
+  <div class="map-container">
+    <div id="chartdiv" class="map-container"></div>
+    <div class="info-container">
+      <div class="high-score-container" v-if="isAuthenticated && highScore > 0">
+      HS: {{ highScore }}
+    </div>
+      <div class="score-display">CS: {{ score }}</div>
+      <div class="guesses-display">Rem: {{ guessesRemaining }}</div>
+      <button :class="{ 'flash-red': flashRed, 'disabled-button': !selectedCountry || guessesRemaining === 0 }"
+            :disabled="!selectedCountry || guessesRemaining === 0"
+            @click="submitGuess"
+            class="submit-button">
+      Submit
+    </button>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .map-container {
   width: 100%;
-  height: 80%;
+  height: 72%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   position: relative;
