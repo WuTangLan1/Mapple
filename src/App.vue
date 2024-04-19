@@ -70,10 +70,12 @@ export default {
 
     function openPrivacyModal() {
       showPrivacyModal.value = true;
+      console.log('show privacy modal')
     }
 
     function closePrivacyModal() {
       showPrivacyModal.value = false;
+      console.log('c;lose privacy modal')
     }
 
     function openToSModal() {
@@ -99,7 +101,9 @@ export default {
       openPrivacyModal,
       closePrivacyModal,
       openToSModal,
-      closeToSModal
+      closeToSModal,
+      showPrivacyModal,
+      showToSModal
     };
   },
   mounted() {
@@ -128,7 +132,11 @@ export default {
     <div class="router-view-container">
       <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
     </div>
-    <bottom-footer @footer-height-changed="updateRouterViewHeight"/>
+    <bottom-footer
+      @footer-height-changed="updateRouterViewHeight"
+      @open-privacy-modal="openPrivacyModal"
+      @open-tos-modal="openToSModal"
+    />
     <privacy-modal v-if="showPrivacyModal" @close-modal="closePrivacyModal" />
     <tos-modal v-if="showToSModal" @close-modal="closeToSModal" />
     <game-over-modal v-if="showGameOverModal" :score="gameScore" @restartGame="restartGame"/>
