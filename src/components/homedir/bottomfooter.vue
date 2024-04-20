@@ -63,15 +63,9 @@ export default {
             <h3>Some accounts I like</h3>
             <div class="social-icons">
               <div class="social-icon">
-                <a href="https://www.twitter.com/epic_maps" target="_blank" rel="noopener noreferrer">
-                  <img src="@/assets/images/socials/x_icon.png" alt="Twitter" />
-                  <span>Epic Maps</span>
-                </a>
-              </div>
-              <div class="social-icon">
                 <a href="https://www.twitter.com/Locati0ns" target="_blank" rel="noopener noreferrer">
                   <img src="@/assets/images/socials/x_icon.png" alt="Twitter" />
-                  <span>Locati0ns</span>
+                  <span>Epic Maps</span>
                 </a>
               </div>
               <div class="social-icon">
@@ -147,6 +141,7 @@ export default {
   display: flex;
   justify-content: center;
   gap: 2rem;
+  width: 100%;
 }
 
 .social-icon {
