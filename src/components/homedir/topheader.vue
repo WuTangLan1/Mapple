@@ -5,7 +5,7 @@ import { useAuthStore } from '@/stores/useAuthStore';
 
 export default {
   name: 'TopHeader',
-  emits: ['auth-modal-open'], 
+  emits: ['auth-modal-open', 'coming-soon-modal-open'],  // Add new event
   setup(props, { emit }) {
     const authStore = useAuthStore();
 
@@ -17,10 +17,16 @@ export default {
       }
     }
 
-    return { authStore, handleAuthAction };
+    // Function to emit event to open the Coming Soon modal
+    const openComingSoonModal = () => {
+      emit('coming-soon-modal-open');
+    }
+
+    return { authStore, handleAuthAction, openComingSoonModal };
   }
 }
 </script>
+
 
 <template>
   <header class="top-header">
@@ -31,9 +37,9 @@ export default {
       <router-link to="/" class="nav-link">
         <img src="@/assets/images/header/home.png" alt="Home" class="nav-icon"/>
       </router-link>
-      <router-link to="/daily" class="nav-link">
+      <div class="nav-link" @click="openComingSoonModal">
         <img src="@/assets/images/header/calender.png" alt="Daily" class="nav-icon"/>
-      </router-link>
+      </div>
       <div class="nav-link" @click="handleAuthAction">
         <img v-if="authStore.user" src="@/assets/images/header/logout.png" alt="Logout" class="nav-icon"/>
         <img v-else src="@/assets/images/header/login.png" alt="Reg/Login" class="nav-icon"/>
@@ -41,6 +47,7 @@ export default {
     </nav>
   </header>
 </template>
+
 
 <style scoped>
 .top-header {

@@ -1,3 +1,4 @@
+// src\router\index.js
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/homeView.vue'
 import dailyView from '../views/dailyView.vue'

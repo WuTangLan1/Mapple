@@ -8,6 +8,7 @@ import StartModal from './components/homedir/startModal.vue';
 import GameOverModal from './components/mappledir/additional/gameovermodal.vue';
 import PrivacyModal from './components/homedir/additional/privacyModal.vue';
 import tosModal from './components/homedir/additional/tosModal.vue';
+import comingsoonModal from './components/homedir/additional/comingsoonModal.vue'
 import { useGameStore } from '@/stores/useGameStore';
 import { useCountryStore } from '@/stores/useCountryStore'; 
 
@@ -19,7 +20,8 @@ export default {
     StartModal,
     GameOverModal,
     PrivacyModal,
-    tosModal
+    tosModal,
+    comingsoonModal
   },
   setup() {
     const difficultySelected = ref(false);
@@ -84,6 +86,16 @@ export default {
       showToSModal.value = false;
     }
 
+    const showComingSoonModal = ref(false);
+
+    const openComingSoonModal = () => {
+      showComingSoonModal.value = true;
+    };
+
+    const closeComingSoonModal = () => {
+      showComingSoonModal.value = false;
+    };
+
     return {
       difficultySelected,
       setDifficulty,
@@ -101,7 +113,10 @@ export default {
       openToSModal,
       closeToSModal,
       showPrivacyModal,
-      showToSModal
+      showToSModal,
+      showComingSoonModal,
+      closeComingSoonModal,
+      openComingSoonModal
     };
   },
   mounted() {
@@ -126,7 +141,7 @@ export default {
   <div id="app">
     <start-modal @difficultySelected="setDifficulty" v-if="showStartModal"/>
     <auth-modal v-if="showAuthModal" @close-modal="closeAuthModal" />
-    <top-header @auth-modal-open="openAuthModal"/>
+    <top-header @auth-modal-open="openAuthModal" @coming-soon-modal-open="openComingSoonModal"/>
     <div class="router-view-container">
       <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
     </div>
@@ -137,6 +152,7 @@ export default {
     />
     <privacy-modal v-if="showPrivacyModal" @close-modal="closePrivacyModal" />
     <tos-modal v-if="showToSModal" @close-modal="closeToSModal" />
+    <comingsoon-modal v-if="showComingSoonModal" @close-modal="closeComingSoonModal"/>
     <game-over-modal v-if="showGameOverModal" :score="gameScore" @restartGame="restartGame"/>
   </div>
 </template>
