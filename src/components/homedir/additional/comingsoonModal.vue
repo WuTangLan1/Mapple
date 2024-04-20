@@ -2,13 +2,15 @@
 <template>
     <div class="modal-overlay" @click="closeModal">
         <div class="modal-content" @click.stop>
-            <h2>Coming Soon: Daily Challenges!</h2>
-            <p>Get ready for a new way to play Mapple! Our upcoming Daily Challenges will test your geographical prowess with a new country featured every day. Dive into a focused challenge where you select countries from the map until the correct one is identified. Are you up to the task of becoming a daily geography expert?</p>
-            <p>Each day presents a fresh opportunity to learn interesting facts and test your knowledge against the clock. Earn badges and climb the leaderboard by participating daily and showing off your geographical skills!</p>
-            <button @click="closeModal">Close</button>
+            <h2>🌟 Coming Soon: Daily Challenges! 🌟</h2>
+            <p><strong>Excitement Alert!</strong> A thrilling new game mode is on the horizon! Prepare to put your geography knowledge to the ultimate test with <em>Daily Challenges</em> — a feature where every day is a new adventure!</p>
+            <p>Zoom into a world of fun and sharpen your map skills by pinpointing the mystery country of the day. Hurry though, the clock is ticking! Quick wits and rapid responses will be your allies as you strive for glory.</p>
+            <p>🏅 Chase daily high scores, collect exclusive badges, and make your mark on the global leaderboard. It's not just about being smart, it's about being quick! Stay tuned, explorers!</p>
+            <button class="close-btn" @click="closeModal">Close</button>
         </div>
     </div>
-    </template>
+</template>
+
     
     <script>
     export default {
@@ -43,6 +45,12 @@
       max-width: 80%;
       text-align: center;
       position: relative;
+    }
+
+    @media (max-width: 600px) {
+        .modal-content {
+            width: 70%; 
+        }
     }
     
     button {
