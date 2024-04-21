@@ -58,16 +58,15 @@ export default {
   padding-bottom: 2.5rem;
   border-radius: 10px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
-  max-width: 600px;
+  width: 600px; /* Adjusted for fixed width */
   max-width: 80%; 
   text-align: left; 
-  position: relative;
   transition: all 0.3s ease;
   animation: dropAnimation 1s ease-in-out forwards;
   cursor: default;
-  overflow-y: auto;
-  max-height: 80%; 
-  position:relative;
+  display: flex; /* New added property */
+  flex-direction: column; /* New added property */
+  max-height: 85%; 
 }
 
 
@@ -91,7 +90,10 @@ export default {
 .modal-body {
   color: #555;
   line-height: 1.6;
+  overflow-y: auto; /* Moved from .modal-content */
+  flex: 1; /* Added to allow the body to expand */
 }
+
 
 .modal-footer {
   position: absolute;
