@@ -110,6 +110,7 @@ export default {
     }
 
   .close-button {
+    color: #2562b8;
     position: absolute;
     background: none;
     right: 0;

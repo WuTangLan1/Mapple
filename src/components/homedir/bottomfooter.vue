@@ -136,31 +136,44 @@ export default {
     transform: rotate(180deg); 
   }
 
-
-.social-icons {
+  .social-icons {
   display: flex;
   justify-content: center;
-  gap: 2rem;
   width: 100%;
 }
+
+@media (max-width: 768px) {
+  .social-icons {
+    gap: 3rem; 
+  }
+}
+.social-icon span {
+  display: block;
+  margin-top: 0.5rem;
+  white-space: nowrap; /* Prevents the text from wrapping */
+  overflow: hidden; /* Keeps the text from overflowing the container's bounds */
+  text-overflow: ellipsis; /* Adds an ellipsis to indicate there's more text */
+  max-width: 100%; /* Ensures the text doesn't exceed the width of its container */
+}
+
 
 .social-icon {
   display: flex;
   flex-direction: column;
-  align-items: center; /* This ensures the icon is centered horizontally */
-  text-align: center; /* This ensures the text is centered below the icon */
-  width: 80px; /* Adjust the width as needed or as fits your design */
+  align-items: center; 
+  text-align: center;
+  width: 80px; 
 }
 
 .social-icon img {
-  margin: 0 auto; /* This centers the image in the flex container */
+  margin: 0 auto; 
   display: block;
   height: 2.5rem;
   width: auto;
 }
 
 .social-icon span {
-  display: block; /* Ensures that the span takes the full width of its container */
+  display: block; 
   margin-top: 0.5rem;
 }
 
