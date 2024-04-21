@@ -29,7 +29,9 @@ export default {
       <h2>5. Amendments</h2>
         <p>We may update our privacy policy from time to time...</p>
       </div>
-      <button class="modal-button" @click="closeModal">Close</button>
+      <div class="modal-footer">
+        <button class="modal-button" @click="closeModal">Close</button>
+      </div>
     </div>
   </div>
 </template>
@@ -53,6 +55,7 @@ export default {
 .modal-content {
   background: #fafafa;
   padding: 0.8rem;
+  padding-bottom: 2.5rem;
   border-radius: 10px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
   max-width: 600px;
@@ -64,6 +67,7 @@ export default {
   cursor: default;
   overflow-y: auto;
   max-height: 80%; 
+  position:relative;
 }
 
 
@@ -89,8 +93,16 @@ export default {
   line-height: 1.6;
 }
 
+.modal-footer {
+  position: absolute;
+  right: 1.5rem; /* Adjust this value as needed */
+  bottom: 1.5rem; /* Adjust this value as needed, should be equal to modal-content padding */
+  text-align: right;
+}
+
 button {
   padding: 10px 20px;
+  display: inline-block; 
   background-color: #007BFF;
   color: white;
   border: none;

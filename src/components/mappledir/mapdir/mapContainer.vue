@@ -51,21 +51,35 @@ export default {
       
 
         let zoomControl = am5map.ZoomControl.new(root, {
-          slider: {
-            step: 0.15
-          }
-        });
-        chart.set("zoomControl", zoomControl);
+            slider: {
+              step: 0.02, // More granular zoom steps
+              start: 0.5, // Default zoom level
+              end: 5   // Max zoom level
+            }
+          });
+          chart.set("zoomControl", zoomControl);
+          chart.set("wheelY", "zoomX"); // Enable zooming with mouse wheel along X axis
+          chart.seriesContainer.events.on("zoomstarted", (e) => {
+            e.target.animate({
+              key: "scale",
+              to: e.target.scale * 1.1,
+              duration: 500,
+              easing: am5.ease.out(am5.ease.cubic)
+            });
+          });
 
         graticuleSeries = chart.series.push(am5map.GraticuleSeries.new(root, {
               stroke: am5.color(0xffffff, 0.3)
             }));
 
             if (window.innerWidth <= 768) {
-          root.setThemes([]);
-        } else {
-          root.setThemes([am5themes_Animated.new(root)]);
-        }
+            root.setThemes([am5themes_Animated.new(root)]);
+            zoomControl.hide(); // Hide zoom controls on smaller screens for more space
+          } else {
+            root.setThemes([am5themes_Animated.new(root)]);
+            zoomControl.show();
+          }
+
 
 
         polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
@@ -192,6 +206,12 @@ export default {
 #chartdiv {
   width: 100%;
   height: 40vh;
+}
+
+@keyframes pulse {
+  0% { fill: #FFCCAA; }
+  50% { fill: #FFEECC; }
+  100% { fill: #FFCCAA; }
 }
 .info-container {
   display: flex;
