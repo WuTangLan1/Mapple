@@ -147,14 +147,23 @@ export default {
 .social-icon {
   display: flex;
   flex-direction: column;
-  align-items: center; /* This ensures that the content is centered horizontally within the .social-icon container */
+  align-items: center; /* This ensures the icon is centered horizontally */
+  text-align: center; /* This ensures the text is centered below the icon */
+  width: 80px; /* Adjust the width as needed or as fits your design */
+}
+
+.social-icon img {
+  margin: 0 auto; /* This centers the image in the flex container */
+  display: block;
+  height: 2.5rem;
+  width: auto;
 }
 
 .social-icon span {
-  font-size: 0.75rem;
-  color: #333;
-  margin-top: 0.5rem; /* Adjust if necessary to control space between the icon and the label */
+  display: block; /* Ensures that the span takes the full width of its container */
+  margin-top: 0.5rem;
 }
+
 
 img {
   height: 2.5rem;
