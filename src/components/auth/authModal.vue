@@ -1,4 +1,46 @@
 <!-- This is the code for src\components\auth\authModal.vue -->
+<script>
+import { computed, ref, watch } from 'vue';
+import RegSide from './regSide.vue';
+import LogSide from './logSide.vue';
+import { useAuthStore } from '@/stores/useAuthStore';
+
+export default {
+  components: {
+    RegSide,
+    LogSide
+  },
+  setup(props, { emit }) {
+    const currentComponent = ref('RegSide');
+    const authStore = useAuthStore();
+
+    const toggleButtonText = computed(() => {
+      return currentComponent.value === 'RegSide' ? 'Log In' : 'Register';
+    });
+
+    watch(() => authStore.user, (newUser) => {
+      if (newUser) {
+        closeModal(); 
+      }
+    });
+
+    function toggleComponent() {
+      currentComponent.value = currentComponent.value === 'RegSide' ? 'LogSide' : 'RegSide';
+    }
+
+    function closeModal() {
+      emit('closeModal');
+    }
+
+    return {
+      currentComponent,
+      toggleComponent,
+      closeModal,
+      toggleButtonText // make sure to return it here so it can be used in the template
+    };
+  }
+};
+</script>
 
 <template>
     <div class="modal-backdrop">
@@ -11,49 +53,6 @@
       </div>
     </div>
   </template>
-  
-  <script>
-  import { computed, ref, watch } from 'vue';
-  import RegSide from './regSide.vue';
-  import LogSide from './logSide.vue';
-  import { useAuthStore } from '@/stores/useAuthStore';
-
-  export default {
-    components: {
-      RegSide,
-      LogSide
-    },
-    setup(props, { emit }) {
-      const currentComponent = ref('RegSide');
-      const authStore = useAuthStore();
-
-      const toggleButtonText = computed(() => {
-        return currentComponent.value === 'RegSide' ? 'Log In' : 'Register';
-      });
-
-      watch(() => authStore.user, (newUser) => {
-        if (newUser) {
-          closeModal(); 
-        }
-      });
-
-      function toggleComponent() {
-        currentComponent.value = currentComponent.value === 'RegSide' ? 'LogSide' : 'RegSide';
-      }
-
-      function closeModal() {
-        emit('closeModal');
-      }
-
-      return {
-        currentComponent,
-        toggleComponent,
-        closeModal,
-        toggleButtonText // make sure to return it here so it can be used in the template
-      };
-    }
-  };
-  </script>
   
   <style scoped>
   .modal-backdrop {
