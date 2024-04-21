@@ -32,6 +32,8 @@ export default {
     const showStartModal = ref(true);
     const showGameOverModal = ref(false);
     const showAuthModal = ref(false);
+    const lastCountryName = ref('');
+
 
     function setDifficulty(level) {
       gameStore.setDifficulty(level);
@@ -51,13 +53,15 @@ export default {
       showStartModal.value = false;
     }
 
-    function handleGameOver(score) {
+    function handleGameOver(score, countryName) {
       gameScore.value = score;
+      lastCountryName.value = countryName;  // Store the country name
       gameOver.value = true;
       difficultySelected.value = false;
       showGameOverModal.value = true;
       showStartModal.value = false;
     }
+
 
     function openAuthModal() {
       showAuthModal.value = true;
@@ -116,7 +120,8 @@ export default {
       showToSModal,
       showComingSoonModal,
       closeComingSoonModal,
-      openComingSoonModal
+      openComingSoonModal,
+      lastCountryName
     };
   },
   mounted() {
@@ -153,7 +158,7 @@ export default {
     <privacy-modal v-if="showPrivacyModal" @close-modal="closePrivacyModal" />
     <tos-modal v-if="showToSModal" @close-modal="closeToSModal" />
     <comingsoon-modal v-if="showComingSoonModal" @close-modal="closeComingSoonModal"/>
-    <game-over-modal v-if="showGameOverModal" :score="gameScore" @restartGame="restartGame"/>
+    <game-over-modal v-if="showGameOverModal" :score="gameScore" :countryName="lastCountryName" @restartGame="restartGame"/>
   </div>
 </template>
 

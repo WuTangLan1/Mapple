@@ -149,7 +149,7 @@ export default {
           flashRed.value = true;
           setTimeout(() => { flashRed.value = false; }, 3000);
           if (guessesRemaining.value === 0) {
-            emit('gameOver', score.value);
+             emit('gameOver', score.value, countryStore.currentCountry.c_name);
           }
         }
       }

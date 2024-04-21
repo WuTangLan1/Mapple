@@ -66,15 +66,15 @@ export default {
     this.$refs.mapContainer.resetMap();
     this.$refs.promptContainer.refreshPrompts();
   },
-  handleGameOver(score) {
-    this.$emit('gameOver', score);  // Emitting to bubble up
+  handleGameOver(score, countryName) {
+    this.$emit('gameOver', score, countryName);
     const authStore = useAuthStore();
-    authStore.updateHighScore(score);  // Update high score if new score is higher
+    authStore.updateHighScore(score); 
   },
     refreshData() {
     const countryStore = useCountryStore();
     countryStore.getRandomCountry().then(() => {
-      this.componentKey++; // Trigger re-render by updating key
+      this.componentKey++; //
     });
   }
   },

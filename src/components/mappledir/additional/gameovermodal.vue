@@ -4,7 +4,7 @@
 
 export default {
   name : 'GameOver-Modal',
-  props: ['score'],
+  props: ['score', 'countryName'],
   emits: ['restartGame'],
   methods: {
     restartGame(level) {
@@ -19,6 +19,7 @@ export default {
     <div class="modal-content">
       <h2>Game Over!</h2>
       <p>Your score: {{ score }}</p>
+      <p>You could not guess: {{ countryName }}</p> <!-- Display the country name -->
       <div class="buttons-container">
         <button @click="restartGame('easy')" class="button-easy">Restart on Easy</button>
         <button @click="restartGame('medium')" class="button-medium">Restart on Medium</button>
@@ -27,6 +28,7 @@ export default {
     </div>
   </div>
 </template>
+
 
 <style scoped>
 .modal-backdrop {
