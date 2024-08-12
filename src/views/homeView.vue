@@ -102,14 +102,22 @@ export default {
   flex-direction: column;
   height: 100%; 
 }
-
-.prompt-container {
-  flex: 1 0 30%; 
+prompt-container {
+  flex: 1 1 30%; 
   overflow: auto; 
+  padding: 10px; 
 }
 
 .map-container {
-  flex: 2 0 70%; 
+  flex: 2 1 70%; 
+  overflow: hidden; 
+}
+
+.router-view-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 64px; 
   overflow: hidden; 
 }
 
@@ -119,9 +127,10 @@ export default {
   }
   
   .prompt-container, .map-container {
-    max-height: none;
+    flex: 1 1 50%; 
   }
 }
+
 </style>
 
 
