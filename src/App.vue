@@ -2,7 +2,6 @@
 <script>
 import { ref } from 'vue';
 import TopHeader from './components/homedir/topheader.vue';
-import BottomFooter from './components/homedir/bottomfooter.vue';
 import AuthModal from './components/auth/authModal.vue';
 import StartModal from './components/homedir/startModal.vue';
 import GameOverModal from './components/mappledir/additional/gameovermodal.vue';
@@ -15,7 +14,6 @@ import { useCountryStore } from '@/stores/useCountryStore';
 export default {
   components: {
     TopHeader,
-    BottomFooter,
     AuthModal,
     StartModal,
     GameOverModal,
@@ -124,20 +122,6 @@ export default {
       lastCountryName
     };
   },
-  mounted() {
-    this.updateRouterViewHeight();
-  },
-  updated() {
-    this.updateRouterViewHeight();
-  },
-  methods: {
-    updateRouterViewHeight() {
-      const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height'), 10);
-      const footerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--footer-height'), 10);
-      const newRouterViewHeight = `calc(100vh - ${headerHeight}px - ${footerHeight}px)`;
-      document.documentElement.style.setProperty('--router-view-height', newRouterViewHeight);
-    }
-  }
 
 }
 </script>
@@ -151,11 +135,6 @@ export default {
       <div class="router-view-container">
         <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
       </div>
-      <bottom-footer
-        @footer-height-changed="updateRouterViewHeight"
-        @open-privacy-modal="openPrivacyModal"
-        @open-tos-modal="openToSModal"
-      />
       <privacy-modal v-if="showPrivacyModal" @close-modal="closePrivacyModal" />
       <tos-modal v-if="showToSModal" @close-modal="closeToSModal" />
       <comingsoon-modal v-if="showComingSoonModal" @close-modal="closeComingSoonModal"/>
@@ -187,27 +166,18 @@ body:not(.dark) #app {
 #app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100vh; 
   overflow-y: auto;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  background-color: #f3f4f6; 
-  color: #2c3e50;
-  transition: background-color 0.3s, color 0.3s;
 }
 
 .top-header {
-  flex: 0 0 10%; 
-}
+    flex: 0 0 auto;
+    height: 64px; 
+  }
 
-.router-view-container {
-  flex: 1; 
-  overflow-y: auto; 
-}
-
-.bottom-footer {
-  flex: 0 0 10%; 
-}
+  .router-view-container {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 64px; /* Same as the height of the top-header */
+  }
 </style>

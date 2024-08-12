@@ -43,10 +43,10 @@ export default {
 <style scoped>
 .v-app-bar {
   background-color: #c9d2f3 !important;
-  justify-content: space-between; /* Ensures elements are spread out */
+  justify-content: space-between; 
 }
 
 img {
-  margin-right: auto; /* Pushes everything else to the right */
+  margin-right: auto; 
 }
 </style>
