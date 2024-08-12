@@ -34,7 +34,6 @@
   </script>
   
   <style scoped>
-  @import '@/assets/css/styles.css';
   .modal-backdrop {
   position: fixed;
   top: 0;

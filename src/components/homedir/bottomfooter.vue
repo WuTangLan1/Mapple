@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       footerExpanded: false,
-      footerMaxHeight: '100px',
+      footerMaxHeight: '50px',
       toggleIconUrl: require('@/assets/images/socials/toggle_arrow.png'),
     };
   },
@@ -17,14 +17,14 @@ export default {
     toggleFooter() {
     this.footerExpanded = !this.footerExpanded;
     this.$nextTick(() => {
-        const newHeight = this.footerExpanded ? '215px' : '100px'; // Use consistent value
+        const newHeight = this.footerExpanded ? '50px' : '50px'; 
         this.footerMaxHeight = newHeight;
         document.documentElement.style.setProperty('--footer-height', newHeight);
         this.$emit('footer-height-changed');
     });
   },
       updateFooterHeight() {
-        const newHeight = this.footerExpanded ? '215px' : '100px'; 
+        const newHeight = this.footerExpanded ? '50px' : '50px'; 
         this.footerMaxHeight = newHeight;
         document.documentElement.style.setProperty('--footer-height', newHeight);
       },
@@ -45,195 +45,47 @@ export default {
 }
 </script>
 
-
 <template>
-    <footer :class="{ 'footer-expanded': footerExpanded }" class="footer" :style="{ 'max-height': footerMaxHeight }">
-    <div class="footer-content" ref="footerContent">
-      <div class="footer-toggle" @click="toggleFooter">
-        <img :src="toggleIconUrl" class="toggle-icon" alt="Toggle arrow" />
-      </div>
-      <div class="footer-section links">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="#" @click="openPrivacyModal">Privacy Policy</a></li>
-            <li><a href="#" @click="openToSModal">Terms of Service</a></li>
-          </ul>
-        </div>
-        <div class="footer-section social" v-show="footerExpanded">
-            <h3>Some accounts I like</h3>
-            <div class="social-icons">
-              <div class="social-icon">
-                <a href="https://www.twitter.com/Locati0ns" target="_blank" rel="noopener noreferrer">
-                  <img src="@/assets/images/socials/x_icon.png" alt="Twitter" />
-                  <span>Epic Maps</span>
-                </a>
-              </div>
-              <div class="social-icon">
-                <a href="https://www.instagram.com/loveofgeography" target="_blank" rel="noopener noreferrer">
-                  <img src="@/assets/images/socials/insta_icon.png" alt="Instagram" />
-                  <span>CEO of GEO</span>
-                </a>
-              </div>
-              <div class="social-icon">
-                <a href="https://www.twitter.com/vintagemapstore" target="_blank" rel="noopener noreferrer">
-                  <img src="@/assets/images/socials/x_icon.png" alt="Twitter" />
-                  <span>Vintage Maps</span>
-                </a>
-              </div>
+  <v-footer color="blue lighten-2" padless>
+    <v-container fluid>
+      <v-row justify="center" align="center">
+        <v-col cols="12" sm="6" class="text-center">
+          <v-btn text @click="toggleFooter">
+            <v-icon left>mdi-chevron-up</v-icon>
+            Quick Links
+          </v-btn>
+          <v-expand-transition>
+            <div v-show="footerExpanded">
+              <v-btn text @click="openPrivacyModal">Privacy Policy</v-btn>
+              <v-btn text @click="openToSModal">Terms of Service</v-btn>
             </div>
+          </v-expand-transition>
+        </v-col>
+        <v-col cols="12" sm="6">
+          <div class="social-icons" v-show="footerExpanded">
+            <v-btn icon :href="'https://www.twitter.com/Locati0ns'" target="_blank">
+              <v-icon>mdi-twitter</v-icon>
+            </v-btn>
+            <v-btn icon :href="'https://www.instagram.com/loveofgeography'" target="_blank">
+              <v-icon>mdi-instagram</v-icon>
+            </v-btn>
+            <v-btn icon :href="'https://www.twitter.com/vintagemapstore'" target="_blank">
+              <v-icon>mdi-twitter</v-icon>
+            </v-btn>
           </div>
-       </div>
-  </footer>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-footer>
 </template>
 
 
 <style scoped>
- @import '@/assets/css/styles.css';
 .footer {
-  position: fixed; /* or 'absolute' if you want it to scroll away */
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #c9d2f3;
-  color: #333;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
   transition: max-height 0.9s ease;
 }
-
-.footer-content {
+.social-icons {
   display: flex;
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
-  flex-wrap: wrap;
-  flex-direction: column;
-  padding: 0.5rem;
-  transition: max-height 0.3s ease;
-  position: relative;
+  justify-content: space-evenly;
 }
-
-
-.footer:not(.footer-expanded) .footer-content {
-  max-height: 100px; 
-}
-
-.footer-toggle {
-  position: absolute; 
-  top: 0; 
-  right: 0; 
-  cursor: pointer;
-}
-
-.toggle-icon {
-  position: absolute; 
-  top: 10px; 
-  right: 20px;
-  width: 20px;
-  height: 20px; 
-  transition: transform 0.3s ease;
-}
-
-  .footer-expanded .toggle-icon {
-    transform: rotate(180deg); 
-  }
-
-  .social-icons {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-@media (max-width: 768px) {
-  .social-icons {
-    gap: 3rem; 
-  }
-}
-.social-icon span {
-  display: block;
-  margin-top: 0.5rem;
-  white-space: nowrap; /* Prevents the text from wrapping */
-  overflow: hidden; /* Keeps the text from overflowing the container's bounds */
-  text-overflow: ellipsis; /* Adds an ellipsis to indicate there's more text */
-  max-width: 100%; /* Ensures the text doesn't exceed the width of its container */
-}
-
-
-.social-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  text-align: center;
-  width: 80px; 
-}
-
-.social-icon img {
-  margin: 0 auto; 
-  display: block;
-  height: 2.5rem;
-  width: auto;
-}
-
-.social-icon span {
-  display: block; 
-  margin-top: 0.5rem;
-}
-
-
-img {
-  height: 2.5rem;
-  width: auto;
-  display: block; /* This ensures that the image does not inline with the text */
-}
-
-.social-icon a {
-  text-decoration: none;
-}
-
-.footer-section {
-  width: 100%;
-  display: flex; 
-  flex-direction: column; 
-  align-items: center;
-  text-align: center; 
-  border: 1px thin black;
-}
-
-.footer-section h3 {
-  color: #333;
-  margin-bottom: 0.2rem;
-}
-
-.footer-section.links ul {
-  border: 1px thin black;
-  display: flex;
-  justify-content: center;
-  padding: 0;
-}
-
-
-.footer-section.links li {
-  padding: 0 0.5rem; /* Add some spacing between the links */
-}
-
-.footer-section ul {
-  list-style: none;
-}
-
-.footer-section li a {
-  color: #333;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.footer-section li a:hover {
-  color: #000;
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top:0.2rem;
-  font-size: 0.85rem;
-}
-
 </style>
-
-

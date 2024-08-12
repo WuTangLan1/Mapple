@@ -83,22 +83,47 @@ export default {
 </script>
 
 <template>
-  <div class="home-view">
-    <PromptContainer v-if="difficulty" :key="componentKey" />
-    <MapContainer ref="mapContainer" v-if="difficulty" @gameOver="handleGameOver" @correctGuess="correctGuessHandler" @refreshData="refreshData"/>
+  <v-container fluid>
+    <div class="home-view">
+      <div class="prompt-container">
+        <prompt-container v-if="difficulty" :key="componentKey" />
+      </div>
+      <div class="map-container">
+        <map-container ref="mapContainer" v-if="difficulty" @gameOver="handleGameOver" @correctGuess="correctGuessHandler" @refreshData="refreshData"/>
+      </div>
+    </div>
     <correct-modal :visible="showCorrectModal" :country="correctCountry" @close="closeModal"/>
-  </div>
+  </v-container>
 </template>
 
 <style scoped>
+.home-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%; 
+}
+
+.prompt-container {
+  flex: 1 0 30%; 
+  overflow: auto; 
+}
+
+.map-container {
+  flex: 2 0 70%; 
+  overflow: hidden; 
+}
+
+@media (max-width: 600px) { 
   .home-view {
-    display: flex;
     flex-direction: column;
-    width: 100%;
-    background-color: #ffffff;
-    color: #333333;
   }
+  
+  .prompt-container, .map-container {
+    max-height: none;
+  }
+}
 </style>
+
 
 
 

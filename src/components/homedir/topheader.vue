@@ -27,10 +27,9 @@ export default {
 
 <template>
   <v-app-bar dense>
-    <v-toolbar-title>
-      <img src="@/assets/images/logo/logo.png" alt="Mapple Logo" height="40">
-    </v-toolbar-title>
+    <img src="@/assets/images/logo/logo.png" alt="Mapple Logo" height="40" style="margin-right: auto;"> 
     <v-spacer></v-spacer>
+
     <v-btn icon @click="openComingSoonModal">
       <v-icon>mdi-calendar</v-icon>
     </v-btn>
@@ -40,8 +39,14 @@ export default {
   </v-app-bar>
 </template>
 
+
 <style scoped>
 .v-app-bar {
-  background-color: #c9d2f3;
+  background-color: #c9d2f3 !important;
+  justify-content: space-between; /* Ensures elements are spread out */
+}
+
+img {
+  margin-right: auto; /* Pushes everything else to the right */
 }
 </style>

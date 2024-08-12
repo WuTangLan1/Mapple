@@ -141,6 +141,7 @@ export default {
 
 }
 </script>
+
 <template>
   <v-app>
     <div id="app">
@@ -164,17 +165,49 @@ export default {
 </template>
 
 <style>
- @import '@/assets/css/styles.css';
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body:not(.dark) #app {
+  background-color: #f3f4f6; 
+  color: #2c3e50;
+}
+
 #app {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  overflow-y: auto;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  background-color: #f3f4f6; 
+  color: #2c3e50;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.top-header {
+  flex: 0 0 10%; 
 }
 
 .router-view-container {
-    height: var(--router-view-height);
-    transition: height 0.3s ease-in-out;
-    overflow: auto;
+  flex: 1; 
+  overflow-y: auto; 
+}
+
+.bottom-footer {
+  flex: 0 0 10%; 
 }
 </style>
