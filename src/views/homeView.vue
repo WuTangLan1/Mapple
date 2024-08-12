@@ -1,4 +1,4 @@
-<!-- This is the code for the src\views\homeView.vue -->
+<!-- src\views\homeView.vue -->
 
 <script>
 import PromptContainer from '@/components/mappledir/promptdir/promptContainer.vue';

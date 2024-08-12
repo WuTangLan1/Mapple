@@ -1,7 +1,7 @@
-// this is the code for the useCountryStore 
+// useCountryStore.js
 
 import { defineStore } from 'pinia';
-import { db } from '@/components/fbdir/fbInit'; // Ensure this import path matches your project structure
+import { db } from '@/components/fbdir/fbInit'; 
 import { collection, getDocs } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
@@ -64,7 +64,7 @@ export const useCountryStore = defineStore('country', {
     async getRandomCountry() {
       let filteredCountries = this.countries.filter(c => !this.experiencedCountries.includes(c.id));
       if (filteredCountries.length === 0) {
-        await this.fetchCountries(true, true); // Also exclude the last country on refresh
+        await this.fetchCountries(true, true); 
         filteredCountries = this.countries;
       }
       const randomIndex = Math.floor(Math.random() * filteredCountries.length);

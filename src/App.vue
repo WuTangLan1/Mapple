@@ -55,7 +55,7 @@ export default {
 
     function handleGameOver(score, countryName) {
       gameScore.value = score;
-      lastCountryName.value = countryName;  // Store the country name
+      lastCountryName.value = countryName;  
       gameOver.value = true;
       difficultySelected.value = false;
       showGameOverModal.value = true;
@@ -141,25 +141,26 @@ export default {
 
 }
 </script>
-
 <template>
-  <div id="app">
-    <start-modal @difficultySelected="setDifficulty" v-if="showStartModal"/>
-    <auth-modal v-if="showAuthModal" @close-modal="closeAuthModal" />
-    <top-header @auth-modal-open="openAuthModal" @coming-soon-modal-open="openComingSoonModal"/>
-    <div class="router-view-container">
-      <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
+  <v-app>
+    <div id="app">
+      <start-modal @difficultySelected="setDifficulty" v-if="showStartModal"/>
+      <auth-modal v-if="showAuthModal" @close-modal="closeAuthModal" />
+      <top-header @auth-modal-open="openAuthModal" @coming-soon-modal-open="openComingSoonModal"/>
+      <div class="router-view-container">
+        <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
+      </div>
+      <bottom-footer
+        @footer-height-changed="updateRouterViewHeight"
+        @open-privacy-modal="openPrivacyModal"
+        @open-tos-modal="openToSModal"
+      />
+      <privacy-modal v-if="showPrivacyModal" @close-modal="closePrivacyModal" />
+      <tos-modal v-if="showToSModal" @close-modal="closeToSModal" />
+      <comingsoon-modal v-if="showComingSoonModal" @close-modal="closeComingSoonModal"/>
+      <game-over-modal v-if="showGameOverModal" :score="gameScore" :countryName="lastCountryName" @restartGame="restartGame"/>
     </div>
-    <bottom-footer
-      @footer-height-changed="updateRouterViewHeight"
-      @open-privacy-modal="openPrivacyModal"
-      @open-tos-modal="openToSModal"
-    />
-    <privacy-modal v-if="showPrivacyModal" @close-modal="closePrivacyModal" />
-    <tos-modal v-if="showToSModal" @close-modal="closeToSModal" />
-    <comingsoon-modal v-if="showComingSoonModal" @close-modal="closeComingSoonModal"/>
-    <game-over-modal v-if="showGameOverModal" :score="gameScore" :countryName="lastCountryName" @restartGame="restartGame"/>
-  </div>
+  </v-app>
 </template>
 
 <style>
@@ -177,5 +178,3 @@ export default {
     overflow: auto;
 }
 </style>
-
-

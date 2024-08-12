@@ -1,10 +1,12 @@
+// src\main.js
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import { useAuthStore } from './stores/useAuthStore';
-import { createPinia } from 'pinia'; // Import createPinia
+import { createPinia } from 'pinia'; 
+import vuetify from './plugins/vuetify';
 
-// Debounce function
+
 const debounce = (callback, delay) => {
   let timeoutId;
   return (...args) => {
@@ -15,7 +17,7 @@ const debounce = (callback, delay) => {
   };
 };
 
-// Extending ResizeObserver with a debounced callback
+
 const OriginalResizeObserver = window.ResizeObserver;
 window.ResizeObserver = class extends OriginalResizeObserver {
   constructor(callback) {
@@ -30,5 +32,6 @@ const authStore = useAuthStore();
 authStore.initializeAuthListener();
 
 app.use(router);
+app.use(vuetify);
 
 app.mount('#app');

@@ -1,4 +1,4 @@
-<!-- This is the code for the src\views\dailyView.vue which I want to hold the the infoContainer and the mapContainer  -->
+<!-- src\views\dailyView.vue-->
 
 <script>
     import infoContainer from '@/components/daily/info/infoContainer.vue'
@@ -22,7 +22,7 @@
 
 <style scoped>
     .daily-view {
-        display: flex;
+    display: flex;
     flex-direction: column;
     height:100%;
     width: 100%;
