@@ -1,121 +1,102 @@
 <!-- This is the code for src\components\auth\logSide.vue -->
+<script>
+import { ref, computed } from 'vue';
+import { useAuthStore } from '@/stores/useAuthStore';
 
-<!-- src/components/auth/logSide.vue -->
-<template>
-    <div class="login-container">
-      <form @submit.prevent="login" class="login-form">
-        <h2>Login</h2>
-        <div class="form-group">
-          <label for="loginEmail">Email</label>
-          <input type="email" id="loginEmail" v-model.trim="loginForm.email" required placeholder="Enter your email">
-        </div>
-        <div class="form-group">
-          <label for="loginPassword">Password</label>
-          <input type="password" id="loginPassword" v-model="loginForm.password" required minlength="6" placeholder="Enter your password">
-        </div>
-        <div class="btn-grp">
-          <button type="submit" class="submit-button">Login</button>
-        </div>
-      </form>
-    </div>
-  </template>
-  
-  <script>
-  import { ref, nextTick } from 'vue';
-  import { useAuthStore } from '@/stores/useAuthStore';
-  
-  export default {
-    name: 'LogSide',
-    setup(_, {emit}) {
-      const loginForm = ref({
-        email: '',
-        password: ''
-      });
-  
-      const authStore = useAuthStore();
-  
-      const login = async () => {
-        try {
-          await authStore.loginUser({
-            username: loginForm.value.email,
-            password: loginForm.value.password
-          });
-          loginForm.value = { email: '', password: '' }; 
-          await nextTick();
-          emit('closeModal'); 
-        } catch (error) {
-          console.error(error);
-        }
-      };
-  
-      return {
-        loginForm,
-        login
-      };
+export default {
+  name: 'LogSide',
+  setup() {
+    const loginForm = ref({
+      email: '',
+      password: ''
+    });
+    const showPassword = ref(false);
+    const touchedFields = ref({});
+    const authStore = useAuthStore();
+
+    const isValid = computed(() => {
+      return loginForm.value.email && loginForm.value.password && loginForm.value.password.length >= 6;
+    });
+
+    function validateField(fieldName) {
+      touchedFields.value[fieldName] = true;
     }
-  };
-  </script>
+
+    function getError(fieldName) {
+      return touchedFields.value[fieldName] ? null : '';
+    }
+
+    const login = async () => {
+      if (!isValid.value) {
+        alert("Please check your inputs.");
+        return;
+      }
+      try {
+        await authStore.loginUser({
+          username: loginForm.value.email,
+          password: loginForm.value.password
+        });
+      } catch (error) {
+        console.error('Login Error:', error);
+      }
+    };
+
+    return {
+      loginForm,
+      showPassword,
+      login,
+      isValid,
+      validateField,
+      getError
+    };
+  }
+};
+</script>
+
+<template>
+  <v-form ref="form" @submit.prevent="login" class="login-form" lazy-validation>
+    <v-card class="pa-4">
+      <v-card-title class="text-h5 mb-4">Login</v-card-title>
+      <v-text-field
+        v-model="loginForm.email"
+        label="Email"
+        required
+        clearable
+        type="email"
+        placeholder="Enter your email"
+        :rules="[v => !!v || 'Email is required', v => /.+@.+\..+/.test(v) || 'E-mail must be valid']"
+        @blur="validateField('email')"
+        :error-messages="getError('email')"
+      ></v-text-field>
+      <v-text-field
+        v-model="loginForm.password"
+        label="Password"
+        required
+        clearable
+        :type="showPassword ? 'text' : 'password'"
+        placeholder="Enter your password"
+        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        @click:append="showPassword = !showPassword"
+        :rules="[v => !!v || 'Password is required', v => v.length >= 6 || 'Minimum 6 characters required']"
+        @blur="validateField('password')"
+        :error-messages="getError('password')"
+      ></v-text-field>
+      <v-btn
+        color="primary"
+        block
+        large
+        :disabled="!isValid"
+        type="submit"
+      >
+        Login
+      </v-btn>
+    </v-card>
+  </v-form>
+</template>
 
 <style scoped>
-.login-container {
-  background: #e1e8eb;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  max-height: 70vh;
-  margin-top: 0.5rem;
+.login-form {
+  max-width: 400px;
+  margin: auto;
 }
-
-.login-form h2 {
-    font-size: 24px;
-  color: #333;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 10px;
-  color: #666;
-}
-
-.form-group input {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  font-size: 16px;
-}
-
-.btn-grp {
-  display: flex;
-  justify-content: flex-end; /* Aligns the button to the right */
-  margin-top: 10px; /* Space above the button */
-}
-
-.submit-button {
-  padding: 15px;
-  background-color: #5c90b8;
-  color: white;
-  border: none;
-  width:50%;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 18px;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.submit-button:hover, .submit-button:focus {
-  background-color: #4cae4c;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
 </style>
