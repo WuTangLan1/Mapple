@@ -72,21 +72,21 @@ export default {
     const showPrivacyModal = ref(false);
     const showToSModal = ref(false);
 
-    function openPrivacyModal() {
-      showPrivacyModal.value = true;
-    }
-
-    function closePrivacyModal() {
-      showPrivacyModal.value = false;
-    }
-
-    function openToSModal() {
+    const openToSModal = () => {
       showToSModal.value = true;
-    }
+    };
 
-    function closeToSModal() {
+    const closeToSModal = () => {
       showToSModal.value = false;
-    }
+    };
+
+    const openPrivacyModal = () => {
+      showPrivacyModal.value = true;
+    };
+
+    const closePrivacyModal = () => {
+      showPrivacyModal.value = false;
+    };
 
     const showComingSoonModal = ref(false);
 
@@ -129,9 +129,9 @@ export default {
 <template>
   <v-app>
     <div id="app">
+      <top-header @auth-modal-open="openAuthModal" @coming-soon-modal-open="openComingSoonModal" @tos-modal-open="openToSModal" @privacy-modal-open="openPrivacyModal" />
       <start-modal @difficultySelected="setDifficulty" v-if="showStartModal"/>
       <auth-modal v-if="showAuthModal" @close-modal="closeAuthModal" />
-      <top-header @auth-modal-open="openAuthModal" @coming-soon-modal-open="openComingSoonModal"/>
       <div class="router-view-container">
         <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
       </div>

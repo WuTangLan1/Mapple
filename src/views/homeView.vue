@@ -100,25 +100,12 @@ export default {
 .home-view {
   display: flex;
   flex-direction: column;
-  height: 100%; 
-}
-prompt-container {
-  flex: 1 1 30%; 
-  overflow: auto; 
-  padding: 10px; 
+  overflow: hidden;
 }
 
-.map-container {
-  flex: 2 1 70%; 
-  overflow: hidden; 
-}
-
-.router-view-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  margin-top: 64px; 
-  overflow: hidden; 
+.prompt-container, .map-container {
+  flex: 1; 
+  overflow: auto;
 }
 
 @media (max-width: 600px) { 
@@ -130,11 +117,7 @@ prompt-container {
     flex: 1 1 50%; 
   }
 }
-
 </style>
-
-
-
 
 
 
