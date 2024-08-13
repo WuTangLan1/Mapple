@@ -27,9 +27,11 @@ export default {
     const correctCountry = ref(null);
 
     function correctGuessHandler(countryData) {
+        console.log("Toggling modal visibility");
         correctCountry.value = countryData;
         showCorrectModal.value = true;
     }
+
 
     function closeModal() {
         showCorrectModal.value = false;
@@ -74,7 +76,7 @@ export default {
     refreshData() {
     const countryStore = useCountryStore();
     countryStore.getRandomCountry().then(() => {
-      this.componentKey++; //
+      this.componentKey++; 
     });
   }
   },
@@ -89,10 +91,20 @@ export default {
         <prompt-container v-if="difficulty" :key="componentKey" />
       </div>
       <div class="map-container">
-        <map-container ref="mapContainer" v-if="difficulty" @gameOver="handleGameOver" @correctGuess="correctGuessHandler" @refreshData="refreshData"/>
+        <map-container 
+        ref="mapContainer" 
+        v-if="difficulty" 
+        @gameOver="handleGameOver" 
+        @correctGuess="correctGuessHandler" 
+        @refreshData="refreshData"/>
       </div>
     </div>
-    <correct-modal :visible="showCorrectModal" :country="correctCountry" @close="closeModal"/>
+    <correct-modal
+      :visible="showCorrectModal"
+      @update:visible="val => showCorrectModal = val"
+      :country="correctCountry"
+      @close="closeModal"
+    />
   </v-container>
 </template>
 
