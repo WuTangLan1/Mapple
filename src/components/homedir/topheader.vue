@@ -25,8 +25,8 @@ export default {
     };
 
     const openPrivacyModal = () => {
-      emit('privacy-modal-open');
-    };
+    emit('privacy-modal-open');
+  };
 
     return { authStore, handleAuthAction, openComingSoonModal, openToSModal, openPrivacyModal };
   }

@@ -129,13 +129,17 @@ export default {
 <template>
   <v-app>
     <div id="app">
-      <top-header @auth-modal-open="openAuthModal" @coming-soon-modal-open="openComingSoonModal" @tos-modal-open="openToSModal" @privacy-modal-open="openPrivacyModal" />
+      <top-header
+        @auth-modal-open="openAuthModal"
+        @coming-soon-modal-open="openComingSoonModal"
+        @tos-modal-open="openToSModal"
+        @privacy-modal-open="openPrivacyModal" />
       <start-modal @difficultySelected="setDifficulty" v-if="showStartModal"/>
       <auth-modal v-if="showAuthModal" @close-modal="closeAuthModal" />
       <div class="router-view-container">
         <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
       </div>
-      <privacy-modal v-if="showPrivacyModal" @close-modal="closePrivacyModal" />
+      <privacy-modal :value="showPrivacyModal" @input="value => showPrivacyModal = value" />
       <tos-modal v-if="showToSModal" @close-modal="closeToSModal" />
       <comingsoon-modal v-model="showComingSoonModal"/>
       <game-over-modal v-if="showGameOverModal" :score="gameScore" :countryName="lastCountryName" @restartGame="restartGame"/>
