@@ -35,16 +35,21 @@ export default {
 <template>
   <v-dialog v-model="dialogVisible" persistent max-width="600px">
     <v-card>
-      <v-card-title class="text-h5">{{ country.c_name }}</v-card-title>
+      <v-card-title class="d-flex justify-space-between align-center">
+        <span>{{ country.c_name }}</span>
+        <v-btn color="blue darken-1" text @click="closeModal">Next</v-btn>
+      </v-card-title>
       <v-card-text>
         <v-img :src="country.flag_url" aspect-ratio="1.7" contain></v-img>
         <p>{{ country.blurb }}</p>
         <v-alert dense type="success">{{ "Keep up the great work!" }}</v-alert>
       </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="closeModal">Next</v-btn>
-      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
+
+<style scoped>
+.v-btn {
+  margin-top: -3px; 
+}
+</style>
