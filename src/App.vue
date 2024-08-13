@@ -137,7 +137,7 @@ export default {
       </div>
       <privacy-modal v-if="showPrivacyModal" @close-modal="closePrivacyModal" />
       <tos-modal v-if="showToSModal" @close-modal="closeToSModal" />
-      <comingsoon-modal v-if="showComingSoonModal" @close-modal="closeComingSoonModal"/>
+      <comingsoon-modal v-model="showComingSoonModal"/>
       <game-over-modal v-if="showGameOverModal" :score="gameScore" :countryName="lastCountryName" @restartGame="restartGame"/>
     </div>
   </v-app>

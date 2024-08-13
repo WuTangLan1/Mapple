@@ -135,7 +135,6 @@ export default {
 
 
   function submitGuess() {
-    console.log(selectedCountry.value,'submited as a guess')
       if (selectedCountry.value === countryStore.currentCountry.c_name && guessesRemaining.value > 0) {
         score.value += 1;
         flashColor.value = true; 
