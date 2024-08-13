@@ -1,111 +1,40 @@
 <!-- This is the code for the startModal.vue component  -->
 
-<template>
-    <div class="modal-backdrop" v-if="isVisible">
-      <div class="modal-content">
-        <h2>Welcome to Mapple Game!</h2>
-        <p>Guess the country based on the clue given. Select your difficulty level to start playing.</p>
-        <div class="buttons-container">
-          <button @click="selectDifficulty('easy')" class="button-easy">Easy</button>
-          <button @click="selectDifficulty('medium')" class="button-medium">Medium</button>
-          <button @click="selectDifficulty('hard')" class="button-hard">Hard</button>
-        </div>
-      </div>
-    </div>
-  </template>
-  
-  <script>
-  import { useCountryStore } from '@/stores/useCountryStore';
-  export default {
-    data() {
-      return {
-        isVisible: true,
-      };
-    },
-    methods: {
-    selectDifficulty(level) {
-      this.$emit('difficultySelected', level);
-      this.isVisible = false;
-      const countryStore = useCountryStore();
+<script>
+import { useCountryStore } from '@/stores/useCountryStore';
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const isVisible = ref(true);
+    const countryStore = useCountryStore();
+
+    function selectDifficulty(level) {
+      isVisible.value = false;
       countryStore.getRandomCountry();
-    },
+      this.$emit('difficultySelected', level);
+    }
+
+    return { isVisible, selectDifficulty };
   },
-  };
-  </script>
-  
-  <style scoped>
-  .modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+};
+</script>
 
-}
+<template>
+  <v-dialog v-model="isVisible" persistent max-width="600px">
+    <v-card>
+      <v-card-title class="text-h5">Welcome to Mapple</v-card-title>
+      <v-card-text>
+        Guess the country based on the clue given. Select your difficulty level to start playing.
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="green" text @click="selectDifficulty('easy')">Easy</v-btn>
+        <v-btn color="blue" text @click="selectDifficulty('medium')">Medium</v-btn>
+        <v-btn color="purple" text @click="selectDifficulty('hard')">Hard</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+</template>
 
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  text-align: center;
-  width: 80%; 
-  animation: dropAnimation 1.5s ease-in-out forwards;
-}
-
-@keyframes dropAnimation {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.buttons-container {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; 
-}
-
-.button-easy {
-    background-color: rgb(116, 167, 118);   
-}
-
-.button-medium {
-    background-color: rgb(39, 120, 179);   
-}
-
-.button-hard {
-   background-color: rgb(128, 33, 159);     
- }
-
- .button-easy, .button-medium, .button-hard {
-  margin: 10px;
-  padding: 15px 20px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  flex-grow: 1;
-  font-size: 1em; 
-}
-
-@media (max-width: 600px) {
-  .modal-content {
-    padding: 15px;
-    width: 80%; 
-  }
-  .button-easy, .button-medium, .button-hard {
-    padding: 12px 10px; 
-  }
-}
-  </style>
-  
+<style scoped>
+</style>
