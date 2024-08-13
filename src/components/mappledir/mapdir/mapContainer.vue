@@ -52,13 +52,13 @@ export default {
 
         let zoomControl = am5map.ZoomControl.new(root, {
             slider: {
-              step: 0.02, // More granular zoom steps
-              start: 0.5, // Default zoom level
-              end: 5   // Max zoom level
+              step: 0.02, 
+              start: 0.5, 
+              end: 5   
             }
           });
           chart.set("zoomControl", zoomControl);
-          chart.set("wheelY", "zoomX"); // Enable zooming with mouse wheel along X axis
+          chart.set("wheelY", "zoomX"); 
           chart.seriesContainer.events.on("zoomstarted", (e) => {
             e.target.animate({
               key: "scale",
@@ -72,9 +72,9 @@ export default {
               stroke: am5.color(0xffffff, 0.3)
             }));
 
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 468) {
             root.setThemes([am5themes_Animated.new(root)]);
-            zoomControl.hide(); // Hide zoom controls on smaller screens for more space
+            zoomControl.hide(); 
           } else {
             root.setThemes([am5themes_Animated.new(root)]);
             zoomControl.show();

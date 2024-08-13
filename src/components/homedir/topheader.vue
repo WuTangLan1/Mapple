@@ -57,10 +57,11 @@ export default {
 <style scoped>
 .v-app-bar {
   background-color: #c9d2f3 !important;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 img {
-  margin-right: auto; 
+  margin-right: auto;
+  margin-left: 10px; 
 }
 </style>

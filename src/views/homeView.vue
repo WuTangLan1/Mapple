@@ -105,6 +105,10 @@ export default {
   margin: auto;
 }
 
+.prompt-container {
+  margin-bottom: 20px;
+}
+
 .prompt-container, .map-container {
   flex: 1; 
   overflow: auto;
