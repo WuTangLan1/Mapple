@@ -101,6 +101,8 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  max-width: 800px;
+  margin: auto;
 }
 
 .prompt-container, .map-container {

@@ -140,7 +140,7 @@ export default {
         <router-view v-if="difficultySelected" @gameOver="handleGameOver"/>
       </div>
       <privacy-modal :value="showPrivacyModal" @input="value => showPrivacyModal = value" />
-      <tos-modal v-if="showToSModal" @close-modal="closeToSModal" />
+      <tos-modal :value="showToSModal" @input="value => showToSModal = value" />
       <comingsoon-modal v-model="showComingSoonModal"/>
       <game-over-modal v-if="showGameOverModal" :score="gameScore" :countryName="lastCountryName" @restartGame="restartGame"/>
     </div>
