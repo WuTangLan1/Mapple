@@ -33,23 +33,40 @@ export default {
 </script>
 
 <template>
-  <v-dialog v-model="dialogVisible" persistent max-width="600px">
-    <v-card>
-      <v-card-title class="d-flex justify-space-between align-center">
-        <span>{{ country.c_name }}</span>
-        <v-btn color="blue darken-1" text @click="closeModal">Next</v-btn>
-      </v-card-title>
-      <v-card-text>
-        <v-img :src="country.flag_url" aspect-ratio="1.7" contain></v-img>
-        <p>{{ country.blurb }}</p>
-        <v-alert dense type="success">{{ "Keep up the great work!" }}</v-alert>
-      </v-card-text>
-    </v-card>
+  <v-dialog v-model="dialogVisible" persistent max-width="600px" transition="false">
+    <transition name="modal-drop">
+      <v-card>
+        <v-card-title class="d-flex justify-space-between align-center">
+          <span>{{ country.c_name }}</span>
+          <v-btn color="blue darken-1" text @click="closeModal">Next</v-btn>
+        </v-card-title>
+        <v-card-text>
+          <v-img :src="country.flag_url" aspect-ratio="1.7" contain></v-img>
+          <p>{{ country.blurb }}</p>
+          <v-alert dense type="success">{{ "Keep up the great work!" }}</v-alert>
+        </v-card-text>
+      </v-card>
+    </transition>
   </v-dialog>
 </template>
 
 <style scoped>
 .v-btn {
-  margin-top: -3px; 
+  margin-top: -3px;
+}
+
+.modal-drop-enter-active,
+.modal-drop-leave-active {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.modal-drop-enter-from {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.modal-drop-leave-to {
+  transform: translateY(100%);
+  opacity: 0;
 }
 </style>
