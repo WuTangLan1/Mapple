@@ -104,7 +104,7 @@ export default {
       });
 
       polygonSeries.mapPolygons.template.states.create("active", {
-        fill: am5.color(0xFFCCAA)
+        fill: am5.color(0xFF8C00) 
       });
 
       polygonSeries.mapPolygons.template.setAll({
@@ -113,20 +113,28 @@ export default {
         cursorOverStyle: "pointer"
       });
 
-      polygonSeries.mapPolygons.template.events.on("pointerdown", function(ev) {
-        polygonSeries.mapPolygons.each(function(item) {
+      polygonSeries.mapPolygons.template.events.on("pointerup", function (ev) {
+        polygonSeries.mapPolygons.each(function (item) {
           item.set("active", false); 
         });
-        
 
         let polygon = ev.target;
-        polygon.set("active", true);
+        polygon.set("active", true); 
 
         selectedCountry.value = polygon.dataItem.dataContext.name;
         if (navigator.vibrate) {
           navigator.vibrate(50); 
         }
       });
+
+      polygonSeries.mapPolygons.template.setAll({
+        toggleKey: "active",
+        interactive: true,
+        cursorOverStyle: "pointer",
+        hitArea: { type: "circle", radius: 5 }, 
+      });
+
+
     }
      catch (error) {
         console.error("An error occurred while creating the chart:", error);

@@ -4,8 +4,8 @@ module.exports = defineConfig({
   devServer: {
     client: {
       overlay: {
-        warnings: true, // Show warnings
-        errors: false // Set to false to disable the error overlay
+        warnings: true,
+        errors: false 
       },
     },
   },
